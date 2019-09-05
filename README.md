@@ -18,3 +18,4 @@ Syntax -
    6. Control Structures & Boolean Logic: [cs_bl.html](https://github.com/Ch-sriram/JavaScript/blob/master/JS%20Basics/cs_bl.html) | [cs_bl.js](https://github.com/Ch-sriram/JavaScript/blob/master/JS%20Basics/scripts/cs_bl.js)
    7. Coding Challenge II: [challenge_2.html](https://github.com/Ch-sriram/JavaScript/blob/master/JS%20Basics/challenge_2.html) | [challenge_2.js](https://github.com/Ch-sriram/JavaScript/blob/master/JS%20Basics/scripts/challenge_2.js)
    8. Functions - Declarations & Expressions: [functions.html](https://github.com/Ch-sriram/JavaScript/blob/master/JS%20Basics/functions.html) | [functions.js](https://github.com/Ch-sriram/JavaScript/blob/master/JS%20Basics/scripts/functions.js)
+   9. Arrays: [arrays.html](https://github.com/Ch-sriram/JavaScript/blob/master/JS%20Basics/arrays.html) | [arrays.js](https://github.com/Ch-sriram/JavaScript/blob/master/JS%20Basics/scripts/arrays.js)
