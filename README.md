@@ -23,3 +23,4 @@ Syntax -
    11. Objects - Properties & Methods: [objects.html](https://github.com/Ch-sriram/JavaScript/blob/master/JS%20Basics/objects.html) | [objects.js](https://github.com/Ch-sriram/JavaScript/blob/master/JS%20Basics/scripts/objects.js)
    12. Coding Challenge IV: [challenge_4.html](https://github.com/Ch-sriram/JavaScript/blob/master/JS%20Basics/challenge_4.html) | [challenge_4.js](https://github.com/Ch-sriram/JavaScript/blob/master/JS%20Basics/scripts/challenge_4.js)
    13. Looping & Iteration: [loops.html](https://github.com/Ch-sriram/JavaScript/blob/master/JS%20Basics/loops.html) | [loops.js](https://github.com/Ch-sriram/JavaScript/blob/master/JS%20Basics/scripts/loops.js)
+   14. Coding Challenge V: [challenge_5.html](https://github.com/Ch-sriram/JavaScript/blob/master/JS%20Basics/challenge_5.html) | [challenge_5.js](https://github.com/Ch-sriram/JavaScript/blob/master/JS%20Basics/scripts/challenge_5.js)
