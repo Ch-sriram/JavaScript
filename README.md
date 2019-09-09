@@ -27,3 +27,4 @@ Syntax -
 
 2. JS Behind the Scenes
    1. Execution Context & Execution Stack: [exec.html](https://github.com/Ch-sriram/JavaScript/blob/master/JS-Behind-the-Scenes/exec.html) | [exec.js](https://github.com/Ch-sriram/JavaScript/blob/master/JS-Behind-the-Scenes/scripts/exec.js)
+   2. Exectution Context in Detail - Hoisting: [hoisting.html](https://github.com/Ch-sriram/JavaScript/blob/master/JS-Behind-the-Scenes/hoisting.html) | [hoisting.js](https://github.com/Ch-sriram/JavaScript/blob/master/JS-Behind-the-Scenes/scripts/hoisting.js)
