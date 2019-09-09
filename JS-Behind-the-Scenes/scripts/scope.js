@@ -1,6 +1,6 @@
 /********************************************************************************************
- * Execution Context in Detail - Hoisting
- * --------------------------------------
+ * Execution Context in Detail - Scoping & Scope Chain
+ * ---------------------------------------------------
  * 
  * We can associate an execution context with an object, i.e., an execution context can be 
  * thought of as an object. This object (i.e., the execution context) has 3 properties, 
