@@ -22,7 +22,7 @@ Resources:
 Syntax - 
 <em>&lt;topic name>: &lt;html file> | &lt;JavaScript file></em>
 
-1. JavaScript Basics
+1. <strong>JavaScript Basics</strong>
    1. Hello World!:
       1. Inline Script: [hello_i.html](https://github.com/Ch-sriram/JavaScript/blob/master/JS%20Basics/hello_i.html)
       2. External Script: [hello_e.html](https://github.com/Ch-sriram/JavaScript/blob/master/JS%20Basics/hello_e.html) | [hello.js](https://github.com/Ch-sriram/JavaScript/blob/master/JS%20Basics/scripts/hello.js)
@@ -40,9 +40,9 @@ Syntax -
    13. Looping & Iteration: [loops.html](https://github.com/Ch-sriram/JavaScript/blob/master/JS%20Basics/loops.html) | [loops.js](https://github.com/Ch-sriram/JavaScript/blob/master/JS%20Basics/scripts/loops.js)
    14. Coding Challenge V: [challenge_5.html](https://github.com/Ch-sriram/JavaScript/blob/master/JS%20Basics/challenge_5.html) | [challenge_5.js](https://github.com/Ch-sriram/JavaScript/blob/master/JS%20Basics/scripts/challenge_5.js)
 
-2. JS Behind the Scenes
+2. <strong>JS Behind the Scenes</strong>
    1. Execution Context & Execution Stack: [exec.html](https://github.com/Ch-sriram/JavaScript/blob/master/JS-Behind-the-Scenes/exec.html) | [exec.js](https://github.com/Ch-sriram/JavaScript/blob/master/JS-Behind-the-Scenes/scripts/exec.js)
    2. Exectution Context in Detail
       1. Hoisting: [hoisting.html](https://github.com/Ch-sriram/JavaScript/blob/master/JS-Behind-the-Scenes/hoisting.html) | [hoisting.js](https://github.com/Ch-sriram/JavaScript/blob/master/JS-Behind-the-Scenes/scripts/hoisting.js)
       2. Scoping & Scope Chain: [scope.html](https://github.com/Ch-sriram/JavaScript/blob/master/JS-Behind-the-Scenes/scope.html) | [scope.js](https://github.com/Ch-sriram/JavaScript/blob/master/JS-Behind-the-Scenes/scripts/scope.js) | scope.pdf -  [View](https://github.com/Ch-sriram/JavaScript/blob/master/JS-Behind-the-Scenes/assets/scope.pdf) or [Download](https://raw.githubusercontent.com/Ch-sriram/JavaScript/c51a1dba9ec824ffc2b917befeb9b2a46a00a18b/JS-Behind-the-Scenes/assets/scope.pdf)
-      3. The "this" Keyword: [this.html](https://github.com/Ch-sriram/JavaScript/blob/master/JS-Behind-the-Scenes/this.html) | [this.js](https://github.com/Ch-sriram/JavaScript/blob/master/JS-Behind-the-Scenes/scripts/this.js)
+      3. The <code>this</code> Keyword: [this.html](https://github.com/Ch-sriram/JavaScript/blob/master/JS-Behind-the-Scenes/this.html) | [this.js](https://github.com/Ch-sriram/JavaScript/blob/master/JS-Behind-the-Scenes/scripts/this.js)
