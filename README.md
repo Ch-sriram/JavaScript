@@ -1,6 +1,21 @@
 # JavaScript
 Learning the JavaScript Language from the Internet
 
+Resources: 
+<ol>
+   <li>
+      <a href="https://www.udemy.com/the-complete-javascript-course/">JS Course</a>  &  <a href="https://github.com/jonasschmedtmann/complete-javascript-course">Github Repo for JS</a> by <a href="https://twitter.com/jonasschmedtman">Jonas Schmedtmann</a>
+   </li>
+   <li>
+      <a href="https://github.com/getify/You-Dont-Know-JS">You Don't Know JS</a> by <a href="https://github.com/getify">Kyle Simpson (getify)</a>
+   </li>
+   <li>
+      <a href="https://developer.mozilla.org/en-US/docs/Learn/JavaScript">JS Docs by MDN</a>
+   </li>
+</ol>
+
+<em>More resources will be added depending on the usefulness of the resource.</em>
+
 <hr/>
 
 ### Index
@@ -27,4 +42,6 @@ Syntax -
 
 2. JS Behind the Scenes
    1. Execution Context & Execution Stack: [exec.html](https://github.com/Ch-sriram/JavaScript/blob/master/JS-Behind-the-Scenes/exec.html) | [exec.js](https://github.com/Ch-sriram/JavaScript/blob/master/JS-Behind-the-Scenes/scripts/exec.js)
-   2. Exectution Context in Detail - Hoisting: [hoisting.html](https://github.com/Ch-sriram/JavaScript/blob/master/JS-Behind-the-Scenes/hoisting.html) | [hoisting.js](https://github.com/Ch-sriram/JavaScript/blob/master/JS-Behind-the-Scenes/scripts/hoisting.js)
+   2. Exectution Context in Detail
+      1. Hoisting: [hoisting.html](https://github.com/Ch-sriram/JavaScript/blob/master/JS-Behind-the-Scenes/hoisting.html) | [hoisting.js](https://github.com/Ch-sriram/JavaScript/blob/master/JS-Behind-the-Scenes/scripts/hoisting.js)
+      2. Scoping & Scope Chain: [scope.html](https://github.com/Ch-sriram/JavaScript/blob/master/JS-Behind-the-Scenes/scope.html) | [scope.js](https://github.com/Ch-sriram/JavaScript/blob/master/JS-Behind-the-Scenes/scripts/scope.js) | [scope.pdf](https://github.com/Ch-sriram/JavaScript/blob/master/JS-Behind-the-Scenes/assets/scope.pdf)
