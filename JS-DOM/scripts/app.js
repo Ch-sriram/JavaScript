@@ -10,70 +10,118 @@ GAME RULES:
 
 */
 
-
-/**
- * What we'll learn:
- * 1. How to create our fundamental game variables
- * 2. How to generate a random number
- * 3. How to manipulate the DOM
- * 4. How to read from the DOM
- * 5. How to change the CSS Styles
+/********************************************************************************************
+ * Events: Notifications that are sent to notify the JS code that something has happened 
+ *         on the Webpage. Ex: Clicking a button, resizing a window, scrolling down or 
+ *         pressing a key.
+ * 
+ * Event Listener: A function that performs an action based on a certain event. It waits for
+ *                 a specific event to happen in the browser.
+ * 
+ * Q) How are events processed?
+ * A) The rule is that, for an even to be processed, all the functions that are in the 
+ *    stack i.e., all the execution stacks have to be processed first, and then, any event
+ *    can be processed on top of the Global Execution Stack. All the events wait inside 
+ *    the Message Queue. From the message queue, the events are executed in FIFO order.
+ *    For every event, there's an evenet listener which is the event handler which calls
+ *    a function and an execution context for that event handler is pushed on top of the
+ *    execution stack.
  */
 
-// To store the score for each player, we use the score[] array.
-// score[0] corresponds to "Player 1" & score[1] corresponds to "Player 2"
-var scores = [0, 0];
 
-// Per round (i.e., per cahnce of the player), there'll be a single score for the round.
-// Therefore, mainting a variable for the round's score:
-var roundScore = 0;
+/********************************************************************************************
+ * What we'll learn:
+ * 1. How to setup an event handler
+ * 2. What a callback function is
+ * 3. What an anonymous function is
+ * 4. Another way to select elements by ID
+ * 5. How to change the image in an <img> element
+ */
 
-// We'll have a varibale to denote the active player playing the game.
-var activePlayer = 0;   //  0 => Player-1;  1 => Player-2
-
-// We'll need a variable for the dice, which generates a random number from 1-6 everytime
-// we roll the dice. We'll use the random() from the in-built Math object. Read MDN Docs
-// to know more about random() function
-var dice = Math.floor(Math.random() * 6) + 1;
+//var scores = [0, 0];
+//var roundScore = 0;
+//var activePlayer = 0;   //  0 => Player-1;  1 => Player-2
+//var dice = Math.floor(Math.random() * 6) + 1;
 //console.log(dice);  // Testing the dice functionality.
-
-// To get access to the DOM, we use the document object. document object has many other
-// objects & functions. We can simply access any id, class or element by using the
-// querySelector() function. We'll use the document.querySelector() function to show the
-// dice variables output onto some element in the browser using textContent property of that
-// selected HTML element using the id/class/element as follows:
-document.querySelector("#score-0").textContent = dice;
-// Now everytime we refresh the page, we will be seeing a new value at the element which
-// has the id="score-0". Give it a try!
-
-// To get the dice appear anywhere we want, we can just select that id, class or element
-// using the querySelector() function & change its textContent to edit the text inside it.
+//document.querySelector("#score-0").textContent = dice;
 //document.querySelector("#current-0").textContent = dice;
-
-// We can use the activePlayer variable to select our id's/classes cleverly as follows:
-activePlayer = 1;
-document.querySelector("#score-" + activePlayer).textContent = dice;
-
-// We are using the textContent property to of a selected element/id/class to edit the 
-// the text without parsing it as HTML. If we want to parse HTML, then we will use the
-// innerHTML property as follows:
-document.querySelector("#current-" + activePlayer).innerHTML = "<em>" + dice + "</em>";
-
-// If we would do the same above thing using the textContent property, we would not parse 
-// the string as HTML i.e.,
-document.querySelector("#score-" + activePlayer).textContent = "<em>" + dice + "</em>";
-
-// We can simply store our dom object in a variable and use it later in the code
-var dom = document.querySelector("#score-0").textContent;
-console.log(dom);
+//activePlayer = 1;
+//document.querySelector("#score-" + activePlayer).textContent = dice;
+//document.querySelector("#current-" + activePlayer).innerHTML = "<em>" + dice + "</em>";
+//document.querySelector("#score-" + activePlayer).textContent = "<em>" + dice + "</em>";
+//var dom = document.querySelector("#score-0").textContent;
+//console.log(dom);
+//document.querySelector(".dice").style.display = "none";
 
 
-// We can change the CSS rule for a certain id/class/element by taking selecting that
-// particular id/class/element. In our case, we don't want to see the dice image when
-// we open the game in the beginning. Therefore, we have to change its style using JS
-// as follows: (The img tag has the dice class)
-document.querySelector(".dice").style.display = "none";
-// we used the style property to change the CSS style & the display property in CSS to change
-// its actual value.
-// Everytime we change the style of some div/id/class/element, we essentially apply it as 
-// inline CSS, i.e., as a style attribute to the element.
+// We generally write variable declarations on top for a small project, so that the code 
+// seems uniform and simple to navigate.
+
+var scores, roundScore, activePlayer;
+scores = [0,0];
+roundScore = 0;
+activePlayer = 0;   //  0 => Player-1;  1 => Player-2
+
+// Hide the dice image when opening the page for the first time
+document.querySelector('.dice').style.display = "none";
+
+/* Adding an Event Listener */
+// Add functionality to wiht "Roll Dice" which has the .btn-roll class.
+// We use addEventListener(<event_type>, <event_handler>)
+
+// The <event_type> is a string that is an event. To get a click on the button, we send
+// the 'click' event as the <event_type>. For more event definitions, follow this link:
+// https://developer.mozilla.org/en-US/docs/Web/Events
+
+// <event_handler> is a parameter that takes a function. The addEventListener() takes in 
+// a string (which is <event_type>) & a function (which is <event_handler>). 
+// This function can be passed in 2 different ways (we'll understand this later). 
+// The function that's passed, will be called by the addEventListener() method, whenever
+// the event is actually triggered in the webpage by the user/browser, and thereby, 
+// the function is called. Therefore, in this case, addEventListener() is a function, that
+// takes in a function, and calls that function (which is the <event_handler>) only when
+// the event to that related function happens, this makes the addEventListener() method,
+// a callback method/function. A function which call another function due to certain
+// events, is known as a Callback function.
+
+// There are 2 different ways to send the function as a parameter in JS.
+// Way #1: Define the function using function expression & send the variable associated
+//         to that function as the <event_handler> to addEventListener() method i.e.,
+// var btn_roll = function() {
+//     // Do Something to Handle the Event
+// };
+// document.querySelector(".btn-roll").addEventListener('click', btn_roll);
+
+// Way #2: Define the function in the <event_handler>'s parameter, as an anonyous function
+// as follows:
+
+// The <event_handler> to the addEventListener() method in line 100, is defined when passing
+// and also, that function has no name, and therefore, such functions are known to be 
+// Anonymous Functions.
+
+document.querySelector(".btn-roll").addEventListener("click", function() {
+    // 1. Generate a Random Number for the dice:
+    var dice = Math.floor(Math.random() * 6) + 1;
+
+    // 2. Display the Result
+    var diceDOM = document.querySelector(".dice");
+    // Since the diceDOM is an <img> element, we can access its src attribute as a property
+    diceDOM.src = "./img/dice-" + dice + ".png";
+    diceDOM.style.display = "block";
+    
+    // 3. Update the roundScore iff dice !== 1
+});
+
+// We can select the HTML elements using the querySelector() method, or the other methods
+// like getElementById(), getElementsByClassName(), getElementsByName(), 
+// getElementsByTagName(), etc. getElementById() & querySelector() methods are used to select
+// a single element and do something with it. But using getElementsByClass(), 
+// getElementsByName(), getElementsByTagName(), etc, we select multiple elements at once.
+
+// Example of getElementById(): 
+// (We can only select elements which have id's with this method)
+document.getElementById("score-0").textContent = "0";   // Set Initial Score for Player 1 = 0
+document.getElementById("score-1").textContent = "0";   // Set Initial Score for Player 2 = 0
+document.getElementById("current-0").textContent = "0"; //Init Overall Score for Player 1 = 0
+document.getElementById("current-1").textContent = "0"; //Init Overall Score for Player 2 = 0
+
