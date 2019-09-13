@@ -26,6 +26,20 @@ body {
     color: #555;
 }
 
+.info {
+    text-align: center;
+    color: #fff;
+}
+
+.info h1 {
+    font-weight: 600;
+    letter-spacing: 1vh;
+}
+
+.info a { text-decoration: none; }
+.info a:hover { text-decoration: underline; }
+.info a:visited { color: antiquewhite; }
+
 .wrapper {
     width: 1000px;
     position: absolute;
