@@ -50,3 +50,4 @@ Syntax -
 3. <strong>JS DOM: The Pig Game</strong> 
 (Common Markup: [index.html](https://github.com/Ch-sriram/JavaScript/blob/master/JS-DOM/index.html))
    1. DOM Access & Manipulation: [Pig Game (Version 1)](https://github.com/Ch-sriram/JavaScript/blob/1b504a0df042ceb2a74401975c08b5f0c97e146e/JS-DOM/scripts/app.js)
+   2. Events & Event Handling: [Pig Game (Version 2)](https://github.com/Ch-sriram/JavaScript/blob/8b0249a1d8105294f79f9c1042a54253484aaf5e/JS-DOM/scripts/app.js)
