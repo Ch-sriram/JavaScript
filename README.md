@@ -46,3 +46,7 @@ Syntax -
       1. Hoisting: [hoisting.html](https://github.com/Ch-sriram/JavaScript/blob/master/JS-Behind-the-Scenes/hoisting.html) | [hoisting.js](https://github.com/Ch-sriram/JavaScript/blob/master/JS-Behind-the-Scenes/scripts/hoisting.js)
       2. Scoping & Scope Chain: [scope.html](https://github.com/Ch-sriram/JavaScript/blob/master/JS-Behind-the-Scenes/scope.html) | [scope.js](https://github.com/Ch-sriram/JavaScript/blob/master/JS-Behind-the-Scenes/scripts/scope.js) | scope.pdf -  [View](https://github.com/Ch-sriram/JavaScript/blob/master/JS-Behind-the-Scenes/assets/scope.pdf) or [Download](https://raw.githubusercontent.com/Ch-sriram/JavaScript/c51a1dba9ec824ffc2b917befeb9b2a46a00a18b/JS-Behind-the-Scenes/assets/scope.pdf)
       3. The <code>this</code> Keyword: [this.html](https://github.com/Ch-sriram/JavaScript/blob/master/JS-Behind-the-Scenes/this.html) | [this.js](https://github.com/Ch-sriram/JavaScript/blob/master/JS-Behind-the-Scenes/scripts/this.js)
+
+3. <strong>JS DOM: The Pig Game</strong> 
+(Common Markup: [index.html](https://github.com/Ch-sriram/JavaScript/blob/master/JS-DOM/index.html))
+   1. DOM Access & Manipulation: [Pig Game (Version 1)](https://github.com/Ch-sriram/JavaScript/blob/1b504a0df042ceb2a74401975c08b5f0c97e146e/JS-DOM/scripts/app.js)
