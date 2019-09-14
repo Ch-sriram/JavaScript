@@ -36,7 +36,11 @@ body {
     letter-spacing: 1vh;
 }
 
-.info a { text-decoration: none; }
+.info a { 
+    text-decoration: none; 
+    color: antiquewhite; 
+}
+
 .info a:hover { text-decoration: underline; }
 .info a:visited { color: antiquewhite; }
 

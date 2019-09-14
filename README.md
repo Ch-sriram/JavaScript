@@ -54,4 +54,4 @@ Syntax -
    3. Adding, Removing & Toggling HTML Classes: [app.js](https://github.com/Ch-sriram/JavaScript/blob/2bbf7f9c82dff445a4e675c1935b068b79b3641b/JS-DOM/scripts/app.js) v3
    4. DRY Principle & More DOM Manipulation: [app.js](https://github.com/Ch-sriram/JavaScript/blob/631d8e1ce948179789b28305c877991b24be2f7d/JS-DOM/scripts/app.js) v4
    5. Creating Initialization Function for the Game: [app.js](https://github.com/Ch-sriram/JavaScript/blob/07301e404d97a7c54437ab8ec56e9ef32f9f6b79/JS-DOM/scripts/app.js) v5
-   6. Adding Game State: [app.js](https://github.com/Ch-sriram/JavaScript/blob/master/JS-DOM/scripts/app.js) final version | [Play the game @CodeSandBox]()
+   6. Adding Game State: [app.js](https://github.com/Ch-sriram/JavaScript/blob/master/JS-DOM/scripts/app.js) final version | [Play the game @CodeSandBox](https://dtvte.csb.app/)
