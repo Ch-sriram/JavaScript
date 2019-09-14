@@ -14,12 +14,11 @@ GAME RULES:
 
 /********************************************************************************************
  * What we'll learn:
- * 1. How to use ternary operators
- * 2. How to add, remove & toggle HTML classes for an element
+ * 1. DRY (Don't Repeat Yourself) Principle using functions
+ * 2. Thinking about the game logically, as a programmer
  */
 
-// We generally write variable declarations on top for a small project, so that the code 
-// seems uniform and simple to navigate.
+// Declaring all the global variables at a single place
 var scores, roundScore, activePlayer;
 scores = [0,0];
 roundScore = 0;
@@ -55,44 +54,60 @@ document.querySelector(".btn-roll").addEventListener("click", function() {
         document.getElementById("current-" + activePlayer).textContent = roundScore;
 
     } else {    // When we roll a 1
-
-        /* Change the activePlayer using the ternary operator */
-        activePlayer = activePlayer === 0 ? 1 : 0;
-        
-        /* Reset the roundScore to 0 */
-        roundScore = 0;
-
-        /* Set the current scores of both Players (P1 & P2) to 0 */
-        document.getElementById("current-0").textContent = 0;
-        document.getElementById("current-1").textContent = 0;
-
-        /**
-         * Apply the active class to emphasize the current player who has the current turn
-         * to throw the die using the classList property as follows: 
-         */
-        // if (activePlayer === 0) {   // P1's turn
-        //     document.querySelector(".player-1-panel").classList.remove("active");
-        //     document.querySelector(".player-0-panel").classList.add("active");
-        // } else {
-        //     document.querySelector(".player-1-panel").classList.add("active");
-        //     document.querySelector(".player-0-panel").classList.remove("active");
-        // }
-        /**
-         * The code above is too big and tedious. Instead, we just use a single toggle() 
-         * method in the classList property as follows: 
-         */
-        document.querySelector(".player-1-panel").classList.toggle("active");
-        document.querySelector(".player-0-panel").classList.toggle("active");
-        /**
-         * toggle() method will remove the .active class from the intended element, if it 
-         * was applied to the element before, and it will apply the .active class to the
-         * intended element if it was not applied to the intended element. 
-         */
-
-        /* Hide the dice image when we roll a 1 */
-        document.querySelector(".dice").style.display = "none";
+        // We use the DRY (Don't Repeat Yourself) Principle here and use the 
+        // nextActivePlayer() function to achieve our intended functionality
+        nextActivePlayer();
     }
 });
+
+// Adding the Event Handler for the Hold Button
+document.querySelector(".btn-hold").addEventListener("click", function() {
+    // 1. Add the current round score to the global score of the active player
+    scores[activePlayer] += roundScore;
+
+    // 2. Display the global score in the game
+    document.querySelector("#score-" + activePlayer).textContent = scores[activePlayer];
+
+    // 3. Check if the active player has won or not.
+    if (scores[activePlayer] >= 100) { // active player has won the game
+        // 1. Show that the active player is the winner
+        document.querySelector("#name-" + activePlayer).textContent = "Winner!";
+
+        // 2. Hide the dice
+        document.querySelector(".dice").style.display = "none";
+        
+        // 3. Prettify the "Winner!" using the addition of .winner class (defined in the 
+        // style.css) to the .player-x-panel (x = {0,1}) class of the markup
+        document.querySelector(".player-" + activePlayer + "-panel").classList.add("winner");
+        document.querySelector(".player-" + activePlayer + "-panel").classList.remove("active");
+
+    } else { // if the active player has not won, then it is next player's turn
+        // We use the DRY (Don't Repeat Yourself) Principle here and use the 
+        // nextActivePlayer() function to achieve our intended functionality
+        nextActivePlayer();
+    }
+});
+
+// function to toggle between players:
+function nextActivePlayer() {
+    /* Change the activePlayer using the ternary operator */
+    activePlayer = activePlayer === 0 ? 1 : 0;
+    
+    /* Reset the roundScore to 0 */
+    roundScore = 0;
+
+    /* Set the current scores of both Players (P1 & P2) to 0 */
+    document.getElementById("current-0").textContent = 0;
+    document.getElementById("current-1").textContent = 0;
+
+    /* Toggle the style for the active player */ 
+    document.querySelector(".player-1-panel").classList.toggle("active");
+    document.querySelector(".player-0-panel").classList.toggle("active");
+    
+    /* Hide the dice image when we roll a 1 */
+    document.querySelector(".dice").style.display = "none";
+}
+
 
 // Event Handler for Showing the Rules
 document.querySelector("#rules").addEventListener('click', function() {
