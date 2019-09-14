@@ -12,25 +12,14 @@ GAME RULES:
 
 */
 
-/********************************************************************************************
- * What we'll learn:
- * 1. DRY (Don't Repeat Yourself) Principle using functions
- * 2. Thinking about the game logically, as a programmer
- */
-
 // Declaring all the global variables at a single place
 var scores, roundScore, activePlayer;
-scores = [0,0];
-roundScore = 0;
-activePlayer = 0;   //  0 => Player-1;  1 => Player-2
 
-// Hide the dice image when opening the page for the first time
-document.querySelector('.dice').style.display = "none";
+init();
 
-document.getElementById("score-0").textContent = "0";   // Set Initial Score for Player 1 = 0
-document.getElementById("score-1").textContent = "0";   // Set Initial Score for Player 2 = 0
-document.getElementById("current-0").textContent = "0"; //Init Overall Score for Player 1 = 0
-document.getElementById("current-1").textContent = "0"; //Init Overall Score for Player 2 = 0
+/********************************************************************************************
+ * Event Handlers for different events
+ */
 
 // Event Handler for Rolling the Dice
 document.querySelector(".btn-roll").addEventListener("click", function() {
@@ -69,7 +58,7 @@ document.querySelector(".btn-hold").addEventListener("click", function() {
     document.querySelector("#score-" + activePlayer).textContent = scores[activePlayer];
 
     // 3. Check if the active player has won or not.
-    if (scores[activePlayer] >= 100) { // active player has won the game
+    if (scores[activePlayer] >= 20) { // active player has won the game
         // 1. Show that the active player is the winner
         document.querySelector("#name-" + activePlayer).textContent = "Winner!";
 
@@ -87,6 +76,31 @@ document.querySelector(".btn-hold").addEventListener("click", function() {
         nextActivePlayer();
     }
 });
+
+// Event Handler for Starting a New Game
+document.querySelector(".btn-new").addEventListener("click", init);
+
+// Event Handler for Showing the Rules
+document.querySelector("#rules").addEventListener('click', function() {
+    var rule = [];
+    rule[0] = "The game has 2 players, playing in rounds (By default, Player 1 starts)";
+    rule[1] = "In each turn, a player rolls a dice as many times as s/he wishes. Each die roll's result gets added to their ROUND score";
+    rule[2] = "BUT, if the player rolls a 1, entire ROUND score accumulated till now, becomes 0. After that, it's the next player's turn";
+    rule[3] = "The player can choose to 'Hold', which means that the current player's ROUND score gets added to their GLOBAL score. After that, it's the next player's turn";
+    rule[4] = "The first player to reach 100 points on GLOBAL score wins the game";
+    
+    var showAlert = function(messageList) {
+        var messageString = "";
+        for(var i = 0; i < messageList.length; ++i)
+            messageString += (i + 1) + ". " + messageList[i] + ".\n";
+        alert(messageString);
+    }
+    showAlert(rule);
+});
+
+/********************************************************************************************
+ * Function Declarations for Global Use
+ */
 
 // function to toggle between players:
 function nextActivePlayer() {
@@ -108,21 +122,29 @@ function nextActivePlayer() {
     document.querySelector(".dice").style.display = "none";
 }
 
+function init() {
+    scores = [0,0];
+    roundScore = 0;
+    activePlayer = 0;   //  0 => Player-1;  1 => Player-2
 
-// Event Handler for Showing the Rules
-document.querySelector("#rules").addEventListener('click', function() {
-    var rule = [];
-    rule[0] = "The game has 2 players, playing in rounds (By default, Player 1 starts)";
-    rule[1] = "In each turn, a player rolls a dice as many times as s/he wishes. Each die roll's result gets added to their ROUND score";
-    rule[2] = "BUT, if the player rolls a 1, entire ROUND score accumulated till now, becomes 0. After that, it's the next player's turn";
-    rule[3] = "The player can choose to 'Hold', which means that the current player's ROUND score gets added to their GLOBAL score. After that, it's the next player's turn";
-    rule[4] = "The first player to reach 100 points on GLOBAL score wins the game";
-    
-    var showAlert = function(messageList) {
-        var messageString = "";
-        for(var i = 0; i < messageList.length; ++i)
-            messageString += (i + 1) + ". " + messageList[i] + ".\n";
-        alert(messageString);
-    }
-    showAlert(rule);
-});
+    // Hide the dice image when opening the page for the first time
+    document.querySelector('.dice').style.display = "none";
+
+    document.getElementById("score-0").textContent = "0";   // Init 0 for P1
+    document.getElementById("score-1").textContent = "0";   // Init 0 for P2
+    document.getElementById("current-0").textContent = "0"; // Init 0 for roundScore P1
+    document.getElementById("current-1").textContent = "0"; // Init 0 for roundScore P2
+
+    // The names of the Players should be restored to what they were previously
+    document.querySelector("#name-0").textContent = "Player 1";
+    document.querySelector("#name-1").textContent = "Player 2";
+
+    // Remove all the classes that might've been applied to the player panels before
+    document.querySelector(".player-0-panel").classList.remove("winner");
+    document.querySelector(".player-1-panel").classList.remove("winner");
+    document.querySelector(".player-0-panel").classList.remove("active");
+    document.querySelector(".player-1-panel").classList.remove("active");
+
+    // Add the active class to .player-0-panel as the active player after init() is P1
+    document.querySelector(".player-0-panel").classList.add("active");
+}
