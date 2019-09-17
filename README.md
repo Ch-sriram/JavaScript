@@ -55,4 +55,4 @@ Syntax -
    4. DRY Principle & More DOM Manipulation: [app.js](https://github.com/Ch-sriram/JavaScript/blob/631d8e1ce948179789b28305c877991b24be2f7d/JS-DOM/scripts/app.js) v4
    5. Creating Initialization Function for the Game: [app.js](https://github.com/Ch-sriram/JavaScript/blob/07301e404d97a7c54437ab8ec56e9ef32f9f6b79/JS-DOM/scripts/app.js) v5
    6. Adding Game State: [app.js](https://github.com/Ch-sriram/JavaScript/blob/be7496cd93de95f7c616da0870dd2d4b2bf6c302/JS-DOM/scripts/app.js) final version (Easy) | [Play the game @CodeSandBox](https://dtvte.csb.app/)
-   7. The Pig Game: [app.js](https://github.com/Ch-sriram/JavaScript/blob/master/JS-DOM/scripts/app.js) final version (Hard) | [Play the game @Repl.it](https://pig-game.chsriram.repl.co/)
+   7. The Pig Game: [app.js](https://github.com/Ch-sriram/JavaScript/blob/master/JS-DOM/scripts/app.js) final version (Hard) | [Play the game @Repl.it](https://pig-game.chsriram.repl.co/) | Updated Markup - [index.html](https://github.com/Ch-sriram/JavaScript/blob/master/JS-DOM/index.html)
