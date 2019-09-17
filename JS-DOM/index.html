@@ -6,6 +6,7 @@
 <html lang="en">
     <head>
         <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width">
         <link href="https://fonts.googleapis.com/css?family=Lato:100,300,600" rel="stylesheet" type="text/css">
         <link href="http://code.ionicframework.com/ionicons/2.0.1/css/ionicons.min.css" rel="stylesheet" type="text/css">
         <link type="text/css" rel="stylesheet" href="./styles/style.css">
@@ -16,7 +17,11 @@
     <body>
         <div class="info">
             <h1>The Pig Game</h1>
-            <a href="#" id="rules">&lt;Rules of the Game&gt;</a>
+            <input type="button" id="rules" value="Rules of the Game" class="btn-rules"/>
+        </div>
+        <div id="change-score">
+            <input name="winningScore" type="button" value="Change the Winning Score" id="winning-button" class="btn-win" />
+        </div>
         </div>
         <div class="wrapper clearfix">
             <div class="player-0-panel active">
@@ -42,6 +47,10 @@
             <button class="btn-hold"><i class="ion-ios-download-outline"></i>Hold</button>
             
             <img src="./img/dice-5.png" alt="Dice" class="dice"/>
+        </div>
+
+        <div id="overlay">
+            <div id="text"></div>
         </div>
         
         <script src="./scripts/app.js"></script>

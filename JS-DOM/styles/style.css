@@ -24,6 +24,7 @@ body {
     position: relative;
     height: 100vh;
     color: #555;
+    overflow: auto;
 }
 
 .info {
@@ -36,23 +37,55 @@ body {
     letter-spacing: 1vh;
 }
 
-.info a { 
-    text-decoration: none; 
+.info input { 
     color: antiquewhite; 
+    border: 1px solid antiquewhite;
+
 }
 
-.info a:hover { text-decoration: underline; }
+.info a:hover { 
+    text-decoration: underline; 
+}
 .info a:visited { color: antiquewhite; }
 
+#change-score {
+    color: antiquewhite;
+    text-align: center;
+}
+
+.btn-win, .btn-rules {
+    border: 1px solid antiquewhite;
+    background: none;
+    color: antiquewhite;
+    padding: 1px;
+    border-radius: 2px;
+    transition: background 300ms, color 300ms;
+}
+
+.btn-win:hover, .btn-rules:hover {
+    color: #222;
+    background: gold;
+    cursor: pointer;
+}
+
+
+#winning-score {
+    border: 0;
+    padding: 1px;
+    border-radius: 2px;
+    width: 60px;
+}
+
 .wrapper {
+    margin-top: -3%;
     width: 1000px;
-    position: absolute;
+    position: relative;
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
     background-color: #fff;
     box-shadow: 0px 10px 50px rgba(0, 0, 0, 0.3);
-    overflow: hidden;
+    transition: background 350ms;
 }
 
 .player-0-panel,
@@ -61,6 +94,7 @@ body {
     float: left;
     height: 600px;
     padding: 100px;
+    transition: background 350ms;
 }
 
 
@@ -170,3 +204,124 @@ i {
 
 .winner { background-color: #f7f7f7; }
 .winner .player-name { font-weight: 300; color: #EB4D4D; }
+
+/* taken from: https://www.w3schools.com/howto/tryit.asp?filename=tryhow_css_overlay */
+#overlay {
+    position: fixed;
+    display: none;
+    width: 100%;
+    height: 100%;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: rgba(0,0,0,0.5);
+    overflow: auto;
+    transition: display 350ms;
+}
+
+#text {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    font-size: 1rem;
+    line-height: 2rem;
+    color: white;
+    transform: translate(-50%,-50%);
+    -ms-transform: translate(-50%,-50%);
+    border: 1px solid black;
+    padding: 2%;
+    padding-bottom: 5px;
+    padding-top: 5px;
+    background: #515151;
+    opacity: 0.9;
+    text-align: center;
+    transition: background 500ms, display 350ms;
+    overflow: auto;
+    /* -webkit-filter: invert(100%);
+    filter: invert(100%); */
+}
+
+#text:hover {
+    opacity: 0.9;
+    background: #000;
+    color: peachpuff;
+}
+
+#text h1 {
+    border-bottom: 1.5px solid white;
+    padding-bottom: 2px;
+    width: 50%;
+    transform: translate(50%, 0);
+    transition: border-bottom-color 500ms;
+    text-align: center;
+}
+
+#text:hover h1 {
+    border-bottom-color: peachpuff;
+}
+
+#text ol {
+    text-align: justify;
+}
+
+#text #btn-close {
+    text-align: center;
+}
+
+#win-input {
+    position: relative;
+    border-radius: 2px;
+    width: 80px;
+    border: 0;
+    padding: 5px;
+    margin-right: 3%;
+    text-align: center;
+    transition: background 350ms, color 350ms, font-weight 350ms;
+}
+
+#btn-close,
+#btn-win-close,
+#btn-win-submit {
+    width: 100px;
+    background: white;
+    color: black;
+    font-weight: 300;
+    border: 1px solid black;
+    padding: 5px;
+    border-radius: 2px;
+    transition: background 350ms, color 350ms, font-weight 350ms;
+}
+
+#btn-close:hover,
+#btn-win-close:hover {
+    background: #EB4D4D;
+    color: white;
+    border: 1px solid white;
+    font-weight: 600;
+    cursor: pointer;
+}
+
+#btn-win-submit:hover {
+    background: rgb(145, 219, 33);
+    color: white;
+    border: 1px solid white;
+    font-weight: 600;
+    cursor: pointer;
+}
+
+#btn-win-submit,
+#win-input {
+    transform: translateX(-50%);
+}
+
+#btn-win-close {
+    transform: translateX(50%);
+}
+
+#win-input:hover {
+    color: gold;
+    background: black;
+    font-weight: 600;
+    border: 1px solid white;
+}

@@ -48,10 +48,11 @@ Syntax -
       3. The <code>this</code> Keyword: [this.html](https://github.com/Ch-sriram/JavaScript/blob/master/JS-Behind-the-Scenes/this.html) | [this.js](https://github.com/Ch-sriram/JavaScript/blob/master/JS-Behind-the-Scenes/scripts/this.js)
 
 3. <strong>JS DOM: The Pig Game</strong> 
-(Common Markup: [index.html](https://github.com/Ch-sriram/JavaScript/blob/master/JS-DOM/index.html))
+(Common Markup for 1-6: [index.html](https://github.com/Ch-sriram/JavaScript/blob/07301e404d97a7c54437ab8ec56e9ef32f9f6b79/JS-DOM/index.html))
    1. DOM Access & Manipulation: [app.js](https://github.com/Ch-sriram/JavaScript/blob/1b504a0df042ceb2a74401975c08b5f0c97e146e/JS-DOM/scripts/app.js) v1
    2. Events & Event Handling: [app.js](https://github.com/Ch-sriram/JavaScript/blob/8b0249a1d8105294f79f9c1042a54253484aaf5e/JS-DOM/scripts/app.js) v2
    3. Adding, Removing & Toggling HTML Classes: [app.js](https://github.com/Ch-sriram/JavaScript/blob/2bbf7f9c82dff445a4e675c1935b068b79b3641b/JS-DOM/scripts/app.js) v3
    4. DRY Principle & More DOM Manipulation: [app.js](https://github.com/Ch-sriram/JavaScript/blob/631d8e1ce948179789b28305c877991b24be2f7d/JS-DOM/scripts/app.js) v4
    5. Creating Initialization Function for the Game: [app.js](https://github.com/Ch-sriram/JavaScript/blob/07301e404d97a7c54437ab8ec56e9ef32f9f6b79/JS-DOM/scripts/app.js) v5
-   6. Adding Game State: [app.js](https://github.com/Ch-sriram/JavaScript/blob/master/JS-DOM/scripts/app.js) final version | [Play the game @CodeSandBox](https://dtvte.csb.app/)
+   6. Adding Game State: [app.js](https://github.com/Ch-sriram/JavaScript/blob/be7496cd93de95f7c616da0870dd2d4b2bf6c302/JS-DOM/scripts/app.js) final version (Easy) | [Play the game @CodeSandBox](https://dtvte.csb.app/)
+   7. The Pig Game: [app.js](https://github.com/Ch-sriram/JavaScript/blob/master/JS-DOM/scripts/app.js) final version (Hard) | [Play the game @Repl.it](https://pig-game.chsriram.repl.co/)
