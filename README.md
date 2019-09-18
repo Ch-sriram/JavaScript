@@ -56,3 +56,6 @@ Syntax -
    5. Creating Initialization Function for the Game: [app.js](https://github.com/Ch-sriram/JavaScript/blob/07301e404d97a7c54437ab8ec56e9ef32f9f6b79/JS-DOM/scripts/app.js) v5
    6. Adding Game State: [app.js](https://github.com/Ch-sriram/JavaScript/blob/be7496cd93de95f7c616da0870dd2d4b2bf6c302/JS-DOM/scripts/app.js) final version (Easy) | [Play the game @CodeSandBox](https://dtvte.csb.app/)
    7. The Pig Game: [app.js](https://github.com/Ch-sriram/JavaScript/blob/master/JS-DOM/scripts/app.js) final version (Hard) | [Play the game @Repl.it](https://pig-game.chsriram.repl.co/) | Updated Markup - [index.html](https://github.com/Ch-sriram/JavaScript/blob/master/JS-DOM/index.html)
+
+4. <strong>Advanced JS: Objects & Functions
+   1. Object Creation, Inheritence & Prototype Chain: [obj.html](https://github.com/Ch-sriram/JavaScript/blob/master/JS-Objects-Functions-Advanced/obj.html) | [obj.js](https://github.com/Ch-sriram/JavaScript/blob/master/JS-Objects-Functions-Advanced/scripts/obj.js) | prototypeChain.pdf - [View](https://github.com/Ch-sriram/JavaScript/blob/master/JS-Objects-Functions-Advanced/assets/prototypeChain.pdf)
