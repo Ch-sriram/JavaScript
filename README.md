@@ -48,7 +48,7 @@ Syntax -
       3. The <code>this</code> Keyword: [this.html](https://github.com/Ch-sriram/JavaScript/blob/master/JS-Behind-the-Scenes/this.html) | [this.js](https://github.com/Ch-sriram/JavaScript/blob/master/JS-Behind-the-Scenes/scripts/this.js)
 
 3. <strong>JS DOM: The Pig Game</strong> 
-(Common Markup for 1-6: [index.html](https://github.com/Ch-sriram/JavaScript/blob/07301e404d97a7c54437ab8ec56e9ef32f9f6b79/JS-DOM/index.html))
+(Common Markup for i-vi: [index.html](https://github.com/Ch-sriram/JavaScript/blob/07301e404d97a7c54437ab8ec56e9ef32f9f6b79/JS-DOM/index.html))
    1. DOM Access & Manipulation: [app.js](https://github.com/Ch-sriram/JavaScript/blob/1b504a0df042ceb2a74401975c08b5f0c97e146e/JS-DOM/scripts/app.js) v1
    2. Events & Event Handling: [app.js](https://github.com/Ch-sriram/JavaScript/blob/8b0249a1d8105294f79f9c1042a54253484aaf5e/JS-DOM/scripts/app.js) v2
    3. Adding, Removing & Toggling HTML Classes: [app.js](https://github.com/Ch-sriram/JavaScript/blob/2bbf7f9c82dff445a4e675c1935b068b79b3641b/JS-DOM/scripts/app.js) v3
@@ -62,4 +62,4 @@ Syntax -
    2. Primitives vs. Objects: [prim_vs_obj.html](https://github.com/Ch-sriram/JavaScript/blob/master/JS-Objects-Functions-Advanced/prim_vs_obj.html) | [prim_vs_obj.js](https://github.com/Ch-sriram/JavaScript/blob/master/JS-Objects-Functions-Advanced/scripts/prim_vs_obj.js)
    3. First Class Functions: [first_class_functions.html](https://github.com/Ch-sriram/JavaScript/blob/master/JS-Objects-Functions-Advanced/first_class_functions.html) | [first_class_functions.js](https://github.com/Ch-sriram/JavaScript/blob/master/JS-Objects-Functions-Advanced/scripts/first_class_functions.js)
    4. Immediately Invoked Function Expressions (IIFE): [iife.html](https://github.com/Ch-sriram/JavaScript/blob/master/JS-Objects-Functions-Advanced/iife.html) | [iife.js](https://github.com/Ch-sriram/JavaScript/blob/master/JS-Objects-Functions-Advanced/scripts/iife.js)
-   5. Closures: [closure.html](https://github.com/Ch-sriram/JavaScript/blob/master/JS-Objects-Functions-Advanced/closure.html) | [closure.js](https://github.com/Ch-sriram/JavaScript/blob/master/JS-Objects-Functions-Advanced/scripts/closure.js) | closure.pdf - [view](https://github.com/Ch-sriram/JavaScript/blob/master/JS-Objects-Functions-Advanced/assets/closure.pdf) or [download]()
+   5. Closures: [closure.html](https://github.com/Ch-sriram/JavaScript/blob/master/JS-Objects-Functions-Advanced/closure.html) | [closure.js](https://github.com/Ch-sriram/JavaScript/blob/master/JS-Objects-Functions-Advanced/scripts/closure.js) | closure.pdf - [view](https://github.com/Ch-sriram/JavaScript/blob/master/JS-Objects-Functions-Advanced/assets/closure.pdf) or [download](https://raw.githubusercontent.com/Ch-sriram/JavaScript/9f569b0a67f10ff4a4075015fbccad929c265789/JS-Objects-Functions-Advanced/assets/closure.pdf)
