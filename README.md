@@ -66,5 +66,6 @@ Syntax -
    6. <code>bind()</code>, <code>call()</code> & <code>apply()</code>: [bind_call_apply.html](https://github.com/Ch-sriram/JavaScript/blob/master/JS-Objects-Functions-Advanced/bind_call_apply.html) | [bind_call_apply.js](https://github.com/Ch-sriram/JavaScript/blob/master/JS-Objects-Functions-Advanced/scripts/bind_call_apply.js)
    7. Coding Challenge VII: [challenge_7.html](https://github.com/Ch-sriram/JavaScript/blob/master/JS-Objects-Functions-Advanced/challenge_7.html) | [challenge_7.js](https://github.com/Ch-sriram/JavaScript/blob/master/JS-Objects-Functions-Advanced/scripts/challenge_7.js)
    8. <strong>Budgety App</strong>  (Common Markup: [index.html](https://github.com/Ch-sriram/JavaScript/blob/master/JS-Objects-Functions-Advanced/project-budgety/index.html) & [style.css](https://github.com/Ch-sriram/JavaScript/blob/master/JS-Objects-Functions-Advanced/project-budgety/style.css))
-      1. Module Pattern, Encapsulation & Separation of Concerns: [app.js]()
-      2. <code>keypress</code> Events & <code>event</code> Object: [app.js]()
+      1. Module Pattern, Encapsulation & Separation of Concerns: [app.js](https://github.com/Ch-sriram/JavaScript/blob/d51c8a5d78080988d8f7f1e7e7b8b41ad9710f5c/JS-Objects-Functions-Advanced/project-budgety/app.js)
+      2. <code>keypress</code> Events & <code>event</code> Object: [app.js](https://github.com/Ch-sriram/JavaScript/blob/aefe04cbade051779737e82f318593583e6467e8/JS-Objects-Functions-Advanced/project-budgety/app.js)
+      3. Reading <code>HTML</code> Input Data w. Separation of Concerns: [app.js]()
