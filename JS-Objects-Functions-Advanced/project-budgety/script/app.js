@@ -1,22 +1,53 @@
 /********************************************************************************************
  * What we'll learn
  * ----------------
- * How and why to create an initialization function.
+ * 1. How to choose function constructors that meet our application's needs.
+ * 2. How to set up a proper data structure for our budget controller.
  */
 
+/**
+ * We should have a distinct way to distinguish between expenses and incomes of the user.
+ * For that, we should create function constructors for expense and income respectively.
+ * Also, each user can have many expense and income values, for that, we can use a 
+ * data structure like an array, to store all the user's each and every income, expense, etc
+ * separately.
+ */
 
 // Budget Controller
 var budgetController = (function() {    // Code related to handling the budget (data) logic
     
-    
+    // Function Constructor for Expense
+    var Expense = function(id, description, value) {
+        this.id = id;
+        this.description = description;
+        this.value = value;
+    };
 
+    // Function constructor for Incomes
+    var Income = function(id, description, value) {
+        this.id = id;
+        this.description = description;
+        this.value = value;
+    };
+
+    // Use a Data Structure to store each and every individual income & expense uniquely
+    var data = {
+        allItems: { 
+            income: [],     // each and every income and expense needs to be stored 
+            expense: []     // separately => we use a list (array) data structure for this.
+        },
+        totals: {
+            income: 0,      // the total income and expense would simply be a number.
+            expense: 0
+        }
+    };
 })();
 
 
 // UI Controller
 var UIController = (function(){      // Code to manipulate the UI
 
-    /**
+    /** Object desc:
      * Each and every HTML DOM Element is added in this DOMStrings Object. This object
      * is used in document.querySelector(DOMString.<property>) throughout our code.
      */
@@ -28,13 +59,14 @@ var UIController = (function(){      // Code to manipulate the UI
     };
 
     return {
-        /**
-         * getInput(): returns the values present currently in the classes of the inputs
-         *             which are .add__type, .add_description & .add__value, referred to as
-         *             inputType, inputDescription & inputValue using the DOMStrings object
-         *             which is defined above.
-         */
+        
         getInput: function() {
+            /** function desc:
+             * returns the values present currently in the classes of the inputs
+             * which are .add__type, .add_description & .add__value, referred to as
+             * inputType, inputDescription & inputValue using the DOMStrings object
+             * which is defined above.
+             */
             return {
                 type: document.querySelector(DOMStrings.inputType).value,
                 description: document.querySelector(DOMStrings.inputDescription).value,
@@ -42,28 +74,18 @@ var UIController = (function(){      // Code to manipulate the UI
             };
         },
 
-        /**
-         * getDOMStrings(): simply returns the above defined DOMSTrings object to the 
-         *                  public scope, i.e., wherever UIController.getDOMStrings() is
-         *                  called.
-         */
+        
         getDOMStrings: function() {
+            /** function desc:
+             * simply returns the above defined DOMStrings object to the public scope, i.e., 
+             * wherever UIController.getDOMStrings() is called.
+             */
             return DOMStrings;
         }
     };
 
 })();
 
-
-/**
- * It is always better to create an initialization function to start the app.
- * We can create an init() function inside the controller iife. Check the code below to see
- * how the init() is written.
- *
- * Also, we separate our code inside the controller itself, by separating the events into
- * a single and simple function known setupEventListeners, where all the event listeners
- * and their code will reside. We will call that function inside our init() function.
- */
 
 // Global App Controller
 var controller = (function(budgetCtrl, UICtrl){ // Code related to handling events 
