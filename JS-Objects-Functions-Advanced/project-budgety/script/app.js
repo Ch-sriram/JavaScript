@@ -1,8 +1,8 @@
 /********************************************************************************************
  * What we'll learn
  * ----------------
- * 1. How to choose function constructors that meet our application's needs.
- * 2. How to set up a proper data structure for our budget controller.
+ * 1. How to avoid conflicts in our data structures.
+ * 2. How and why to pass data from one module to another.
  */
 
 /**
@@ -41,6 +41,39 @@ var budgetController = (function() {    // Code related to handling the budget (
             expense: 0
         }
     };
+
+    return {
+        addItem: function(type, des, val) {
+            var newItem, ID;
+            
+            // To create a unique ID, we will always take the Array's latest created
+            // element's index (i.e., its ID) and 1 to it, to always get a unique number
+            // as our ID for each and every item we add into the array. For the first element
+            // added in our array, we create it with an id of 0.
+            if (data.allItems[type].length === 0) {
+                ID = 0;
+            } else {
+                ID = data.allItems[type][data.allItems[type].length - 1].id + 1;
+            }
+
+            // Check the type of the item we are adding, is it income or expense?
+            if (type === "income")
+                newItem = new Income(ID, des, val);
+            else if (type === "expense")
+                newItem = new Expense(ID, des, val);
+            
+            // Push the newly created item into our data structure
+            data.allItems[type].push(newItem);
+
+            // new item should be returned to the global controller of this app
+            return newItem;
+        },
+
+        testing: function() {
+            // use this function only for testing purpose
+            return data;
+        }
+    };
 })();
 
 
@@ -66,6 +99,7 @@ var UIController = (function(){      // Code to manipulate the UI
              * which are .add__type, .add_description & .add__value, referred to as
              * inputType, inputDescription & inputValue using the DOMStrings object
              * which is defined above.
+             * type: income/expense
              */
             return {
                 type: document.querySelector(DOMStrings.inputType).value,
@@ -107,9 +141,13 @@ var controller = (function(budgetCtrl, UICtrl){ // Code related to handling even
     
 
     var ctrlAddItem = function() {
+        var input, newItem;
+
         // 1. Get the field input data
-        var input = UICtrl.getInput();
+        input = UICtrl.getInput();
+        
         // console.log(input); // testing
+        newItem = budgetCtrl.addItem(input.type, input.description, input.value);
 
         // 2. Add the item to the budget controller
 
