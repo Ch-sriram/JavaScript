@@ -49,10 +49,10 @@ Syntax -
 
 3. <strong>JS DOM: The Pig Game</strong> 
 (Common Markup for i-vi: [index.html](https://github.com/Ch-sriram/JavaScript/blob/07301e404d97a7c54437ab8ec56e9ef32f9f6b79/JS-DOM/index.html) & [style.css](https://github.com/Ch-sriram/JavaScript/blob/07301e404d97a7c54437ab8ec56e9ef32f9f6b79/JS-DOM/styles/style.css))
-   1. DOM Access & Manipulation: [app.js](https://github.com/Ch-sriram/JavaScript/blob/1b504a0df042ceb2a74401975c08b5f0c97e146e/JS-DOM/scripts/app.js) v1
-   2. Events & Event Handling: [app.js](https://github.com/Ch-sriram/JavaScript/blob/8b0249a1d8105294f79f9c1042a54253484aaf5e/JS-DOM/scripts/app.js) v2
-   3. Adding, Removing & Toggling HTML Classes: [app.js](https://github.com/Ch-sriram/JavaScript/blob/2bbf7f9c82dff445a4e675c1935b068b79b3641b/JS-DOM/scripts/app.js) v3
-   4. DRY Principle & More DOM Manipulation: [app.js](https://github.com/Ch-sriram/JavaScript/blob/631d8e1ce948179789b28305c877991b24be2f7d/JS-DOM/scripts/app.js) v4
+   1. DOM Access & Manipulation: [app.js](https://github.com/Ch-sriram/JavaScript/blob/1b504a0df042ceb2a74401975c08b5f0c97e146e/JS-DOM/scripts/app.js)
+   2. Events & Event Handling: [app.js](https://github.com/Ch-sriram/JavaScript/blob/8b0249a1d8105294f79f9c1042a54253484aaf5e/JS-DOM/scripts/app.js)
+   3. Adding, Removing & Toggling HTML Classes: [app.js](https://github.com/Ch-sriram/JavaScript/blob/2bbf7f9c82dff445a4e675c1935b068b79b3641b/JS-DOM/scripts/app.js)
+   4. DRY Principle & More DOM Manipulation: [app.js](https://github.com/Ch-sriram/JavaScript/blob/631d8e1ce948179789b28305c877991b24be2f7d/JS-DOM/scripts/app.js)
    5. Creating Initialization Function for the Game: [app.js](https://github.com/Ch-sriram/JavaScript/blob/07301e404d97a7c54437ab8ec56e9ef32f9f6b79/JS-DOM/scripts/app.js) v5
    6. Adding Game State: [app.js](https://github.com/Ch-sriram/JavaScript/blob/be7496cd93de95f7c616da0870dd2d4b2bf6c302/JS-DOM/scripts/app.js) final version (Easy) | [Play the game @CodeSandBox](https://dtvte.csb.app/)
    7. The Pig Game: [app.js](https://github.com/Ch-sriram/JavaScript/blob/master/JS-DOM/scripts/app.js) final version (Hard) | [Play the game @Repl.it](https://pig-game.chsriram.repl.co/) | Updated Markup - [index.html](https://github.com/Ch-sriram/JavaScript/blob/master/JS-DOM/index.html) & [style.css](https://github.com/Ch-sriram/JavaScript/blob/master/JS-DOM/styles/style.css)
@@ -65,5 +65,6 @@ Syntax -
    5. Closures: [closure.html](https://github.com/Ch-sriram/JavaScript/blob/master/JS-Objects-Functions-Advanced/closure.html) | [closure.js](https://github.com/Ch-sriram/JavaScript/blob/master/JS-Objects-Functions-Advanced/scripts/closure.js) | closure.pdf - [view](https://github.com/Ch-sriram/JavaScript/blob/master/JS-Objects-Functions-Advanced/assets/closure.pdf) or [download](https://raw.githubusercontent.com/Ch-sriram/JavaScript/9f569b0a67f10ff4a4075015fbccad929c265789/JS-Objects-Functions-Advanced/assets/closure.pdf)
    6. Bind, Call & Apply: [bind_call_apply.html](https://github.com/Ch-sriram/JavaScript/blob/master/JS-Objects-Functions-Advanced/bind_call_apply.html) | [bind_call_apply.js](https://github.com/Ch-sriram/JavaScript/blob/master/JS-Objects-Functions-Advanced/scripts/bind_call_apply.js)
    7. Coding Challenge VII: [challenge_7.html](https://github.com/Ch-sriram/JavaScript/blob/master/JS-Objects-Functions-Advanced/challenge_7.html) | [challenge_7.js](https://github.com/Ch-sriram/JavaScript/blob/master/JS-Objects-Functions-Advanced/scripts/challenge_7.js)
-   8. <strong>Budgety App</strong>  (Common Markup: [index.html](https://github.com/Ch-sriram/JavaScript/blob/master/JS-Objects-Functions-Advanced/project-budgety/index.html)) | [style.css](https://github.com/Ch-sriram/JavaScript/blob/master/JS-Objects-Functions-Advanced/project-budgety/style.css)
-      1. Module Pattern, Encapsulation & Separation of Concerns: [app.js]() v1
+   8. <strong>Budgety App</strong>  (Common Markup: [index.html](https://github.com/Ch-sriram/JavaScript/blob/master/JS-Objects-Functions-Advanced/project-budgety/index.html) & [style.css](https://github.com/Ch-sriram/JavaScript/blob/master/JS-Objects-Functions-Advanced/project-budgety/style.css))
+      1. Module Pattern, Encapsulation & Separation of Concerns: [app.js]()
+      2. <code>keypress</code> Events & <code>event</code> Object: [app.js]()
