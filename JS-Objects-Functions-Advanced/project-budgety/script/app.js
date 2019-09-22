@@ -1,14 +1,9 @@
 /********************************************************************************************
  * What we'll learn
  * ----------------
- * How to read data from different HTML input types with Separation of Concerns.
+ * How and why to create an initialization function.
  */
 
-/**
- * We write methods for calculating the budget in the budgetController, and in the 
- * controller function, we use the function i.e., we call the functions from the
- * budgetController (using budgetCtrl in controller) and then use them accordingly. 
- */
 
 // Budget Controller
 var budgetController = (function() {    // Code related to handling the budget (data) logic
@@ -60,15 +55,39 @@ var UIController = (function(){      // Code to manipulate the UI
 })();
 
 
+/**
+ * It is always better to create an initialization function to start the app.
+ * We can create an init() function inside the controller iife. Check the code below to see
+ * how the init() is written.
+ *
+ * Also, we separate our code inside the controller itself, by separating the events into
+ * a single and simple function known setupEventListeners, where all the event listeners
+ * and their code will reside. We will call that function inside our init() function.
+ */
+
 // Global App Controller
 var controller = (function(budgetCtrl, UICtrl){ // Code related to handling events 
 
-    var DOM = UICtrl.getDOMStrings();
+    var setupEventListeners = function() {
+        // Get all the DOM classes, id's, etc
+        var DOM = UICtrl.getDOMStrings();
+
+        // when we press the .add__btn, we should add the expense/income
+        document.querySelector(DOM.inputBtn).addEventListener("click", ctrlAddItem);
+
+        // when we press the Enter/Return Key, we should add the expense/income
+        document.addEventListener("keypress", function(event) {
+            // If we press the Enter/Return Key, do the following
+            if (event.keyCode === 13 || event.which === 13) 
+                ctrlAddItem();
+        });
+    };
+    
 
     var ctrlAddItem = function() {
         // 1. Get the field input data
         var input = UICtrl.getInput();
-        console.log(input);
+        // console.log(input); // testing
 
         // 2. Add the item to the budget controller
 
@@ -81,13 +100,17 @@ var controller = (function(budgetCtrl, UICtrl){ // Code related to handling even
         // console.log("Its okay!");   // testing
     };
 
-    // when we press the .add__btn, we should add the expense/income
-    document.querySelector(DOM.inputBtn).addEventListener("click", ctrlAddItem);
+    // to be able to call the init() function from the global scope, we return an 
+    // object that contains the init() function as follows:
+    return {
+        init: function() {
+            console.log("Application has started.");    // test
+            setupEventListeners();
+        }
+    };
 
-    // when we press the Enter/Return Key, we should add the expense/income
-    document.addEventListener("keypress", function(event) {
-        if (event.keyCode === 13 || event.which === 13) // If we press the Enter/Return Key
-            ctrlAddItem();
-    });
-    
 })(budgetController, UIController);
+
+
+// This is the only piece of code that we write in the global scope
+controller.init();
