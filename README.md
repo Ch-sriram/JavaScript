@@ -72,3 +72,4 @@ Syntax -
       4. Adding the Initialization Function: [app.js](https://github.com/Ch-sriram/JavaScript/blob/b5760de43adeaedd29d2997fedc43059cd172cbc/JS-Objects-Functions-Advanced/project-budgety/script/app.js)
       5. Function Constructors and Data Structures for Incomes & Expenses: [app.js](https://github.com/Ch-sriram/JavaScript/blob/d0fb4eafdf2613d8c692f8bbd4c22a63b0ead81c/JS-Objects-Functions-Advanced/project-budgety/script/app.js)
       6. Avoiding Data Structure Conflicts & Passing Data from One Module to Another: [app.js](https://github.com/Ch-sriram/JavaScript/blob/cc0f444858b3b1eb4860a9ee78add0b105ff9be2/JS-Objects-Functions-Advanced/project-budgety/script/app.js)
+      7. Usage of <code>innerAdjacentHTML()</code> method & <code>replace()</code> method: [app.js]()
