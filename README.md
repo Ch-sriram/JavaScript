@@ -74,4 +74,4 @@ Syntax -
       6. Avoiding Data Structure Conflicts & Passing Data from One Module to Another: [app.js](https://github.com/Ch-sriram/JavaScript/blob/cc0f444858b3b1eb4860a9ee78add0b105ff9be2/JS-Objects-Functions-Advanced/project-budgety/script/app.js)
       7. Usage of <code>innerAdjacentHTML()</code> method & <code>replace()</code> method: [app.js](https://github.com/Ch-sriram/JavaScript/blob/ce2b3650d1745900ba8070af731c7ab75d8be2cf/JS-Objects-Functions-Advanced/project-budgety/script/app.js)
       8. Usage of <code>querySelectorAll()</code> method, Conversion of <code>NodeList</code> to <code>Array</code> & the usage of <code>forEach()</code> method: [app.js](https://github.com/Ch-sriram/JavaScript/blob/345d673fb41d34d6bd98de97284219196220ead5/JS-Objects-Functions-Advanced/project-budgety/script/app.js)
-      9. Converting HTML Field Inputs to Numbers & Preventing False Item Inputs: [app.js]()
+      9. Converting HTML Field Inputs to Numbers & Preventing False Item Inputs: [app.js](https://github.com/Ch-sriram/JavaScript/blob/8728f2f69f67dcafe5b174e9236ab5a5578725bb/JS-Objects-Functions-Advanced/project-budgety/script/app.js)
