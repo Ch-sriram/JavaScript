@@ -1,9 +1,10 @@
 /********************************************************************************************
  * What we'll learn
  * ----------------
- * 1. A technique for adding big chunks of HTML into the DOM;
- * 2. How to replace parts of strings;
- * 3. How to do DOM Manipulation using the insertAdjacentHTML() method;
+ * 1. How to clear HTML fields;
+ * 2. How to use querySelectorAll();
+ * 3. How to convert a list to an Array;
+ * 4. A better way to loop over an array than for loop: forEach() loop;
  */
 
 // Budget Controller
@@ -73,7 +74,9 @@ var budgetController = (function() {    // Code related to handling the budget (
 })();
 
 /**
- * Adding the new items to the UI using the insertAdjacentHTML() method, in the UIController
+ * After adding new items to the UI, we also want to clear HTML fields in the UI, because it
+ * makes sense to do that. Therefore, we do it by adding the relevant function into the
+ * UIController's IIFE, below:
  */
 
 // UI Controller
@@ -137,6 +140,31 @@ var UIController = (function(){      // Code to manipulate the UI
             // Find the documentation here: https://developer.mozilla.org/en-US/docs/Web/API/Element/insertAdjacentHTML
             document.querySelector(element).insertAdjacentHTML("beforeend", newHTML);
         },
+
+        clearFields: function() {
+            /** Desc: Clears all the relevant HTML fields (like inputDescription and
+             * inputValue from DOMStrings) after we added a new item using the addListItem 
+             * into the page.
+             */
+            var fields; // Used to store the NodeList type list (not an array) from the 
+                        // return of querySelectorAll() method.
+            var fieldsArr;  // Used to store the converted fields NodeList variable as
+                            // an array
+            // API Reference for querySelectorAll()
+            // https://developer.mozilla.org/en-US/docs/Web/API/Document/querySelectorAll
+            fields = document.querySelectorAll(DOMStrings.inputDescription + 
+                                               ", " + DOMStrings.inputValue);
+            //fieldsArr = Array.prototype.slice.call(fields);   // instead of this, we can
+            fieldsArr = Array.from(fields);     // simply do this.
+            // forEach is a fucnction that takes in a callback function.
+            // That callback function takes in 3 arguments: currentValue, index, array
+            // where, "currentValue" is the current element's value in the array pointed by 
+            // the "index", and "array" is the entire array itself.
+            fieldsArr.forEach(function(curr, idx, arr) {  
+                curr.value = "";
+            });
+            fieldsArr[0].focus(); // fieldsArr[0] is the DOMStrings.inputDescription element
+        },
         
         getDOMStrings: function() {
             /** function desc:
@@ -181,9 +209,12 @@ var controller = (function(budgetCtrl, UICtrl){ // Code related to handling even
         // 3. Add the item to UI
         UICtrl.addListItem(newItem, input.type);
 
-        // 4. Calculate the budget
+        // 4. Clear the input HTML fields
+        UICtrl.clearFields();
 
-        // 5. Display the budget at the UI
+        // 5. Calculate the budget
+
+        // 6. Display the budget at the UI
 
         // console.log("Its okay!");   // testing
     };
