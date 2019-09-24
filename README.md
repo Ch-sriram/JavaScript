@@ -75,3 +75,4 @@ Syntax -
       7. Usage of <code>innerAdjacentHTML()</code> method & <code>replace()</code> method: [app.js](https://github.com/Ch-sriram/JavaScript/blob/ce2b3650d1745900ba8070af731c7ab75d8be2cf/JS-Objects-Functions-Advanced/project-budgety/script/app.js)
       8. Usage of <code>querySelectorAll()</code> method, Conversion of <code>NodeList</code> to <code>Array</code> & the usage of <code>forEach()</code> method: [app.js](https://github.com/Ch-sriram/JavaScript/blob/345d673fb41d34d6bd98de97284219196220ead5/JS-Objects-Functions-Advanced/project-budgety/script/app.js)
       9. Converting HTML Field Inputs to Numbers & Preventing False Item Inputs: [app.js](https://github.com/Ch-sriram/JavaScript/blob/8728f2f69f67dcafe5b174e9236ab5a5578725bb/JS-Objects-Functions-Advanced/project-budgety/script/app.js)
+      10. Creating functions for a singular purpose: [app.js]()

@@ -1,12 +1,12 @@
 /********************************************************************************************
  * What we'll learn
  * ----------------
- * 1. How to convert field inputs to numbers;
- * 2. How to prevent false inputs (i.e., an empty input);
+ * 1. How and why to create simple, reusable function with only one purpose each;
+ * 2. How to sum all elements of an array using the forEach() method;
  */
 
-// Budget Controller
-var budgetController = (function() {    // Code related to handling the budget (data) logic
+// Budget Controller - Code related to handling the budget (data) logic
+var budgetController = (function() {     
     
     // Function Constructor for Expense
     var Expense = function(id, description, value) {
@@ -31,7 +31,22 @@ var budgetController = (function() {    // Code related to handling the budget (
         totals: {
             income: 0,      // the total income and expense would simply be a number.
             expense: 0
-        }
+        },
+        budget: 0,  // stores the available budget: totals.income - totals.expense
+        percentage: -1, // % of expenses made out of the total income. by default it is -1
+    };
+
+    // Function to calculate the total income/expense made by the user till now
+    var calculateTotal = function(type) {
+        var sum = 0;    // Stores the total income/expense sum till now
+        
+        // loop through all the current incomes/expenses and save them in sum
+        data.allItems[type].forEach(function(curr) {
+            sum += curr.value;
+        });
+
+        // Store the sum inside the relevant item type - income/expense
+        data.totals[type] = sum;
     };
 
     function createID(type) {
@@ -64,6 +79,31 @@ var budgetController = (function() {    // Code related to handling the budget (
             return newItem;
         },
 
+        // Calculates the total budget by tallying income and expenses
+        calculateBudget: function() {
+            // Calculate total income/expense
+            calculateTotal("income");
+            calculateTotal("expense");
+
+            // Calculate the budget: income - expense
+            data.budget = data.totals.income - data.totals.expense;
+
+            // Calculate the percentage of income that we spend, only if income !== 0
+            if (data.totals.income > 0)
+             data.percentage = Math.round((data.totals.expense / data.totals.income) * 100);
+            else data.percentage = -1;
+        },
+
+        // Returns the budget, as an object
+        getBudget: function() {
+            return {
+                budget: data.budget,
+                totalIncome: data.totals.income,
+                totalExpense: data.totals.expense,
+                percentage: data.percentage,
+            };
+        },
+
         testing: function() {
             // use this function only for testing purpose
             return data;
@@ -72,20 +112,21 @@ var budgetController = (function() {    // Code related to handling the budget (
 })();
 
 
-// UI Controller
-var UIController = (function(){      // Code to manipulate the UI
+// UI Controller - Code to manipulate the UI
+var UIController = (function(){
 
-    /** Object desc:
-     * Each and every HTML DOM Element is added in this DOMStrings Object. This object
-     * is used in document.querySelector(DOMString.<property>) throughout our code.
-     */
     var DOMStrings = {
+        /** Object desc:
+         * Each and every HTML DOM Element is added in this DOMStrings Object. This object
+         * is used for getting the HTML element throughout the code using a more uniform
+         * naming methodology.
+         */
         inputType: '.add__type',
         inputDescription: '.add__description',
         inputValue: '.add__value',
         inputBtn: '.add__btn',
-        incomeContainer: '.income__list',       // added newly
-        expenseContainer: '.expenses__list'     // added newly
+        incomeContainer: '.income__list',
+        expenseContainer: '.expenses__list'
     };
 
     return {
@@ -96,9 +137,9 @@ var UIController = (function(){      // Code to manipulate the UI
              * inputType, inputDescription & inputValue using the DOMStrings object
              * which is defined above.
              * 
-             * type: income/expense option
-             * description: string
-             * value: floating point number 
+             *      type: income/expense from the <select> <option>'s value
+             *      description: string from <input type="text" ...>
+             *      value: number from <input type="number" ...>
              */
             return {
                 type: document.querySelector(DOMStrings.inputType).value,
@@ -174,8 +215,8 @@ var UIController = (function(){      // Code to manipulate the UI
 })();
 
 
-// Global App Controller
-var controller = (function(budgetCtrl, UICtrl){ // Code related to handling events 
+// Global App Controller - Code related to handling events and everything else in the app
+var controller = (function(budgetCtrl, UICtrl){ 
 
     var setupEventListeners = function() {
         // Get all the DOM classes, id's, etc
@@ -194,11 +235,16 @@ var controller = (function(budgetCtrl, UICtrl){ // Code related to handling even
     
     var updateBudget = function() {
         // 1. Calculate the budget
+        budgetCtrl.calculateBudget();
 
         // 2. Return the budget
+        var budget = budgetCtrl.getBudget();
 
         // 3. Display the budget on the UI
+        
 
+        // code to test this function's working
+        console.log(budget);
     };
 
     var ctrlAddItem = function() {
