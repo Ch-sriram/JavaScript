@@ -1,10 +1,8 @@
 /********************************************************************************************
  * What we'll learn
  * ----------------
- * 1. How to clear HTML fields;
- * 2. How to use querySelectorAll();
- * 3. How to convert a list to an Array;
- * 4. A better way to loop over an array than for loop: forEach() loop;
+ * 1. How to convert field inputs to numbers;
+ * 2. How to prevent false inputs (i.e., an empty input);
  */
 
 // Budget Controller
@@ -73,11 +71,6 @@ var budgetController = (function() {    // Code related to handling the budget (
     };
 })();
 
-/**
- * After adding new items to the UI, we also want to clear HTML fields in the UI, because it
- * makes sense to do that. Therefore, we do it by adding the relevant function into the
- * UIController's IIFE, below:
- */
 
 // UI Controller
 var UIController = (function(){      // Code to manipulate the UI
@@ -102,12 +95,15 @@ var UIController = (function(){      // Code to manipulate the UI
              * which are .add__type, .add_description & .add__value, referred to as
              * inputType, inputDescription & inputValue using the DOMStrings object
              * which is defined above.
-             * type: income/expense
+             * 
+             * type: income/expense option
+             * description: string
+             * value: floating point number 
              */
             return {
                 type: document.querySelector(DOMStrings.inputType).value,
                 description: document.querySelector(DOMStrings.inputDescription).value,
-                value: document.querySelector(DOMStrings.inputValue).value
+                value: parseFloat(document.querySelector(DOMStrings.inputValue).value)
             };
         },
 
@@ -196,6 +192,14 @@ var controller = (function(budgetCtrl, UICtrl){ // Code related to handling even
         });
     };
     
+    var updateBudget = function() {
+        // 1. Calculate the budget
+
+        // 2. Return the budget
+
+        // 3. Display the budget on the UI
+
+    };
 
     var ctrlAddItem = function() {
         var input, newItem;
@@ -203,20 +207,24 @@ var controller = (function(budgetCtrl, UICtrl){ // Code related to handling even
         // 1. Get the field input data
         input = UICtrl.getInput();      // console.log(input); // testing
 
-        // 2. Add the item to the budget controller
-        newItem = budgetCtrl.addItem(input.type, input.description, input.value);
+        /**
+         * We want steps 2 and above to happen, only when the input has some description and
+         * some income/expense value (not 0 & NaN). Therefore, we use an if statement to
+         * handle such a scenario, right here.
+         */
+        if (input.description !== "" && !isNaN(input.value) && input.value > 0) {
+            // 2. Add the item to the budget controller
+            newItem = budgetCtrl.addItem(input.type, input.description, input.value);
 
-        // 3. Add the item to UI
-        UICtrl.addListItem(newItem, input.type);
+            // 3. Add the item to UI
+            UICtrl.addListItem(newItem, input.type);
 
-        // 4. Clear the input HTML fields
-        UICtrl.clearFields();
+            // 4. Clear the input HTML fields
+            UICtrl.clearFields();
 
-        // 5. Calculate the budget
-
-        // 6. Display the budget at the UI
-
-        // console.log("Its okay!");   // testing
+            // 5. Calculate and update the budget
+            updateBudget();
+        }
     };
 
     // to be able to call the init() function from the global scope, we return an 
