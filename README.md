@@ -22,7 +22,7 @@ Resources:
 Syntax - 
 <em>&lt;topic name>: &lt;html file> | &lt;JavaScript file></em>
 
-1. <strong>JavaScript Basics</strong>
+1. #### JavaScript Basics
    1. Hello World!:
       1. Inline Script: [hello_i.html](https://github.com/Ch-sriram/JavaScript/blob/master/JS%20Basics/hello_i.html)
       2. External Script: [hello_e.html](https://github.com/Ch-sriram/JavaScript/blob/master/JS%20Basics/hello_e.html) | [hello.js](https://github.com/Ch-sriram/JavaScript/blob/master/JS%20Basics/scripts/hello.js)
@@ -40,24 +40,24 @@ Syntax -
    13. Looping & Iteration: [loops.html](https://github.com/Ch-sriram/JavaScript/blob/master/JS%20Basics/loops.html) | [loops.js](https://github.com/Ch-sriram/JavaScript/blob/master/JS%20Basics/scripts/loops.js)
    14. Coding Challenge V: [challenge_5.html](https://github.com/Ch-sriram/JavaScript/blob/master/JS%20Basics/challenge_5.html) | [challenge_5.js](https://github.com/Ch-sriram/JavaScript/blob/master/JS%20Basics/scripts/challenge_5.js)
 
-2. <strong>JS Behind the Scenes</strong>
+2. #### JS Behind the Scenes
    1. Execution Context & Execution Stack: [exec.html](https://github.com/Ch-sriram/JavaScript/blob/master/JS-Behind-the-Scenes/exec.html) | [exec.js](https://github.com/Ch-sriram/JavaScript/blob/master/JS-Behind-the-Scenes/scripts/exec.js)
    2. Exectution Context in Detail
       1. Hoisting: [hoisting.html](https://github.com/Ch-sriram/JavaScript/blob/master/JS-Behind-the-Scenes/hoisting.html) | [hoisting.js](https://github.com/Ch-sriram/JavaScript/blob/master/JS-Behind-the-Scenes/scripts/hoisting.js)
       2. Scoping & Scope Chain: [scope.html](https://github.com/Ch-sriram/JavaScript/blob/master/JS-Behind-the-Scenes/scope.html) | [scope.js](https://github.com/Ch-sriram/JavaScript/blob/master/JS-Behind-the-Scenes/scripts/scope.js) | scope.pdf -  [view](https://github.com/Ch-sriram/JavaScript/blob/master/JS-Behind-the-Scenes/assets/scope.pdf) or [download](https://raw.githubusercontent.com/Ch-sriram/JavaScript/c51a1dba9ec824ffc2b917befeb9b2a46a00a18b/JS-Behind-the-Scenes/assets/scope.pdf)
       3. The <code>this</code> Keyword: [this.html](https://github.com/Ch-sriram/JavaScript/blob/master/JS-Behind-the-Scenes/this.html) | [this.js](https://github.com/Ch-sriram/JavaScript/blob/master/JS-Behind-the-Scenes/scripts/this.js)
 
-3. <strong>JS DOM: The Pig Game</strong> 
-(Common Markup for i-vi: [index.html](https://github.com/Ch-sriram/JavaScript/blob/07301e404d97a7c54437ab8ec56e9ef32f9f6b79/JS-DOM/index.html) & [style.css](https://github.com/Ch-sriram/JavaScript/blob/07301e404d97a7c54437ab8ec56e9ef32f9f6b79/JS-DOM/styles/style.css))
+3. #### JS DOM: The Pig Game
+   0. Common Markup for ii-vii: [index.html](https://github.com/Ch-sriram/JavaScript/blob/07301e404d97a7c54437ab8ec56e9ef32f9f6b79/JS-DOM/index.html) & [style.css](https://github.com/Ch-sriram/JavaScript/blob/07301e404d97a7c54437ab8ec56e9ef32f9f6b79/JS-DOM/styles/style.css)
    1. DOM Access & Manipulation: [app.js](https://github.com/Ch-sriram/JavaScript/blob/1b504a0df042ceb2a74401975c08b5f0c97e146e/JS-DOM/scripts/app.js)
    2. Events & Event Handling: [app.js](https://github.com/Ch-sriram/JavaScript/blob/8b0249a1d8105294f79f9c1042a54253484aaf5e/JS-DOM/scripts/app.js)
    3. Adding, Removing & Toggling HTML Classes: [app.js](https://github.com/Ch-sriram/JavaScript/blob/2bbf7f9c82dff445a4e675c1935b068b79b3641b/JS-DOM/scripts/app.js)
    4. DRY Principle & More DOM Manipulation: [app.js](https://github.com/Ch-sriram/JavaScript/blob/631d8e1ce948179789b28305c877991b24be2f7d/JS-DOM/scripts/app.js)
    5. Creating Initialization Function for the Game: [app.js](https://github.com/Ch-sriram/JavaScript/blob/07301e404d97a7c54437ab8ec56e9ef32f9f6b79/JS-DOM/scripts/app.js)
    6. Adding Game State: [app.js](https://github.com/Ch-sriram/JavaScript/blob/be7496cd93de95f7c616da0870dd2d4b2bf6c302/JS-DOM/scripts/app.js) final version (Easy) | [Play the game @CodeSandBox](https://dtvte.csb.app/)
-   7. The Pig Game: [app.js](https://github.com/Ch-sriram/JavaScript/blob/master/JS-DOM/scripts/app.js) final version (Hard) | [Play the game @Repl.it](https://pig-game.chsriram.repl.co/) | Updated Markup - [index.html](https://github.com/Ch-sriram/JavaScript/blob/master/JS-DOM/index.html) & [style.css](https://github.com/Ch-sriram/JavaScript/blob/master/JS-DOM/styles/style.css)
+   7. #### Pig Game: [app.js](https://github.com/Ch-sriram/JavaScript/blob/master/JS-DOM/scripts/app.js) final version (Hard) | [Play the game @Repl.it](https://pig-game.chsriram.repl.co/) | Updated Markup - [index.html](https://github.com/Ch-sriram/JavaScript/blob/master/JS-DOM/index.html) & [style.css](https://github.com/Ch-sriram/JavaScript/blob/master/JS-DOM/styles/style.css)
 
-4. <strong>Advanced JS: Objects & Functions</strong>
+4. #### Advanced JS: Objects & Functions
    1. <code>Object</code> Creation, Inheritence & <code>prototype</code> Chain: [obj.html](https://github.com/Ch-sriram/JavaScript/blob/master/JS-Objects-Functions-Advanced/obj.html) | [obj.js](https://github.com/Ch-sriram/JavaScript/blob/master/JS-Objects-Functions-Advanced/scripts/obj.js) | prototypeChain.pdf - [view](https://github.com/Ch-sriram/JavaScript/blob/master/JS-Objects-Functions-Advanced/assets/prototypeChain.pdf) or [download](https://raw.githubusercontent.com/Ch-sriram/JavaScript/d5dca5cc69e7fd3700784d8afe88d41432b0bca5/JS-Objects-Functions-Advanced/assets/prototypeChain.pdf)
    2. Primitives vs. Objects: [prim_vs_obj.html](https://github.com/Ch-sriram/JavaScript/blob/master/JS-Objects-Functions-Advanced/prim_vs_obj.html) | [prim_vs_obj.js](https://github.com/Ch-sriram/JavaScript/blob/master/JS-Objects-Functions-Advanced/scripts/prim_vs_obj.js)
    3. First Class Functions: [first_class_functions.html](https://github.com/Ch-sriram/JavaScript/blob/master/JS-Objects-Functions-Advanced/first_class_functions.html) | [first_class_functions.js](https://github.com/Ch-sriram/JavaScript/blob/master/JS-Objects-Functions-Advanced/scripts/first_class_functions.js)
@@ -65,7 +65,9 @@ Syntax -
    5. Closures: [closure.html](https://github.com/Ch-sriram/JavaScript/blob/master/JS-Objects-Functions-Advanced/closure.html) | [closure.js](https://github.com/Ch-sriram/JavaScript/blob/master/JS-Objects-Functions-Advanced/scripts/closure.js) | closure.pdf - [view](https://github.com/Ch-sriram/JavaScript/blob/master/JS-Objects-Functions-Advanced/assets/closure.pdf) or [download](https://raw.githubusercontent.com/Ch-sriram/JavaScript/9f569b0a67f10ff4a4075015fbccad929c265789/JS-Objects-Functions-Advanced/assets/closure.pdf)
    6. <code>bind()</code>, <code>call()</code> & <code>apply()</code>: [bind_call_apply.html](https://github.com/Ch-sriram/JavaScript/blob/master/JS-Objects-Functions-Advanced/bind_call_apply.html) | [bind_call_apply.js](https://github.com/Ch-sriram/JavaScript/blob/master/JS-Objects-Functions-Advanced/scripts/bind_call_apply.js)
    7. Coding Challenge VII: [challenge_7.html](https://github.com/Ch-sriram/JavaScript/blob/master/JS-Objects-Functions-Advanced/challenge_7.html) | [challenge_7.js](https://github.com/Ch-sriram/JavaScript/blob/master/JS-Objects-Functions-Advanced/scripts/challenge_7.js)
-   8. <strong>Budgety App</strong>  (Common Markup: [index.html](https://github.com/Ch-sriram/JavaScript/blob/6d76d72a2a5861e08e67b1148fd413946109f203/JS-Objects-Functions-Advanced/project-budgety/index.html) & [style.css](https://github.com/Ch-sriram/JavaScript/blob/6d76d72a2a5861e08e67b1148fd413946109f203/JS-Objects-Functions-Advanced/project-budgety/style/style.css))
+   8. Event Bubbling, Target Element & Event Delegation: [eventDelegation.html](https://github.com/Ch-sriram/JavaScript/blob/master/JS-Objects-Functions-Advanced/eventDelegation.html) | [eventDelegation.pdf](https://github.com/Ch-sriram/JavaScript/blob/master/JS-Objects-Functions-Advanced/assets/eventDelegation.pdf) (Read this before reading the code from Budgety App (l))
+   9. #### Budgety App 
+      0. Common Markup: [index.html](https://github.com/Ch-sriram/JavaScript/blob/6d76d72a2a5861e08e67b1148fd413946109f203/JS-Objects-Functions-Advanced/project-budgety/index.html) & [style.css](https://github.com/Ch-sriram/JavaScript/blob/6d76d72a2a5861e08e67b1148fd413946109f203/JS-Objects-Functions-Advanced/project-budgety/style/style.css)
       1. Module Pattern, Encapsulation & Separation of Concerns: [app.js](https://github.com/Ch-sriram/JavaScript/blob/d51c8a5d78080988d8f7f1e7e7b8b41ad9710f5c/JS-Objects-Functions-Advanced/project-budgety/app.js)
       2. <code>keypress</code> Events & <code>event</code> Object: [app.js](https://github.com/Ch-sriram/JavaScript/blob/aefe04cbade051779737e82f318593583e6467e8/JS-Objects-Functions-Advanced/project-budgety/app.js)
       3. Reading <code>HTML</code> Input Data w. Separation of Concerns: [app.js](https://github.com/Ch-sriram/JavaScript/blob/6d76d72a2a5861e08e67b1148fd413946109f203/JS-Objects-Functions-Advanced/project-budgety/script/app.js)

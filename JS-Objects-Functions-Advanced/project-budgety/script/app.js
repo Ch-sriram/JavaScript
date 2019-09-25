@@ -1,8 +1,7 @@
 /********************************************************************************************
  * What we'll learn
  * ----------------
- * 1. How and why to create simple, reusable function with only one purpose each;
- * 2. How to sum all elements of an array using the forEach() method;
+ * 1. More DOM Manipulation
  */
 
 // Budget Controller - Code related to handling the budget (data) logic
@@ -104,6 +103,15 @@ var budgetController = (function() {
             };
         },
 
+        initBudget: function() {
+            return {
+                budget: 0,
+                totalIncome: 0,
+                totalExpense: 0,
+                percentage: -1,
+            };
+        },
+
         testing: function() {
             // use this function only for testing purpose
             return data;
@@ -126,7 +134,11 @@ var UIController = (function(){
         inputValue: '.add__value',
         inputBtn: '.add__btn',
         incomeContainer: '.income__list',
-        expenseContainer: '.expenses__list'
+        expenseContainer: '.expenses__list',
+        budgetLabel: '.budget__value',                      // newly added class
+        incomeLabel: '.budget__income--value',              // newly added class
+        expenseLabel: '.budget__expenses--value',           // newly added class
+        percentageLabel: '.budget__expenses--percentage',   // newly added class
     };
 
     return {
@@ -202,6 +214,23 @@ var UIController = (function(){
             });
             fieldsArr[0].focus(); // fieldsArr[0] is the DOMStrings.inputDescription element
         },
+
+        displayBudget: function(obj) {
+            /** Desc: Used only to display the budget in the UI. The function uses DOM 
+             * manipulation to achieve the task of displaying to the UI.
+             * obj => the budget object that contains budget, totalIncome, totalExpense,
+             *        and percentage properties.
+             * Refer the DOMStrings object defined above to see the HTML classes that we are
+             * using to refer to the objects here.
+             */
+            document.querySelector(DOMStrings.budgetLabel).textContent = obj.budget;
+            document.querySelector(DOMStrings.incomeLabel).textContent = obj.totalIncome;
+            document.querySelector(DOMStrings.expenseLabel).textContent = obj.totalExpense;
+
+            if (obj.percentage > 0)
+                document.querySelector(DOMStrings.percentageLabel).textContent = obj.percentage + "%";
+            else document.querySelector(DOMStrings.percentageLabel).textContent = "---";
+        },
         
         getDOMStrings: function() {
             /** function desc:
@@ -238,13 +267,10 @@ var controller = (function(budgetCtrl, UICtrl){
         budgetCtrl.calculateBudget();
 
         // 2. Return the budget
-        var budget = budgetCtrl.getBudget();
+        var budget = budgetCtrl.getBudget();    // console.log(budget);    // testing
 
         // 3. Display the budget on the UI
-        
-
-        // code to test this function's working
-        console.log(budget);
+        UICtrl.displayBudget(budget);
     };
 
     var ctrlAddItem = function() {
@@ -278,6 +304,7 @@ var controller = (function(budgetCtrl, UICtrl){
     return {
         init: function() {
             console.log("Application has started.");    // test
+            UICtrl.displayBudget(budgetCtrl.initBudget());
             setupEventListeners();
         }
     };
