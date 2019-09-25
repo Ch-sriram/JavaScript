@@ -1,7 +1,9 @@
 /********************************************************************************************
  * What we'll learn
  * ----------------
- * 1. More DOM Manipulation
+ * 1. How to use Event Delegation in Practice;
+ * 2. How to use IDs in HTML to connect the UI to the Data Model;
+ * 3. How to use the parentNode property for DOM traversing;
  */
 
 // Budget Controller - Code related to handling the budget (data) logic
@@ -135,10 +137,11 @@ var UIController = (function(){
         inputBtn: '.add__btn',
         incomeContainer: '.income__list',
         expenseContainer: '.expenses__list',
-        budgetLabel: '.budget__value',                      // newly added class
-        incomeLabel: '.budget__income--value',              // newly added class
-        expenseLabel: '.budget__expenses--value',           // newly added class
-        percentageLabel: '.budget__expenses--percentage',   // newly added class
+        budgetLabel: '.budget__value',                      
+        incomeLabel: '.budget__income--value',              
+        expenseLabel: '.budget__expenses--value',           
+        percentageLabel: '.budget__expenses--percentage',
+        container: '.container',
     };
 
     return {
@@ -260,6 +263,9 @@ var controller = (function(budgetCtrl, UICtrl){
             if (event.keyCode === 13 || event.which === 13) 
                 ctrlAddItem();
         });
+
+        // when there's an event on .container class, we make a callback to ctrlDeleteItem
+        document.querySelector(DOM.container).addEventListener("click", ctrlDeleteItem);
     };
     
     var updateBudget = function() {
@@ -297,6 +303,81 @@ var controller = (function(budgetCtrl, UICtrl){
             // 5. Calculate and update the budget
             updateBudget();
         }
+    };
+
+    var ctrlDeleteItem = function(event) {
+        /** desc: We use event delegation to delete the item from the income/expense list 
+         * when the user wants to delete the intended item. We apply this event handler on 
+         * the parent (not immediate) element denoted by the .container class.
+         */
+        var itemID; // used for storing the id attribute we want to delete from the income/
+                    // expense list from the DOM
+        var splitID;    // used for storing the itemID as an array, which is returned from  
+                        // the use of split() on the itemID variable
+        var type;   // splitID[0] contains the type of the item from the list, whether it is
+                    // is an income/expense item
+        var ID; // splitID[1] contains the id number of the income/expense item we want
+                // to delete.
+
+        // Getting the required information from the event
+        //itemID = event.target;
+        
+        // The line above gives an <i> element, we don't want that, we only want the id of 
+        // the income/expense list's item that we want to delete. We can get that by using 
+        // the parentNode property of the event.target object.
+        //itemID = event.target.parentNode;
+
+        // Using the above line, we'll get a <button> element related to an item from
+        // either the income/expense list.
+        //itemID = event.target.parentNode.parentNode;
+
+        // from the code in the line above, we get a <div class="item__delete">...</div>
+        // element. We don't want that either. We want an element where we can fetch the
+        // id, whether that's income or an expense?
+        //itemID = event.target.parentNode.parentNode.parentNode;
+
+        // With the code above, we again get a <div class="right clearfix">...</div> element,
+        // which is not something we want. Therefore, we try and look for what we require
+        // even more above the current node's parentNode
+        //itemID = event.target.parentNode.parentNode.parentNode.parentNode;
+
+        // from the line above, we get <div class="item clearfix" id="income-0">...</div>
+        // which has an id attribute. Therefore, now we only need the id of that particular
+        // element. Therefore we get it as follows
+        //itemID = event.target.parentNode.parentNode.parentNode.parentNode.id;
+
+        // using the above line, we did get the id that we required, but the way we got it
+        // is not the recommended way. We hard coded the property calls of parentNode 4 times
+        // which is not an ideal way of developing what we want. Therefore, what we do is, we
+        // write a loop to find our required item's ID as follows:
+
+        itemID = event.target;
+        while(itemID !== null) {
+            if (itemID.tagName.toLowerCase() === "html")
+                break;
+            // to understand regex: https://www.youtube.com/watch?v=909NfO1St0A&t=50s
+            else if (itemID.id !== null && typeof itemID.id === "string" &&  
+                (/income/.test(itemID.id) || /expense/.test(itemID.id))) {
+                    itemID = itemID.id;
+                    break;
+            } else itemID = itemID.parentNode;
+        } // console.log(itemID); // testing
+
+        // now that we got the required itemID, we have to split the itemID depending on 
+        // the hiphen '-' because, we want to separate out the income/expense id from the 
+        // type and store them separately, i.e.,
+        splitID = itemID.split('-');    //console.log(splitID); // testing
+        type = splitID[0];
+        ID = splitID[1];
+
+        // We have all the required information we want, now we just have to follow the steps
+        // below, to delete the required item from income/expense list
+
+        // 1. Delete the item from data structure (i.e., from "data" object in budgetCtrl)
+
+        // 2. Delete the item from UI
+
+        // 3. Update and show the new budget
     };
 
     // to be able to call the init() function from the global scope, we return an 
