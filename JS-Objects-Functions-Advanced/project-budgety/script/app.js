@@ -1,7 +1,8 @@
 /********************************************************************************************
  * What we'll learn
  * ----------------
- * 1. How to remove an element from the DOM;
+ * 1. Interaction between different kinds of functions and objects.
+ * 2. Usage of prototype to define a method for a pre-defined function constructor.
  */
 
 // Budget Controller - Code related to handling the budget (data) logic
@@ -12,6 +13,21 @@ var budgetController = (function() {
         this.id = id;
         this.description = description;
         this.value = value;
+        this.percentage = -1;   // every expense item has a percentage value, which is its
+                                // percentage expense out of the total income.
+    };
+
+    // Expense Constructor has the calcPerc() method defined as follows:
+    Expense.prototype.calcPerc = function(totalIncome) {
+        if (totalIncome > 0)
+            this.percentage = Math.round(this.value / totalIncome * 100);
+        else
+            this.percentage = -1;
+    };
+
+    // Expense Constructor has the getPerc() method defined as follows:
+    Expense.prototype.getPerc = function() {
+        return this.percentage;
     };
 
     // Function constructor for Incomes
@@ -123,6 +139,25 @@ var budgetController = (function() {
             if (data.totals.income > 0)
              data.percentage = Math.round((data.totals.expense / data.totals.income) * 100);
             else data.percentage = -1;
+        },
+
+        calculatePercentages: function() {
+            /** Desc: calculates the percentage of each expense in the expense list against
+             * the total income.
+             */ 
+            data.allItems.expense.forEach(function(curr) {
+                curr.calcPerc(data.totals.income);
+            });
+        },
+
+        getPercentages: function() {
+            /** Desc: gets the percentage of each expense in the expense list against the 
+             * total income.
+             */
+            var allPerc = data.allItems.expense.map(function(curr) {
+                return curr.getPerc();
+            });
+            return allPerc;
         },
 
         // Returns the budget, as an object
@@ -327,6 +362,17 @@ var controller = (function(budgetCtrl, UICtrl){
         UICtrl.displayBudget(budget);
     };
 
+    var updatePercentages = function() {
+        // 1. Calculate Percentages
+        budgetCtrl.calculatePercentages();
+
+        // 2. Read percentages from the budget controller
+        var percentages = budgetCtrl.getPercentages();
+
+        // 3. Update the UI with the new percentages
+        console.log(percentages);   // testing
+    };
+
     var ctrlAddItem = function() {
         var input, newItem;
 
@@ -350,6 +396,9 @@ var controller = (function(budgetCtrl, UICtrl){
 
             // 5. Calculate and update the budget
             updateBudget();
+
+            // 6. Calculate and update the percentages
+            updatePercentages();
         }
     };
 
@@ -421,6 +470,9 @@ var controller = (function(budgetCtrl, UICtrl){
 
         // 3. Update and show the new budget
         updateBudget();
+
+        // 4. Calculate and update the percentages
+        updatePercentages();
     };
 
     // to be able to call the init() function from the global scope, we return an 
