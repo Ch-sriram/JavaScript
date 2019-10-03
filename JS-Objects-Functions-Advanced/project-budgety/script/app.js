@@ -1,7 +1,7 @@
 /********************************************************************************************
  * What we'll learn
  * ----------------
- * 1. How to create our own forEach() but for NodeList instead of array;
+ * 1. How to use different String methods to manipulate strings;
  */
 
 // Budget Controller - Code related to handling the budget (data) logic
@@ -210,6 +210,34 @@ var UIController = (function(){
         expensePercentageLabel: '.item__percentage',
     };
 
+    var formatNumber = function(num, type) {
+        /** Desc: formats the number as follows:
+         * if num = 25000 & type = income, then the function returns "+ 25,000.00"
+         * if num = 5000 & type = expense, then the function returns "- 5,000.00"
+         */
+        var numSplit;   // array where [0] has integer part & [1] has decimal part
+        var integer;    // = numSplit[0]
+        var decimal;    // = numSplit[1]
+
+        num = Math.abs(num);
+        num = num.toFixed(2);  // returns a fixed floating point string till 2 decimal places
+
+        // Get the integer and decimal part
+        numSplit = num.split(".");
+        integer = numSplit[0];
+        decimal = numSplit[1];
+
+        // to the integer part, we need to add the comma appropriately
+        if (integer.length > 3) {
+            // we use the substr() method to get the substring from a starting index to some
+            // ending index. substr(starting_index, number_of_chars)
+            integer = integer.substr(0, integer.length - 3) + "," + 
+                                                integer.substr(integer.length - 3, 3);
+        }
+
+        return (type === "income" ? "+" : "-") + " " + integer + "." + decimal;
+    };
+
     return {
         getInput: function() {
             /** function desc:
@@ -252,7 +280,7 @@ var UIController = (function(){
             // 2. Replace the placeholder text with some actual data using regexp replace()
             newHTML = HTML.replace("%id%", obj.id);
             newHTML = newHTML.replace("%description%", obj.description);
-            newHTML = newHTML.replace("%value%", obj.value);
+            newHTML = newHTML.replace("%value%", formatNumber(obj.value, type));
 
             // 3. Insert the HTML into the DOM
             // Find the documentation here: https://developer.mozilla.org/en-US/docs/Web/API/Element/insertAdjacentHTML
@@ -310,9 +338,11 @@ var UIController = (function(){
              * Refer the DOMStrings object defined above to see the HTML classes that we are
              * using to refer to the objects here.
              */
-            document.querySelector(DOMStrings.budgetLabel).textContent = obj.budget;
-            document.querySelector(DOMStrings.incomeLabel).textContent = obj.totalIncome;
-            document.querySelector(DOMStrings.expenseLabel).textContent = obj.totalExpense;
+            var type = (obj.budget >= 0) ? "income" : "expense";
+
+            document.querySelector(DOMStrings.budgetLabel).textContent = formatNumber(obj.budget, type);
+            document.querySelector(DOMStrings.incomeLabel).textContent = formatNumber(obj.totalIncome, "income");
+            document.querySelector(DOMStrings.expenseLabel).textContent = formatNumber(obj.totalExpense, "expense");
 
             if (obj.percentage > 0)
                 document.querySelector(DOMStrings.percentageLabel).textContent = obj.percentage + "%";
