@@ -1,8 +1,7 @@
 /********************************************************************************************
  * What we'll learn
  * ----------------
- * 1. Interaction between different kinds of functions and objects.
- * 2. Usage of prototype to define a method for a pre-defined function constructor.
+ * 1. How to create our own forEach() but for NodeList instead of array;
  */
 
 // Budget Controller - Code related to handling the budget (data) logic
@@ -208,6 +207,7 @@ var UIController = (function(){
         expenseLabel: '.budget__expenses--value',           
         percentageLabel: '.budget__expenses--percentage',
         container: '.container',
+        expensePercentageLabel: '.item__percentage',
     };
 
     return {
@@ -318,6 +318,31 @@ var UIController = (function(){
                 document.querySelector(DOMStrings.percentageLabel).textContent = obj.percentage + "%";
             else document.querySelector(DOMStrings.percentageLabel).textContent = "---";
         },
+
+        displayPercentages: function(percentages) {
+            /** Desc: displays the percentage of expense for each expense in the expense 
+             * list, against the total income.
+             */
+
+            // Get all the .item__percentage fields in expenses we have in our html page
+            // as a NodeList into the fields variable below
+            var fields = document.querySelectorAll(DOMStrings.expensePercentageLabel);
+
+            // We iterate over the NodeList using our own variant of the nodeListForEach()
+            // method as follows
+            var nodeListForEach = function(nodeList, callback) {
+                for(var i = 0; i < nodeList.length; ++i)
+                    callback(nodeList[i], i);
+            };
+
+            // We use the above nodeListForEach() method as follows
+            nodeListForEach(fields, function(curr, idx) {
+                if (percentages[idx] > 0)
+                    curr.textContent = percentages[idx] + "%";
+                else 
+                    curr.textContent = "---";
+            });
+        },
         
         getDOMStrings: function() {
             /** function desc:
@@ -367,10 +392,10 @@ var controller = (function(budgetCtrl, UICtrl){
         budgetCtrl.calculatePercentages();
 
         // 2. Read percentages from the budget controller
-        var percentages = budgetCtrl.getPercentages();
+        var percentages = budgetCtrl.getPercentages();  //console.log(percentages);
 
         // 3. Update the UI with the new percentages
-        console.log(percentages);   // testing
+        UICtrl.displayPercentages(percentages);
     };
 
     var ctrlAddItem = function() {
@@ -440,18 +465,19 @@ var controller = (function(budgetCtrl, UICtrl){
         // which is not an ideal way of developing what we want. Therefore, what we do is, we
         // write a loop to find our required item's ID as follows:
 
-        itemID = event.target;
-        while(itemID !== null) {
-            if (itemID.tagName.toLowerCase() === "html")
-                break;
-            // to understand regex: https://www.youtube.com/watch?v=909NfO1St0A&t=50s
-            else if (itemID.id !== null && typeof itemID.id === "string" &&  
-                (/income/.test(itemID.id) || /expense/.test(itemID.id))) {
-                    itemID = itemID.id;
-                    break;
-            } else itemID = itemID.parentNode;
-        } // console.log(itemID); // testing
+        // itemID = event.target;
+        // while(itemID !== null) {
+        //     if (itemID.tagName.toLowerCase() === "html")
+        //         break;
+        //     // to understand regex: https://www.youtube.com/watch?v=909NfO1St0A&t=50s
+        //     else if (itemID.id !== null && typeof itemID.id === "string" &&  
+        //         (/^income-[0-9]+$/.test(itemID.id) || /^expense-[0-9]+$/.test(itemID.id))) {
+        //             itemID = itemID.id;
+        //             break;
+        //     } else itemID = itemID.parentNode;
+        // } // console.log(itemID); // testing
 
+        itemID = event.target.parentNode.parentNode.parentNode.parentNode.id;
         // now that we got the required itemID, we have to split the itemID depending on 
         // the hiphen '-' because, we want to separate out the income/expense id from the 
         // type and store them separately, i.e.,
