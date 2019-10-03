@@ -1,8 +1,7 @@
 /********************************************************************************************
  * What we'll learn
  * ----------------
- * 1. How to loop over an array using the map() method;
- * 2. How to remove elements from an array using the splice() method;
+ * 1. How to remove an element from the DOM;
  */
 
 // Budget Controller - Code related to handling the budget (data) logic
@@ -81,22 +80,6 @@ var budgetController = (function() {
 
         // Deletes the item that we added from the 'data' object defined above
         deleteItem: function(type, ID) {
-            // if we select our item as follows: data.allItems[type][ID], then we will
-            // select the item basing the ID as the index of the item we want to delete.
-            // But that's NOT what we want, because if we do that, we can have two scenarios:
-            //  1. there can be an error, because the ID for each item is calculated using
-            //     whatever was the last item we added. Therefore, if we add a lot of
-            //     items and then delete them from income/expense list, we will have id
-            //     which will be higher than all previous id's. And therefore, we won't be
-            //     able to get that id, as an index in the income/expense array, and that
-            //     leads to some kind of arrayIndexOutOfBounds error.
-            //  2. whatever we delete, might not be the actual data with the id we intended
-            //     to delete, because the if we refer to an object in the data.allItems[type]
-            //     [id], then we are refering an object which is not having that id, but
-            //     is actually some other object with some other id.
-            // Therefore, we avoid such scenarios by choosing the correct object from the
-            // list of objects in either income/expense list of data.allItems data structure.
-
             // we want to get the index of the item we want to delete from the income/expense
             // list. For that, we can simply loop over all the elements in the income/expense
             // list, depending on the type of the element we want to delete.
@@ -239,6 +222,24 @@ var UIController = (function(){
             // 3. Insert the HTML into the DOM
             // Find the documentation here: https://developer.mozilla.org/en-US/docs/Web/API/Element/insertAdjacentHTML
             document.querySelector(element).insertAdjacentHTML("beforeend", newHTML);
+        },
+
+        deleteListItem: function(selectorID) {
+            /** Desc: deletes the list item from the UI. To delete an element from the DOM
+             * we need the class name or the id of that particular element. In this case
+             * the element is removed using the id of the element passed in as selectorID.
+             */
+            // In DOM, we remove an element from the DOM using the removeChild() method.
+            // the removeChild() accepts one parameter and that's the child element to
+            // be removed. 
+
+            // we first get the element we want to remove
+            var element = document.getElementById(selectorID);
+
+            // we remove the element using the removeChild() method. To remove a child
+            // element, we use the parentNode property and then remove the child from the
+            // parentNode as follows:
+            element.parentNode.removeChild(element);
         },
 
         clearFields: function() {
@@ -416,8 +417,10 @@ var controller = (function(budgetCtrl, UICtrl){
         budgetCtrl.deleteItem(type, ID);
 
         // 2. Delete the item from UI
+        UICtrl.deleteListItem(itemID);
 
         // 3. Update and show the new budget
+        updateBudget();
     };
 
     // to be able to call the init() function from the global scope, we return an 
