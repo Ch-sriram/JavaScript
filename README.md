@@ -83,3 +83,4 @@ Syntax -
       13. How to remove an element from the DOM using <code>removeChild()</code>: [app.js](https://github.com/Ch-sriram/JavaScript/blob/324b99a43e0c3bf6b59b8abf91132ffeefff67da/JS-Objects-Functions-Advanced/project-budgety/script/app.js)
       14. Usage of <code>prototype</code> to define a method in a predefined function constructor: [app.js](https://github.com/Ch-sriram/JavaScript/blob/779030e22f3d50d2e6f155a1392e62b6f2d0c43b/JS-Objects-Functions-Advanced/project-budgety/script/app.js)
       15. How to implement a <code>forEach()</code> for NodeList instead of array: [app.js](https://github.com/Ch-sriram/JavaScript/blob/8500ef3d46ba9f5c00dfc1acb429df69cf39d399/JS-Objects-Functions-Advanced/project-budgety/script/app.js)
+      16. How to use different String methods to manipulate strings: [app.js](https://github.com/Ch-sriram/JavaScript/blob/a141500e8eb2b45304ee96e6dadd09466348efb9/JS-Objects-Functions-Advanced/project-budgety/script/app.js)
