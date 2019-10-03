@@ -79,3 +79,4 @@ Syntax -
       9. Converting HTML Field Inputs to Numbers & Preventing False Item Inputs: [app.js](https://github.com/Ch-sriram/JavaScript/blob/8728f2f69f67dcafe5b174e9236ab5a5578725bb/JS-Objects-Functions-Advanced/project-budgety/script/app.js)
       10. Creating functions for a singular purpose: [app.js](https://github.com/Ch-sriram/JavaScript/blob/cbf4b6a889c113f7abe02a51331e1d316aea580a/JS-Objects-Functions-Advanced/project-budgety/script/app.js)
       11. Event Delegation in Practice - The <code>parentNode</code> property: [app.js](https://github.com/Ch-sriram/JavaScript/blob/3edc705d701f2ed3c0ccc4855636385e33ba4142/JS-Objects-Functions-Advanced/project-budgety/script/app.js)
+      12. Usage of <code>map()</code> and <code>splice()</code> methods on an array: [app.js]()

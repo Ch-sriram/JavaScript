@@ -1,9 +1,8 @@
 /********************************************************************************************
  * What we'll learn
  * ----------------
- * 1. How to use Event Delegation in Practice;
- * 2. How to use IDs in HTML to connect the UI to the Data Model;
- * 3. How to use the parentNode property for DOM traversing;
+ * 1. How to loop over an array using the map() method;
+ * 2. How to remove elements from an array using the splice() method;
  */
 
 // Budget Controller - Code related to handling the budget (data) logic
@@ -80,6 +79,54 @@ var budgetController = (function() {
             return newItem;
         },
 
+        // Deletes the item that we added from the 'data' object defined above
+        deleteItem: function(type, ID) {
+            // if we select our item as follows: data.allItems[type][ID], then we will
+            // select the item basing the ID as the index of the item we want to delete.
+            // But that's NOT what we want, because if we do that, we can have two scenarios:
+            //  1. there can be an error, because the ID for each item is calculated using
+            //     whatever was the last item we added. Therefore, if we add a lot of
+            //     items and then delete them from income/expense list, we will have id
+            //     which will be higher than all previous id's. And therefore, we won't be
+            //     able to get that id, as an index in the income/expense array, and that
+            //     leads to some kind of arrayIndexOutOfBounds error.
+            //  2. whatever we delete, might not be the actual data with the id we intended
+            //     to delete, because the if we refer to an object in the data.allItems[type]
+            //     [id], then we are refering an object which is not having that id, but
+            //     is actually some other object with some other id.
+            // Therefore, we avoid such scenarios by choosing the correct object from the
+            // list of objects in either income/expense list of data.allItems data structure.
+
+            // we want to get the index of the item we want to delete from the income/expense
+            // list. For that, we can simply loop over all the elements in the income/expense
+            // list, depending on the type of the element we want to delete.
+
+            // we use the map() method to loop over all the elements of the type of the list
+            // to get the respective id list. map() returns a list.
+            // map() can take in 3 parameters - @param1 is current element, @param2 is index
+            // of the current element & @param3 is the entire array. In our case, we only
+            // need @param1, the current element.
+
+            var ids;    // list of all the IDs of the respective type of list
+            var index;  // index of the ID we want to delete from the respective list type
+
+            ids = data.allItems[type].map(function(current) {
+                return current.id;
+            });
+
+            index = ids.indexOf(ID);
+
+            // we use the splice() method to delete the respective ID from the type list
+            // splice(): returns void. splice takes in 2 parameters. @param1 is the position
+            // of the index from which we want to delete the elements in the array & @param2
+            // is the number of elements we want to delete from the array from the index in
+            // @param1. PTR: index can be -1. Therefore, we have to assert it using an if()
+
+            if (index !== -1) {
+                data.allItems[type].splice(index, 1);
+            }
+        },
+
         // Calculates the total budget by tallying income and expenses
         calculateBudget: function() {
             // Calculate total income/expense
@@ -105,6 +152,7 @@ var budgetController = (function() {
             };
         },
 
+        // This function is only used once, when there is a call made to controller.init()
         initBudget: function() {
             return {
                 budget: 0,
@@ -243,7 +291,6 @@ var UIController = (function(){
             return DOMStrings;
         }
     };
-
 })();
 
 
@@ -327,18 +374,10 @@ var controller = (function(budgetCtrl, UICtrl){
         // the parentNode property of the event.target object.
         //itemID = event.target.parentNode;
 
-        // Using the above line, we'll get a <button> element related to an item from
-        // either the income/expense list.
-        //itemID = event.target.parentNode.parentNode;
-
         // from the code in the line above, we get a <div class="item__delete">...</div>
         // element. We don't want that either. We want an element where we can fetch the
-        // id, whether that's income or an expense?
-        //itemID = event.target.parentNode.parentNode.parentNode;
-
-        // With the code above, we again get a <div class="right clearfix">...</div> element,
-        // which is not something we want. Therefore, we try and look for what we require
-        // even more above the current node's parentNode
+        // id, whether that's income or an expense? Therefore, we try and look for what we 
+        // require even more above the current node's parentNode
         //itemID = event.target.parentNode.parentNode.parentNode.parentNode;
 
         // from the line above, we get <div class="item clearfix" id="income-0">...</div>
@@ -368,12 +407,13 @@ var controller = (function(budgetCtrl, UICtrl){
         // type and store them separately, i.e.,
         splitID = itemID.split('-');    //console.log(splitID); // testing
         type = splitID[0];
-        ID = splitID[1];
+        ID = parseInt(splitID[1]);
 
         // We have all the required information we want, now we just have to follow the steps
         // below, to delete the required item from income/expense list
 
         // 1. Delete the item from data structure (i.e., from "data" object in budgetCtrl)
+        budgetCtrl.deleteItem(type, ID);
 
         // 2. Delete the item from UI
 
