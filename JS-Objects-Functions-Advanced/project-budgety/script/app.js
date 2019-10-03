@@ -1,7 +1,7 @@
 /********************************************************************************************
  * What we'll learn
  * ----------------
- * 1. How to use different String methods to manipulate strings;
+ * 1. How to get the current date by using the Date object constructor;
  */
 
 // Budget Controller - Code related to handling the budget (data) logic
@@ -208,6 +208,7 @@ var UIController = (function(){
         percentageLabel: '.budget__expenses--percentage',
         container: '.container',
         expensePercentageLabel: '.item__percentage',
+        dateLabel: '.budget__title--month',
     };
 
     var formatNumber = function(num, type) {
@@ -373,6 +374,23 @@ var UIController = (function(){
                     curr.textContent = "---";
             });
         },
+
+        displayDate: function() {
+            /**Desc: displays the month and year when the app is opened.
+             */
+            // Date() constructor can take in 3 parameters and they're:
+            // @param1: Year; @param2: Month (0-based indexed => December is 11)
+            // @param3: Date;
+            var today = new Date();     //console.log(today);
+            // var newYear = new Date(2018, 11, 31); console.log(newYear);
+
+            // Date class/prototype has a lot of methods, so we use them as follows
+            var year = today.getFullYear();
+            var months = ["January", "February", "March", "April", "May", "June", "July", 
+                          "August", "September", "October", "November", "December"];
+            var month = months[today.getMonth()];
+            document.querySelector(DOMStrings.dateLabel).textContent = month + " " + year;
+        },
         
         getDOMStrings: function() {
             /** function desc:
@@ -536,6 +554,7 @@ var controller = (function(budgetCtrl, UICtrl){
     return {
         init: function() {
             console.log("Application has started.");    // test
+            UICtrl.displayDate();
             UICtrl.displayBudget(budgetCtrl.initBudget());
             setupEventListeners();
         }
