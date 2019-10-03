@@ -84,3 +84,4 @@ Syntax -
       14. Usage of <code>prototype</code> to define a method in a predefined function constructor: [app.js](https://github.com/Ch-sriram/JavaScript/blob/779030e22f3d50d2e6f155a1392e62b6f2d0c43b/JS-Objects-Functions-Advanced/project-budgety/script/app.js)
       15. How to implement a <code>forEach()</code> for NodeList instead of array: [app.js](https://github.com/Ch-sriram/JavaScript/blob/8500ef3d46ba9f5c00dfc1acb429df69cf39d399/JS-Objects-Functions-Advanced/project-budgety/script/app.js)
       16. How to use different String methods to manipulate strings: [app.js](https://github.com/Ch-sriram/JavaScript/blob/a141500e8eb2b45304ee96e6dadd09466348efb9/JS-Objects-Functions-Advanced/project-budgety/script/app.js)
+      17. How to get the current date using the <code>Date</code> object constructor: [app.js](https://github.com/Ch-sriram/JavaScript/blob/659018a14cf5c9eef6cb1a365b543110ef82358c/JS-Objects-Functions-Advanced/project-budgety/script/app.js)
