@@ -86,3 +86,4 @@ Syntax -
       16. How to use different String methods to manipulate strings: [app.js](https://github.com/Ch-sriram/JavaScript/blob/a141500e8eb2b45304ee96e6dadd09466348efb9/JS-Objects-Functions-Advanced/project-budgety/script/app.js)
       17. How to get the current date using the <code>Date</code> object constructor: [app.js](https://github.com/Ch-sriram/JavaScript/blob/659018a14cf5c9eef6cb1a365b543110ef82358c/JS-Objects-Functions-Advanced/project-budgety/script/app.js)
       18. How and when to use <code>change</code> events: [app.js](https://github.com/Ch-sriram/JavaScript/blob/e9bef14a1d3cf9345bf7d7fee0e9a39db8cb6426/JS-Objects-Functions-Advanced/project-budgety/script/app.js)
+      19. #### Budgety App: [app.js](https://github.com/Ch-sriram/JavaScript/blob/master/JS-Objects-Functions-Advanced/project-budgety/script/app.js) (final version) | [Play the game @netlify](https://priceless-boyd-d60475.netlify.com)

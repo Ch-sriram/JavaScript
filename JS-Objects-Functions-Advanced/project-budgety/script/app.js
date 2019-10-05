@@ -1,9 +1,3 @@
-/********************************************************************************************
- * What we'll learn
- * ----------------
- * 1. How and when to use 'change' events;
- */
-
 // Budget Controller - Code related to handling the budget (data) logic
 var budgetController = (function() {     
     
