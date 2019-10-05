@@ -1,7 +1,7 @@
 /********************************************************************************************
  * What we'll learn
  * ----------------
- * 1. How to get the current date by using the Date object constructor;
+ * 1. How and when to use 'change' events;
  */
 
 // Budget Controller - Code related to handling the budget (data) logic
@@ -239,6 +239,12 @@ var UIController = (function(){
         return (type === "income" ? "+" : "-") + " " + integer + "." + decimal;
     };
 
+    // We iterate over the NodeList using our own variant of the nodeListForEach() method
+    var nodeListForEach = function(nodeList, callback) {
+        for(var i = 0; i < nodeList.length; ++i)
+            callback(nodeList[i], i);
+    };
+
     return {
         getInput: function() {
             /** function desc:
@@ -359,14 +365,7 @@ var UIController = (function(){
             // as a NodeList into the fields variable below
             var fields = document.querySelectorAll(DOMStrings.expensePercentageLabel);
 
-            // We iterate over the NodeList using our own variant of the nodeListForEach()
-            // method as follows
-            var nodeListForEach = function(nodeList, callback) {
-                for(var i = 0; i < nodeList.length; ++i)
-                    callback(nodeList[i], i);
-            };
-
-            // We use the above nodeListForEach() method as follows
+            // We use the predefined nodeListForEach() method (above) as follows
             nodeListForEach(fields, function(curr, idx) {
                 if (percentages[idx] > 0)
                     curr.textContent = percentages[idx] + "%";
@@ -390,6 +389,21 @@ var UIController = (function(){
                           "August", "September", "October", "November", "December"];
             var month = months[today.getMonth()];
             document.querySelector(DOMStrings.dateLabel).textContent = month + " " + year;
+        },
+
+        changedType: function() {
+            var fields = document.querySelectorAll(
+                DOMStrings.inputType + "," + 
+                DOMStrings.inputDescription + "," +
+                DOMStrings.inputValue
+            );
+
+            nodeListForEach(fields, function(curr) {
+                curr.classList.toggle("red-focus"); // .red-focus found @ ../style/style.css
+            });
+
+            document.querySelector(DOMStrings.inputBtn).classList.toggle('red');
+            // .red class found at ../style/style.css
         },
         
         getDOMStrings: function() {
@@ -422,6 +436,9 @@ var controller = (function(budgetCtrl, UICtrl){
 
         // when there's an event on .container class, we make a callback to ctrlDeleteItem
         document.querySelector(DOM.container).addEventListener("click", ctrlDeleteItem);
+
+        // when there's an event on the inputType (HTML option element), we do the foll.
+        document.querySelector(DOM.inputType).addEventListener("change", UICtrl.changedType);
     };
     
     var updateBudget = function() {
