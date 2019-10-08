@@ -87,3 +87,6 @@ Syntax -
       17. How to get the current date using the <code>Date</code> object constructor: [app.js](https://github.com/Ch-sriram/JavaScript/blob/659018a14cf5c9eef6cb1a365b543110ef82358c/JS-Objects-Functions-Advanced/project-budgety/script/app.js)
       18. How and when to use <code>change</code> events: [app.js](https://github.com/Ch-sriram/JavaScript/blob/e9bef14a1d3cf9345bf7d7fee0e9a39db8cb6426/JS-Objects-Functions-Advanced/project-budgety/script/app.js)
       19. #### Budgety App: [app.js](https://github.com/Ch-sriram/JavaScript/blob/master/JS-Objects-Functions-Advanced/project-budgety/script/app.js) (final version) | [Play the game @netlify](https://priceless-boyd-d60475.netlify.com)
+
+5. Next Generation JavaScript - Intro to ES6/ES2015:
+   1. List of New Concepts in ES6: [es6.html](https://github.com/Ch-sriram/JavaScript/blob/master/Next-Gen-JS-Intro-to-ES6/es6.html)
