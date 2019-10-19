@@ -91,3 +91,4 @@ Syntax -
 5. #### Next Generation JavaScript - Intro to ES6/ES2015:
    1. List of New Concepts in ES6: [es6.html](https://github.com/Ch-sriram/JavaScript/blob/master/Next-Gen-JS-Intro-to-ES6/es6.html)
    2. Variables declared using <code>let</code> &amp; <code>const</code>: [let_const.html](https://github.com/Ch-sriram/JavaScript/blob/master/Next-Gen-JS-Intro-to-ES6/let_const.html) | [let_const.js](https://github.com/Ch-sriram/JavaScript/blob/master/Next-Gen-JS-Intro-to-ES6/scripts/let_const.js)
+   3. Blocks & IIFEs: [block_iife.html](https://github.com/Ch-sriram/JavaScript/blob/master/Next-Gen-JS-Intro-to-ES6/block_iife.html) | [block_iife.js](https://github.com/Ch-sriram/JavaScript/blob/master/Next-Gen-JS-Intro-to-ES6/scripts/block_iife.js)
