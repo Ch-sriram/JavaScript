@@ -1,0 +1,11 @@
+.box {
+    width: 50%;
+    padding: 40px;
+    text-align: center;
+}
+
+.box:hover {cursor: pointer;}
+
+.green { background: green; }
+.blue { background: dodgerblue; }
+.orange { background: orangered; }
