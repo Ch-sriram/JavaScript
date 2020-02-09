@@ -104,3 +104,5 @@ Syntax -
    11. The <code>Map</code> Data Structure: [map.html](https://github.com/Ch-sriram/JavaScript/blob/master/Next-Gen-JS-Intro-to-ES6/map.html) | [map.js](https://github.com/Ch-sriram/JavaScript/blob/master/Next-Gen-JS-Intro-to-ES6/scripts/map.js)
    12. <code>class</code>es (Syntactic Sugar): [class.html](https://github.com/Ch-sriram/JavaScript/blob/master/Next-Gen-JS-Intro-to-ES6/class.html) | [class.js](https://github.com/Ch-sriram/JavaScript/blob/master/Next-Gen-JS-Intro-to-ES6/scripts/class.js)
    13. Inheritance - Classes & Subclasses (ES5 - <code>Object.create()</code> / ES6 - <code>extends</code>): [inheritance.html](https://github.com/Ch-sriram/JavaScript/blob/master/Next-Gen-JS-Intro-to-ES6/inheritance.html) | [inheritance.js](https://github.com/Ch-sriram/JavaScript/blob/master/Next-Gen-JS-Intro-to-ES6/scripts/inheritance.js)
+   14. Challenge VIII: [challenge8.html](https://github.com/Ch-sriram/JavaScript/blob/master/Next-Gen-JS-Intro-to-ES6/challenge.html) | [challenge.js](https://github.com/Ch-sriram/JavaScript/blob/master/Next-Gen-JS-Intro-to-ES6/scripts/challenge.js)
+   
