@@ -101,3 +101,4 @@ Syntax -
    10. Function Parameters
        1. Rest Parameters: [rest.html](https://github.com/Ch-sriram/JavaScript/blob/master/Next-Gen-JS-Intro-to-ES6/rest.html) | [rest.js](https://github.com/Ch-sriram/JavaScript/blob/master/Next-Gen-JS-Intro-to-ES6/scripts/rest.js)
        2. Default Parameters: [default.html](https://github.com/Ch-sriram/JavaScript/blob/master/Next-Gen-JS-Intro-to-ES6/default.html) | [default.js](https://github.com/Ch-sriram/JavaScript/blob/master/Next-Gen-JS-Intro-to-ES6/scripts/default.js)
+   11. The <code>Map</code> Data Structure: [map.html](https://github.com/Ch-sriram/JavaScript/blob/master/Next-Gen-JS-Intro-to-ES6/map.html) | [map.js](https://github.com/Ch-sriram/JavaScript/blob/master/Next-Gen-JS-Intro-to-ES6/scripts/map.js)
