@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <!-- Boostrap 4 -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    <title>Asynchronous JS: The Event Loop</title>
+</head>
+<body>
+    <div class="container text-center">
+        <h1 class="display-4 text-center">Asynchronous JavaScript: The Event Loop</h1>
+        <p>
+            Open <a href="https://github.com/Ch-sriram/JavaScript/blob/master/Asynchronous-JS/intro.html">intro.html</a> for the code | Images are taken from: <a href="https://www.udemy.com/the-complete-javascript-course/">JS Course by Jonas Schmedtmann</a>
+        </p>
+
+        <p class="lead text-left">
+            All the code we have been writing up until this point is Synchronous code, which simply means that one statement is processed after the other, line by line, in a single <mark>thread</mark>, in the JS Engine. The following is an example of Synchronous JavaScript code:
+        </p>
+        <img class="img-thumbnail mb-3" src="./assets/img/eventLoop-1.png" alt="Synchronous Code" style="width: 40%">
+        <p class="lead text-left">
+            <code>first()</code> is called and then "Hey There!" is logged on to the console. After that, <code>second()</code> and it logs "How are you doing?" onto the console. <code>second()</code> finishes its execution and the control returns to <code>first()'s</code> Execution Context, where finally, "The end" is logged onto the console. Therefore here, the execution is done one instruction after the other in a synchronous way. <br><br>
+
+            Now, an example of Asynchronous JavaScript code is given as follows:
+        </p>
+        <img src="./assets/img/eventLoop-2.png" alt="Async Code" class="img-thumbnail mb-3" style="width:40%;"/>
+        <p class="lead text-left">
+            Here, again the <code>first()</code> gets called and "Hey There!" gets logged onto the console and after that the <code>second()</code> function gets called. In <code>second()</code>'s execution context, <code>setTimeout()</code> is called with a callback function and 2000ms timeout. The <code>second()</code>'s execution context pops out of the execution stack and the control now returns to the <code>first()</code>'s execution context where "The end" is logged onto the console. After 2000ms have elasped, the callback inside the <code>setTimeout()</code> function is called, and that callback function logs "Async Hey There!" onto the console.<br><br>
+            
+            Another example of Asynchronous JavaScript code is given as follows:
+        </p>
+        <img src="./assets/img/eventLoop-3.png" alt="Async Code-2" class="img-thumbnail mb-3" style="width:50%;"/>
+        <p class="lead text-left">
+            Here, we selected an image from our DOM and passed it onto the <code>processLargeImage()</code> function that we created. Now we know that this function will take some time to process the image. So just like before, we don't want the JS Engine to wait for the complete execution of <code>processLargeImage()</code> function. We can simply use Asynchronous JavaScript here. Now, we don't want the <code>processLargeImage()</code> function to stop executing while the image is being processed, because that's not what we want. Therefore, what we do is, we pass a callback function to the <code>processLargeImage()</code> function which we want to be called as soon as the <code>processLargeImage()</code> function is done processing. And that's the way we write Asynchronous JavaScript Code. <br><br>
+            Therefore, there are 3 tenets of Asynchronous Coding:
+        </p>
+        <ol class="lead text-left">
+            <li>Allow asynchronous functions to be run in the <mark>background</mark>.</li>
+            <li>We pass in callbacks that run once the main function has finished its work.</li>
+            <li>The JS Engine moves on immediately, so that the execution of the code is never blocked, which is also known as <mark>Non-Blocking</mark> code.</li>
+        </ol>
+        <p class="lead text-left">
+            In summary, we can use callback functions to defer/postpone actions into the future in order to make our code non-blocking.
+
+            But, how does that actually work behind the scenes of JavaScript? That's where the <mark>Event Loop</mark> comes in. <br><br>
+
+            The <mark>Event Loop</mark> is part of the bigger picture of what happens behind the scenes of JavaScript when we call functions and handle events like DOM events. In the image below, we already know what the <mark>Execution Stack</mark> is and we also know what a <mark>Message Queue</mark> is, when we learned about <mark>Events &amp; Event Handling</mark>. What's new is, the <mark>Web API</mark> and the <mark>Event Loop</mark>. 
+        </p>
+        <img src="./assets/img/eventLoop-4.png" alt="JS Runtime" class="img-thumbnail mb-3">
+        <p class="lead text-left">
+            All of these together (i.e., Execution Stack, Message Queue, Web API, Console and the Event Loop) make up the JavaScript Runtime. This Runtime is responsible for how JS works behind the scenes as it executes our code, and it's extremely important to understand how all these pieces fit together in order to understand how an Asynchronous JavaScript code works. Let us understand how the Event Loop works using the code in the image above (bottom right corner). <br><br>
+
+            It starts by calling the <code>first()</code> function as marked (with <span style="border: solid red 3px;">red</span> border) in the code in the image above. Because of this, <code>first()</code> function's Execution Context is pushed on to the top of Execution Stack as shown below.
+        </p>
+        <img src="./assets/img/eventLoop-5.png" alt="eventLoop-5" class="img-thumbnail mb-3">
+        <p class="lead text-left">
+            In the next line of code, <code>console.log("Hey There!");</code> is called, and the Execution Context of <code>log()</code> is pushed on top of the Execution Stack. Finally, "Hey There!" is logged onto the Console as shown below.
+        </p>
+        <img src="./assets/img/eventLoop-6.png" alt="eventLoop-6" class="img-thumbnail mb-3">
+        <p class="lead text-left">
+            After that, the <code>log()</code> function returns and the Execution Context of <code>log()</code> function, pops of the Execution Stack as shown below.
+        </p>
+        <img src="./assets/img/eventLoop-7.png" alt="eventLoop-7" class="img-thumbnail mb-3">
+        <p class="lead text-left">
+            And now, in the <code>first()</code> function's Execution Context, <code>second()</code> is called as shown below.
+        </p>
+        <img src="./assets/img/eventLoop-8.png" alt="eventLoop-8" class="img-thumbnail mb-3">
+        <p class="lead text-left">
+            After <code>second()</code> is called, its Execution Context is pushed on top of the Execution Stack as shown below.
+        </p>
+        <img src="./assets/img/eventLoop-9.png" alt="eventLoop-9" class="img-thumbnail mb-3">
+        <p class="lead text-left">
+            In <code>second()</code>'s next line, <code>setTimeout()</code> is called and its Execution Context is pushed on top of the Execution Stack as shown below.
+        </p>
+        <img src="./assets/img/eventLoop-10.png" alt="eventLoop-10" class="img-thumbnail mb-3">
+        <p class="lead text-left">
+            Before we move on any further, we have to know a little bit about the <code>setTimeout()</code> function. Where does this <code>setTimeout()</code> function actually come from? The <code>setTimeout()</code> function is a part of something called the <mark>Web APIs</mark>, which actually live outside the JavaScript Engine itself. So, stuff like <mark>DOM Manipulation, Set Timeouts, HTTP Requests for AJAX, Geo Location, Local Storage and tons of other things actually live outside of the JavaScript Engine as Web APIs</mark>. We just have access to these Web APIs because they're also the part of the JavaScript Runtime. And this is exactly where the timer will keep running for 2000ms (i.e., 2 seconds), asynchronously, so that our code can keep running without being blocked. <br><br>
+
+            So, when we call the <code>setTimeout()</code> function, the timer is created together with the callback function right inside the Web API's environment as shown below.
+        </p>
+        <img src="./assets/img/eventLoop-11.png" alt="eventLoop-11" class="img-thumbnail mb-3">
+        <img src="./assets/img/eventLoop-12.png" alt="eventLoop-12" class="img-thumbnail mb-3">
+        <p class="lead text-left">
+            The callback function along with the timer keeps sitting in the Web API's environment until the timer runs out of the specified time (in our case, it is 2000ms), all ofcourse in an asynchronous way. Therefore, the callback function stays attached to the timer in the Web API's environment, until the timer runs out. And so, since the timer keeps working, basically in the background, we don't have to wait for the timer to finish, and can keep executing our code. And because of this asynchronous nature of JavaScript, the <code>setTimeout()</code> function returns and the Execution Context of <code>setTimeout()</code> function is popped from the Execution Stack as shown below.
+        </p>
+        <img src="./assets/img/eventLoop-13.png" alt="eventLoop-13" class="img-thumbnail mb-3">
+        <p class="lead text-left">
+            After that, <code>second()</code> function's execution is completed, so the Execution Context of the <code>second()</code> function pops off the Execution Stack as shown below.
+        </p>
+        <img src="./assets/img/eventLoop-14.png" alt="eventLoop-14" class="img-thumbnail mb-3">
+        <p class="lead text-left">
+            Now we're back to the Execution Context of the <code>first()</code> function, where <code>console.log("The end");</code> is executed and for that, <code>log()</code>'s Execution Context is pushed on top of the Execution Stack and "The end" is logged onto the console as shown below.
+        </p>
+        <img src="./assets/img/eventLoop-15.png" alt="eventLoop-15" class="img-thumbnail mb-3">
+        <p class="lead text-left">
+            The <code>log()</code>'s Execution Context is popped off from the Execution Stack and then the control returns to the <code>first()</code> again as shown below.
+        </p>
+        <img src="./assets/img/eventLoop-16.png" alt="eventLoop-16" class="img-thumbnail mb-3">
+        <p class="lead text-left">
+            In <code>first()</code>'s Execution Context, there's no other statement to be executed, so <code>first()</code>'s Execution Context is now popped off from the Execution Stack and we'll be back to the initial state, as shown below.
+        </p>
+        <img src="./assets/img/eventLoop-17.png" alt="eventLoop-17" class="img-thumbnail mb-3">
+        <p class="lead text-left">
+            Right now we've executed all our code in a synchronous way and we have the timer running asynchronously in the background. Now, after timer runs out (in our case it is 2000ms i.e., 2 seconds), what will happen to the callback function now?
+        </p>
+        <img src="./assets/img/eventLoop-18.png" alt="eventLoop-18" class="img-thumbnail mb-3">
+        <p class="lead text-left">
+            The callback function moves to the Message Queue and it waits to be executed as soon as the Execution Stack is empty (i.e., there's only Global Execution Context presiding on top of the Execution Stack) as shown below.
+        </p>
+        <img src="./assets/img/eventLoop-19.png" alt="eventLoop-19" class="img-thumbnail mb-3">
+        <p class="lead text-left">
+            And this is what exactly happens with DOM Events as well, because it works the exact same way. In the case of DOM Events, our Event Listeners sit in the Web API's Environment waiting for a certain event to happen. As soon as the required Event occurs, the callback function related to that Event is placed in the Message Queue, where the callback waits for itself to be executed. The callback function in the Message Queue always waits till the Execution Stack has no other Execution Context(s) other than Global Execution Context. <br><br>
+
+            How are these callback functions in the Message Queue executed? That's where finally, the <mark>Event Loop</mark> comes in. The job of the Event Loop is to constantly monitor the Message Queue and the Execution Stack, and to push the first callback function in-line (in the Message Queue) on to the Execution Stack as soon as the Execution Stack is empty (i.e., the stack only has GEC). In our example, the Execution Stack right now is actually empty and also, we have one callback function waiting to be executed, and so the Event Loop takes that callback function from the Message Queue and pushes it on top of the Execution Stack as shown below.
+        </p>
+        <img src="./assets/img/eventLoop-20.png" alt="eventLoop-20" class="img-thumbnail mb-3">
+        <p class="lead text-left">
+            For that callback function, a new Execution Context is created on top of the Execution Stack as shown below.
+        </p>
+        <img src="./assets/img/eventLoop-21.png" alt="eventLoop-21" class="img-thumbnail mb-3">
+        <p class="lead text-left">
+            Inside the callback function now, <code>console.log("Async Hey There!");</code> executes, for which <code>log()</code>'s Execution Context is pushed on top of the Execution Stack which logs "Async Hey There!" on to the Console, as shown below.
+        </p>
+        <img src="./assets/img/eventLoop-22.png" alt="eventLoop-22" class="img-thumbnail mb-3">
+        <p class="lead text-left">
+            And now, the Execution Context of <code>log()</code> function is popped off of the Execution Stack, and also, the Execution Context of the callback function is also popped off of the Execution Stack, and the control returns back to the initial state as shown in the images below.
+        </p>
+        <img src="./assets/img/eventLoop-23.png" alt="eventLoop-23" class="img-thumbnail mb-3">
+        <img src="./assets/img/eventLoop-24.png" alt="eventLoop-24" class="img-thumbnail mb-3">
+        <p class="lead text-left">
+            Now, if there were some more callbacks waiting right now, like data coming back from an AJAX request or the Handler of a DOM Event, then the Event Loop will continue pushing those callbacks from the Message Queue onto the Execution Stack until all of those callbacks in the Message Queue are processed. And this is how the Event Loop works.
+        </p>
+    </div>
+</body>
+</html>
