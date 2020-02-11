@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Asynchronous JavaScript: The Old Way - Asynchronous JS using Callbacks</title>
+</head>
+<body>
+    <h1>Asynchronous JavaScript: The Old Way - Asynchronous JS using Callbacks</h1>
+    <p><em>Check the developer console for code/output</em></p>
+    <script>
+        // We will take a close look into Asynchronous JS with Callbacks, as it is the more traditional way to 
+        // deal with asynchronicity in JS.
+
+        // In order to learn about Asynchronous JS with Callbacks, we will build a very small fake recipe reader,
+        // where we will simulate AJAX calls to get some fake recipes using setTimeout() function. Therefore, we are
+        // going to simulate loading some data from a remote web server, which ofcourse would be asynchronous, using
+        // some timers.
+
+        // The way this fake recipe reader works is that first we get some fake IDs of the recipes from the remote
+        // web server and then based on that, we select a recipe and then get that recipe from the remote web server.
+        // Now since we're simulating here, we actually won't get the IDs or get the recipe from the remote web
+        // server, but we will just create them inside the function.
+        function getRecipe() {
+            // To simulate the AJAX call (i.e., the call to get data from the remote web server), we use the 
+            // setTimeout function.
+            setTimeout(() => {
+                // we are creating an array of recipe IDs to simulate that we're getting the data from the remote web
+                // server (but we are not :P)
+                const recipeID = [543, 299, 195, 2234];
+                console.log(recipeID);
+
+                // Now, once the data comes back from the server, we now want to get the recipe for one of these IDs
+                // from the server. We do that by making an AJAX request to the remote web server in here, but since
+                // we are simulating, we will simply call setTimeout function in here.
+                
+                // setTimeout(callback, time, paramsToCallback):
+                // 'callback' parameter is a callback function which can take any number of parameters which are
+                // passed to the callback through the 'paramsToCallback' parameter. The 'time' is the amount of time 
+                // (in ms) after which the callback is supposed to be executed.
+                setTimeout(id => {  // Here, id = recipeID[3], after the timer exhausts
+                    // As this is a simulation, we will make some fake data
+                    const recipe = {
+                        title: 'Cheese Masala Dosa',
+                        publisher: 'Sriram'
+                    };
+                    console.log(`${id}: ${recipe.title}`);
+
+                    // Now let's suppose that we want to get another recipe from the same publisher, in that case,
+                    // we again make an AJAX request, which is simulated as a setTimeout() function call here
+                    setTimeout(pub => {
+                        const recipe2 = {
+                            title: 'Paneer Masala Dosa',
+                            publisher: pub
+                        };
+                        console.log(recipe2);
+                    }, 1500, recipe.publisher);
+
+                }, 1500, recipeID[3]);
+                
+            }, 1500);
+        }
+
+        getRecipe();
+
+        // In the scenario above, we had 3 callbacks nested inside one another. These are like chained/nested 
+        // AJAX calls to get some data from the server. But we can see how this can get out of hand easily. Because
+        // if the chaining/nesting grows to 10 chains (i.e., an AJAX request inside another AJAX request inside
+        // another AJAX request so on... such that there are 10 AJAX request chains nested inside each other).
+        // And this is also known as "Callback Hell". 
+
+        // We can see a triangular shape below (w/o the comments):
+        // function getRecipe() {
+        //     setTimeout(() => {
+        //         const recipeID = [543, 299, 195, 2234];
+        //         console.log(recipeID);
+
+        //         setTimeout(id => {
+        //             const recipe = { title: 'Cheese Masala Dosa', publisher: 'Sriram' };
+        //             console.log(`${id}: ${recipe.title}`);
+
+        //             setTimeout(pub => {
+        //                 const recipe2 = { title: 'Paneer Masala Dosa', publisher: pub};
+        //                 console.log(recipe2);
+        //             }, 1500, recipe.publisher);
+
+        //         }, 1500, recipeID[3]);
+                
+        //     }, 1500);
+        // }
+
+        // This triangular shape can deepen a lot, and that's what Callback Hell is. It pretty much becomes 
+        // unmanageable after some time. That's why in ES6, something known as "Promises" were introduced.
+        // With Promises we can avoid the Callback Hell and have a nicer and cleaner syntax when using Async JS
+    </script>
+</body>
+</html>
