@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Asynchronous JS : An Example Using Asynchronous JavaScript</title>
+</head>
+<body>
+    <h1>Asynchronous JS : An Example Using Asynchronous JavaScript</h1>
+    <p><em>Check the developer console for code output</em></p>
+    <script>
+        // In the term "Asynchronous JS", the word 'Asynchronous' is just a fancy term for some code that keeps
+        // running in the background while our main code is still executing, and typically, we need this kind of 
+        // behaviour from JS for requesting some data from a remote server, like an API. We will see how synchronous
+        // JS code differs from an Asynchronous JS code.
+
+        // Synchronous/Normal JS Code
+        console.log("Synchronous JS");
+
+        const _second = () => {
+            console.log("Second");
+        }
+
+        const _first = () => {
+            console.log("Hey there");
+            _second();
+            console.log("The end");
+        }
+
+        _first();
+        // Output:
+        //        Hey there
+        //        Second
+        //        The end
+        console.log("\n");
+
+        // Asynchronous JS Code
+        // To use Asynchronous JS, we use a function called setTimeout() which is used to set a timer in JS. And
+        // because of the setTimeout() function, we will be able to write code that can be executed a little later
+        // compared to the normal JS code. We will see how it works as follows:
+
+        // setTimeout(callback, time): 
+        // The callback function will be called by the setTimeout function after the time (milliseconds) given as the
+        // second parameter is elapsed.
+        // Eg: setTimeout(callback, 1000); means that callback function will be called after 1000 ms (or 1 second) is
+        // elapsed.
+        console.log("Asynchronous JS");
+
+        const second = () => {
+            setTimeout(() => {
+                console.log("Async: Hey there");
+            }, 2000);   // the callback defined in the 1st parameter will be called after 2000 ms (or, 2 seconds)
+        };
+
+        const first = () => {
+            console.log("Hey there");
+            second();
+            console.log("The end");
+        };
+
+        first();
+        // Output:
+        //         Hey there
+        //         The end
+        //         Async: Hey there     // This will be printed after 2 seconds, open the console to check the output
+
+        // Now, we got a certain output when we wrote Asynchronous code in JS, and that is because of something
+        // known as the Event Loop in JS. Read about it in event_loop.html.
+        // In simple terms, when first() is called, "Hey there" is logged to the console and the second() is called.
+        // second() calls the setTimeout() with 2000ms as the 2nd param. Now JS Engine here, doesn't wait for those
+        // 2000ms, and just moves on starts executing the next line in the second() function. In the next line of the
+        // second() function, the function ends and therefore, the call returns to the first() function's execution
+        // context. In the first()'s execution context, the next line executes and "The end" is logged on to the
+        // console. By the time all this happens, 2000ms will be up and then, the callback function inside the 
+        // setTimeout() function that was called by the second() function, will be called. And now, the callback 
+        // is executed, which simply logs "Async: Hey there" on to the console.
+    </script>
+</body>
+</html>

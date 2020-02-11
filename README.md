@@ -88,7 +88,7 @@ Syntax -
       18. How and when to use <code>change</code> events: [app.js](https://github.com/Ch-sriram/JavaScript/blob/e9bef14a1d3cf9345bf7d7fee0e9a39db8cb6426/JS-Objects-Functions-Advanced/project-budgety/script/app.js)
       19. #### Budgety App: [app.js](https://github.com/Ch-sriram/JavaScript/blob/master/JS-Objects-Functions-Advanced/project-budgety/script/app.js) (final version) | [Use the app @netlify](https://budgety-ram.netlify.com)
 
-5. #### Next Generation JavaScript - Intro to ES6/ES2015:
+5. #### Next Generation JavaScript - Intro to ES6/ES2015
    1. List of New Concepts in ES6: [es6.html](https://github.com/Ch-sriram/JavaScript/blob/master/Next-Gen-JS-Intro-to-ES6/es6.html)
    2. Variables declared using <code>let</code> &amp; <code>const</code>: [let_const.html](https://github.com/Ch-sriram/JavaScript/blob/master/Next-Gen-JS-Intro-to-ES6/let_const.html) | [let_const.js](https://github.com/Ch-sriram/JavaScript/blob/master/Next-Gen-JS-Intro-to-ES6/scripts/let_const.js)
    3. Blocks & IIFEs: [block_iife.html](https://github.com/Ch-sriram/JavaScript/blob/master/Next-Gen-JS-Intro-to-ES6/block_iife.html) | [block_iife.js](https://github.com/Ch-sriram/JavaScript/blob/master/Next-Gen-JS-Intro-to-ES6/scripts/block_iife.js)
@@ -105,3 +105,6 @@ Syntax -
    12. <code>class</code>es (Syntactic Sugar): [class.html](https://github.com/Ch-sriram/JavaScript/blob/master/Next-Gen-JS-Intro-to-ES6/class.html) | [class.js](https://github.com/Ch-sriram/JavaScript/blob/master/Next-Gen-JS-Intro-to-ES6/scripts/class.js)
    13. Inheritance - Classes & Subclasses (ES5 - <code>Object.create()</code> / ES6 - <code>extends</code>): [inheritance.html](https://github.com/Ch-sriram/JavaScript/blob/master/Next-Gen-JS-Intro-to-ES6/inheritance.html) | [inheritance.js](https://github.com/Ch-sriram/JavaScript/blob/master/Next-Gen-JS-Intro-to-ES6/scripts/inheritance.js)
    14. Challenge VIII: [challenge8.html](https://github.com/Ch-sriram/JavaScript/blob/master/Next-Gen-JS-Intro-to-ES6/challenge8.html) | [challenge8.js](https://github.com/Ch-sriram/JavaScript/blob/master/Next-Gen-JS-Intro-to-ES6/scripts/challenge8.js)
+
+6. #### Asynchronous JavaScript
+   1. An Example of Asynchronous JavaScript: [intro.html](https://github.com/Ch-sriram/JavaScript/blob/master/Asynchronous-JS/intro.html)
