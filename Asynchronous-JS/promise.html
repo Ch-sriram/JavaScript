@@ -1,0 +1,271 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- Boostrap 4 -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    <title>Asynchronous JavaScript: From Callback Hell to Promises</title>
+</head>
+<body>
+    <div class="container text-center">
+        <h1 class="display-4 text-center">Asynchronous JavaScript: From Callback Hell to Promises</h1>
+        <p>
+            Open <a href="https://github.com/Ch-sriram/JavaScript/blob/master/Asynchronous-JS/promise.html">promise.html</a> for the code and explaination | Images are taken from: <a href="https://www.udemy.com/the-complete-javascript-course/">JS Course by Jonas Schmedtmann</a>
+        </p>
+        <img src="./assets/img/promise.png" alt="JS Runtime" class="img-thumbnail mb-3">
+        <p><em>Check the Developer Console for Output. View Page Source for Code.</em></p>
+    </div>
+    <script>
+        // Promise is an ES6 feature designed specifically to deal with Asynchronous JavaScript.
+        
+        // What is a Promise?
+        // In simple terms, a Promise can be defined by the following 3 important points:
+        // 1. Promise is an object that keeps track about whether a certain even has happened already or not. Here,
+        //    the events are asynchronous.
+        // 2. Promise determines what happens after the event has stopped, i.e., if an event finishes, like a timer 
+        //    finishing, or an AJAX request getting fulfilled, etc, in these cases, the Promise object will determine
+        //    what will happen after the event has finished its work and stopped.
+        // 3. Promise implements the concept of a future value that we're expecting (kind of). Example: If we have an
+        //    AJAX call that says "Get me the data from the server in the background", and the Promise then promises
+        //    us that it'll get that data, so we can handle it in the future. If the Promise fails to get that data,
+        //    we have to handle that differently, and if the Promise succeeds to get the data, then we handle that
+        //    case differently. All code has to be written in a way, keeping the future in mind.
+
+        // Now, since we are dealing with "Time Sensitive" now, a Promise can have different States.
+        // Different States in a Promise:
+        // 1. Pending: Before an event has happened, the Promise is in Pending State.
+        // 2. Resolved/Settled: After an event has happened, the Promise is in Resolved/Settled State.
+        // 3. Fulfilled: When a Promise in the Resolved State has successfully executed what the user wanted, then
+        //               Promise goes to Fulfilled State, which means that the result is available.
+        // 4. Rejected: When a Promise in the Resolved State has not successfully executed what the user wanted,
+        //              i.e., an error/exception occured in the Promise, then in that case, the Promise goes to
+        //              the Rejected State.
+
+        // Now, the Fulfilled and the Rejected States are important because these 2 states are to be handled by the 
+        // programmer/user.
+
+        // In more practical terms, we can "Produce" and "Consume" Promises.
+        // When we Produce a Promise, we create a new Promise and send a result using that Promise. And when we 
+        // Consume that Promise, we can use callback functions for Fulfillment and for Rejection of our Promise.
+
+        // We will now use Promises to see the same example that we took in callback_hell.html. We will convert the
+        // following code into code generated using Promises. Read the code/comments from Line #75.
+
+        // function getRecipe() {
+        //     setTimeout(() => {
+        //         const recipeID = [543, 299, 195, 2234];
+        //         console.log(recipeID);
+
+        //         setTimeout(id => {
+        //             const recipe = { title: 'Cheese Masala Dosa', publisher: 'Sriram' };
+        //             console.log(`${id}: ${recipe.title}`);
+
+        //             setTimeout(pub => {
+        //                 const recipe2 = { title: 'Paneer Masala Dosa', publisher: pub};
+        //                 console.log(recipe2);
+        //             }, 1500, recipe.publisher);
+
+        //         }, 1500, recipeID[3]);
+                
+        //     }, 1500);
+        // }
+        
+/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+        
+        // A Promise is an object, so we simply instantiate it using the 'new' keyword. The Promise's contructor
+        // takes in a callback function called "Executor" function. The Executor function takes in 2 parameters.
+        // These 2 parameters are again 2 callback functions known as "resolve" and "reject", and that's because the
+        // Executor function is used to inform the promise whether the event it is handling was successful or not, 
+        // and if the event was successful, we are going to call the resolve() function with the data generated by 
+        // the event. If the event was unsuccessful, in that case, we will call the reject() function. These 2
+        // functions represent the two states, "Fulfilled" & "Reject" States.
+        
+        // Since we are simulating the same fake recipe reader which we did using Callbacks in Asynchronous JS, we
+        // will use that same example here also. We first need the IDs of the Recipies. For that, we will make a 
+        // Promise as follows:
+    // const getIDs = new Promise((resolve, reject) => {
+    //     // Here, we need to make a call to an asynchronous event which is the AJAX Request to get the Recipe IDs
+    //     // from the remote web server. But here, we are simulating the situation, therefore, we can simply call 
+    //     // a setTimeout() function
+    //     setTimeout(() => {
+    //         // After 1500ms, we want to return the data we got from the server. Here, since this is a simulation,
+    //         // we will just send some made up data. And the way to send the data back is based on whether this 
+    //         // specific event is successful or unsuccessful. Since we simply made a setTimeout() call, this event
+    //         // will always be successful, and therefore, we call the resolve() function and pass in some fake IDs
+    //         // i.e., our fake data.
+    //         resolve([100, 200, 433, 955]);
+    //     }, 1500);
+
+    //     // Therefore, after 1500ms, the Promise says that the event is successfully executed and the Promise is
+    //     // resolved using the resolve() function, which will take in the fake data we sent, the recipe IDs.
+    // });
+
+    // // Now we "Produced" our Promise inside the getIDs variable. Now it's time that we "Consume" the Promise
+    // // we made from the getIDs variable. To Consume a Promise, we have 2 methods on all the Promise objects.
+    // // These methods are called "then()" and "catch()" methods. All of the Promise objects inherit then() and 
+    // // catch() methods.
+
+    // // The then() method allows us to add an event handler for the case, when the promise is fulfilled, which
+    // // means that there's a result that we obtained from the asynchronous call and we have to handle it.
+    // getIDs.then(IDs => {    
+    //     // IDs is the result obtained from the successful Promise, i.e., IDs now stores whatever we passed to the
+    //     // resolve() function in the Promise above i.e.,  IDs points to [100, 200, 433, 955].
+    //     console.log(IDs);
+    // });
+
+        // // Produce the Promise
+        // const getIDs = new Promise((resolve, reject) => {
+        //     setTimeout(() => {
+        //         resolve([100, 200, 433, 955]);
+        //     }, 1500);
+        // });
+
+        // // Consume the Promise
+        // getIDs.then(IDs => {
+        //     console.log(IDs);
+        // });
+        
+
+        // Now, in the code above, from line #117 to line #126, we assumed that the event is simply going to be 
+        // successful and that will lead the event to be in Fulfilled state, because this is a simulation.
+        // Now, if the event is unsuccessful, i.e., the data wasn't served after the AJAX call, in that case, we have
+        // to handle that scenario as well. Now, if the event was unsuccessful, it means that the Promise goes to 
+        // Reject state, and therefore, now the reject() function is called.
+
+/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////       
+    
+    // Produce the Promise
+    // const getIDs = new Promise((resolve, reject) => {
+    //     setTimeout(() => {
+    //         // If the AJAX request was unsuccessful, we simply reject() and send in some error message or some
+    //         // kind of data.
+    //         reject("Did not get data from the server!");
+
+    //         // We can send any kind of data using the reject() function. Even the fake data, but it won't make
+    //         // much sense sending them.
+    //         //reject([100, 200, 433, 955]);
+    //     }, 1500);
+    // });
+
+
+    // // Consume the Promise by chaining the calls to then() and catch() as follows.
+    // getIDs
+    // .then(IDs => {
+    //     console.log(IDs);
+    // })
+    // .catch(error => {
+    //     // error is now the string that we sent as a parameter into the reject() function, i.e., 
+    //     // error -> "Did not get data from the server!"
+    //     console.log(error);
+    // });
+
+        // If we don't use the catch() method, and if the Promise goes to Rejected state, then, we would get an error
+        // that will be logged onto the console that says: "Uncaught (in promise) > [Parameter sent to reject()]"
+
+/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+    // const getIDs = new Promise((resolve, reject) => {
+    //     setTimeout(() => {
+    //         resolve([100, 200, 433, 955]);
+    //     }, 1500);
+    // });
+
+    // // We have the recipe IDs, and now, we get a recipe as we did in line #60 - #62
+    // // What we will do is that, we will create a function which receives the Recipe IDs which will then return
+    // // a Promise
+    // const getRecipe = recipeID => {
+    //     return new Promise((resolve, reject) => {                
+    //         // Here, we will do the same as we did in line #60 to #62
+    //         setTimeout(ID => {
+    //             const recipe = { title: 'Cheese Masala Dosa', publisher: 'Sriram' };
+    //             // Instead of console.log(), here we just call the resolve() method - therefore we are assuming 
+    //             // that this Promise is successful, since this is just a simulation.
+    //             resolve(`${ID}: ${recipe.title}`);
+    //         }, 1500, recipeID);
+    //     });
+    // };
+    
+    // // Consume the Promise by chaining the calls to then() and catch() as follows.
+    // getIDs
+    // .then(IDs => {
+    //     console.log(IDs);
+    //     // Consuming the second Promise can be done as follows:
+    //     // getRecipe(IDs[2]); and then we can chain the then() and catch() here itself as follows:
+    //     // getRecipe(IDs[2]).then(()=>{...}).catch(()=>{...});
+    //     // This would be same as the Callback Hell and we will end up with a triangular shape of asynchronous 
+    //     // calls inside asynchronous calls again, which we don't want.
+
+    //     // Therefore, what we can do is, we can call the getRecipe() function here and get a Promise, and then
+    //     // return the Promise, which will be handled by a then() [in line #196] chained directly to this 
+    //     // particular then() [in line #179], which is as follows:
+    //     return getRecipe(IDs[2]);
+    // })
+    // // the then() here resolves the Promise returned by getRecipe() function. The Promise if run successfully,
+    // // (which it will, because this is a simulation), will go to the Fulfilled state and call resolve on the data
+    // // which is a template string of ID and Title of the Recipe, which is then handled by the then() below,
+    // // chained to the the previous then() [in line #179] which returns the Promise.
+    // .then(recipe => {
+    //     console.log(recipe);
+    // }) 
+    // .catch(error => {
+    //     console.log(error);
+    // });
+
+    // // getRecipe() is made a function because the Promise that's returned by the getRecipe() needs the recipeID 
+    // // data, which is passed to the getRecipe() in the then() of the getIDs' Promise, therefore, the Promise 
+    // // returned by the getRecipe() function actually needs the recipeID returned at the handler of getIDs'
+    // // Promise, so that the callback chain (not as callback hell, but in Promise style) is maintained.
+
+/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+        // Now, we finally demonstrate the full callback hell as mentioned in line #55 using Promises
+        
+        // Produce the Promise(s)
+        const getIDs = new Promise((resolve, reject) => {
+            setTimeout(() => {
+                resolve([100, 200, 433, 955]);
+            }, 1500);
+        });
+
+        const getRecipe = recipeID => {
+            return new Promise((resolve, reject) => {
+                setTimeout(ID => {
+                    const recipe = { title: 'Cheese Masala Dosa', publisher: 'Sriram' };
+                    resolve([ID, recipe]);
+                }, 1500, recipeID);
+            });
+        };
+
+        const getRelated = publisher => {
+            return new Promise((resolve, reject) => {
+                setTimeout(pub => {
+                    // Assume that we got this recipe object below after an AJAX request sent to the server
+                    const recipe = { title: 'Paneer Masala Dosa', publisher: 'Sriram' };
+                    resolve(`${pub}: ${recipe.title}`);
+                }, 1500, publisher);
+            });
+        };
+
+        // Consume the Promise(s)
+        getIDs
+        .then(IDs => {
+            console.log(IDs);
+            return getRecipe(IDs[2]);
+        })
+        .then(ID_recipe => {    // "Fulfilled State" Handler for Promise returned by getRecipe() function
+            const ID = ID_recipe[0];
+            const recipe = ID_recipe[1];
+            console.log(`${ID}: ${recipe.title}`);
+            return getRelated(recipe.publisher);
+        })
+        .then(recipe => {   // "Fulfilled State" Handler for Promise returned by getRelated() function 
+            console.log(recipe);
+        })     
+        .catch(error => {
+            console.log(error);
+        });
+
+    </script>
+</body>
+</html>
