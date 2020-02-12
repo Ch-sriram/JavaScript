@@ -1,0 +1,225 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Asynchronous JavaScript: From Callback Hell to Promises</title>
+</head>
+<body>
+    <h1>Asynchronous JavaScript: From Callback Hell to Promises</h1>
+    <p><em>Check the Developer Console for Output. View Page Source for Code.</em></p>
+    <script>
+        // This is how we traditionally wrote Asynchronous JavaScript Code, using Callbacks,
+        // which led to Callback Hells.
+        /*
+        function getRecipe() {
+            setTimeout(() => {
+                const recipeID = [543, 299, 195, 2234];
+                console.log(recipeID);
+
+                setTimeout(id => {
+                    const recipe = { title: 'Cheese Masala Dosa', publisher: 'Sriram' };
+                    console.log(`${id}: ${recipe.title}`);
+
+                    setTimeout(pub => {
+                        const recipe2 = { title: 'Paneer Masala Dosa', publisher: pub};
+                        console.log(recipe2);
+                    }, 1500, recipe.publisher);
+
+                }, 1500, recipeID[3]);
+                
+            }, 1500);
+        }
+        */
+
+/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+        // This is how we write Asynchronous JavaScript using Promises, which was introduced in ES6.
+        // Using Promises, we got rid from Callback Hell, but we got introduced to a new problem, and that was,
+        // confusion generated on how to handle the Promises. The chaining of then() with catch(), and the confusing
+        // way of resolving the Promises using the functions that are returned to another then() and so on...
+        // The way we consume the Promises using then() and catch() chaining is extremely confusing for a lot of the
+        // developers out there. Therefore, in ES8/ES2017, we got introduced to Async/Await.
+
+        /*
+        // Produce the Promise(s)
+        const getIDs = new Promise((resolve, reject) => {
+            setTimeout(() => {
+                resolve([100, 200, 433, 955]);
+            }, 1500);
+        });
+
+        const getRecipe = recipeID => {
+            return new Promise((resolve, reject) => {
+                setTimeout(ID => {
+                    const recipe = { title: 'Cheese Masala Dosa', publisher: 'Sriram' };
+                    resolve([ID, recipe]);
+                }, 1500, recipeID);
+            });
+        };
+
+        const getRelated = publisher => {
+            return new Promise((resolve, reject) => {
+                setTimeout(pub => {
+                    // Assume that we got this recipe object below after an AJAX request sent to the server
+                    const recipe = { title: 'Paneer Masala Dosa', publisher: 'Sriram' };
+                    resolve(`${pub}: ${recipe.title}`);
+                }, 1500, publisher);
+            });
+        };
+
+        // Consume the Promise(s)
+        getIDs
+        .then(IDs => {
+            console.log(IDs);
+            return getRecipe(IDs[2]);
+        })
+        .then(ID_recipe => {    // "Fulfilled State" Handler for Promise returned by getRecipe() function
+            const ID = ID_recipe[0];
+            const recipe = ID_recipe[1];
+            console.log(`${ID}: ${recipe.title}`);
+            return getRelated(recipe.publisher);
+        })
+        .then(recipe => {   // "Fulfilled State" Handler for Promise returned by getRelated() function 
+            console.log(recipe);
+        })     
+        .catch(error => {
+            console.log(error);
+        });
+        */
+
+/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+        // Async/Await
+        // -----------
+        // We learned about how to Produce and Consume Promises, but the syntax to Consume Promises can still be
+        // quite confusing and difficult to manage, and so in ES8/ES2017, something called "Async/Await" was
+        // introduced to the JavaScript Langugae in order to make it a lot easier for us developers to Consume
+        // Promises. Remember, Async/Await is only designed for the Consuming of Promises, not for the Production.
+
+        // Now, we simply change the way we consume the Promises, therefore, we Produce the Promise in the same way
+        // we did using Promises as we saw in promise.html
+
+        // Produce the Promises:
+        const getIDs = new Promise((resolve, reject) => {
+            setTimeout(() => {
+                resolve([100, 200, 433, 955]);
+            }, 1500);
+        });
+
+        const getRecipe = recipeID => {
+            return new Promise((resolve, reject) => {
+                setTimeout(ID => {
+                    const recipe = { title: 'Cheese Masala Dosa', publisher: 'Sriram' };
+                    resolve([ID, recipe]);
+                }, 1500, recipeID);
+            });
+        };
+
+        const getRelated = publisher => {
+            return new Promise((resolve, reject) => {
+                setTimeout(pub => {
+                    // Assume that we got this recipe object below after an AJAX request sent to the server
+                    const recipe = { title: 'Paneer Masala Dosa', publisher: 'Sriram' };
+                    resolve(`${pub}: ${recipe.title}`);
+                }, 1500, publisher);
+            });
+        };
+
+        /*
+        // Consume the Promises using Async/Await:
+        // To consume the Promises, we create a function that precedes with the 'async' keyword, telling the 
+        // JS Engine that this particular function is an Asynchronous Function, and therefore, this function
+        // would automatically run asynchronously i.e., run in the background, sitting in the Web API environment.
+        // The async function can return anything.
+
+        async function getRecipesAW() { // "AW" in the end of "getRecipesAW" stands for "Async/Await"
+            // Inside an async function, we can have one or more await expressions, defined using 'await' keyword
+            // We can consume our first Promise as follows:
+            const IDs = await getIDs;
+            // Now, the await expression in the line above really stops the code in this function, from executing
+            // any further, until the getIDs Promise is either "Fulfilled" or "Rejected". If the getIDs Promise is
+            // resolved, then it assigned to IDs constant. In this case, our Promise - getIDs will resolve to 
+            // [100, 200, 433, 955], and that array is assigned to IDs constant.
+            console.log(IDs);   // "(4) [100, 200, 433, 955]" is logged after 1500ms
+
+            // Now, if the Promise is Rejected, then an error will be thrown. Now to handle that error, we have to 
+            // include some more code here, which we'll get into, later.
+
+            // Consuming the second Promise
+            const ID_recipe = await getRecipe(IDs[2]);
+            const ID = ID_recipe[0];
+            const recipe = ID_recipe[1];
+            console.log(`${ID}: ${recipe.title}`);  // 433: Cheese Masala Dosa
+
+            // Consuming the thrid Promise
+            const relatedRecipe = await getRelated(recipe.publisher);
+            console.log(relatedRecipe); // Sriram: Paneer Masala Dosa
+
+            // await expressions can only be used inside an async function, and async function always runs in the
+            // background, because we can never have the main code (the syncrhonous code) stopping in the middle
+            // of the execution. So all we do here is block the code (using await) in the async function, and since
+            // it runs in the background, it won't matter if we use await to wait for the Promise to be resolved
+            // or rejected, since it is already running in the background.
+
+        }
+
+        // We call the Asynchronous function here, synchronously:
+        getRecipesAW(); 
+        */
+
+/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+        // Now if we want to return a value from the async function, then how do we do it? Read from line #190 onwards
+        
+        // Consume the Promises using Async/Await:
+        async function getRecipesAW() { // "AW" in the end of "getRecipesAW" stands for "Async/Await"
+            // Consuming the first Promise
+            const IDs = await getIDs;
+            console.log(IDs);   // "(4) [100, 200, 433, 955]" is logged after 1500ms
+
+            // Consuming the second Promise
+            const ID_recipe = await getRecipe(IDs[2]);
+            const ID = ID_recipe[0];
+            const recipe = ID_recipe[1];
+            console.log(`${ID}: ${recipe.title}`);  // 433: Cheese Masala Dosa
+
+            // Consuming the thrid Promise
+            const relatedRecipe = await getRelated(recipe.publisher);
+            console.log(relatedRecipe); // Sriram: Paneer Masala Dosa
+
+            // Let's say we want to return the recipe object
+            return recipe;
+        }
+
+        /*
+        const rec = getRecipesAW();     
+        console.log(rec);   // Promise {<pending>}
+        */
+
+        // rec contains a Promise which is in Pending state because getRecipesAW() is called synchronously and then
+        // rec is logged on to the console as "Promise {<pending>}" because it is running synchronously. While the
+        // getRecipesAW(), which is an async function, runs in the background, waiting for the the Promises to be
+        // resolved rejected from getIDs, getRecipe() and getRelated() in that order. Therefore, returning a value
+        // like that from async function is fine, but we cannot handle the return value by assigning it to some 
+        // other variable.
+
+        // Now, an async function almost always returns a Promise. Therefore, when we return the value from the 
+        // async function using the 'return' keyword, then the Promise will automatically be resolved with the
+        // returned value. In our case, when we return the recipe object, it will be returned as a Promise which 
+        // will automatically be resolved, and therefore, we can call handle that returned Promise using the then()
+        // method as shown below:
+
+        getRecipesAW().then(recipe => console.log(recipe));
+
+        /*
+        Output in the Console:
+                                > Array(4) [100, 200, 433, 955]
+                                433: Cheese Masala Dosa
+                                Sriram: Paneer Masala Dosa
+                                > {title: "Cheese Masala Dosa", publisher: "Sriram"}
+        */
+
+    </script>
+</body>
+</html>
