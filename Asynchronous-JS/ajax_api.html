@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <!-- Boostrap 4 -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    <title>Asynchronous JavaScript: AJAX &amp; API</title>
+</head>
+<body>
+    <div class="container text-center">
+
+        <h1 class="display-4 text-center">Asynchronous JavaScript: AJAX &amp; API</h1>
+        
+        <p>
+            Open <a href="https://github.com/Ch-sriram/JavaScript/blob/master/Asynchronous-JS/ajax_api.html">ajax_api.html</a> for the code | Images are taken from: <a href="https://www.udemy.com/the-complete-javascript-course/">JS Course by Jonas Schmedtmann</a>
+        </p>
+
+        <img src="./assets/img/ajax_api.png" alt="AJAX & API" class="img-thumbnail mb-3">
+
+        <p class="text-left lead">
+            <strong>AJAX</strong> stands for <strong>A</strong>synchronous <strong>J</strong>avascript <strong>A</strong>nd <strong>X</strong>ML, and basically, AJAX allows us to Asynchronously communicate with Remote Servers. <br><br>
+            
+            Let's say we have our JavaScript App running in the browser (which also called "client"), and we want to get some data from the remote server, without having to reload the entire page. With AJAX, we can do a simple <mark>GET HTTP Request to the Remote Server</mark>, which will then send back a <mark>Response containing the data that we requested</mark>, and all of this <mark>happens asynchronously, in the background</mark> (See <a href="https://github.com/Ch-sriram/JavaScript/blob/master/Asynchronous-JS/assets/event_loop.pdf"><strong>event_loop.pdf</strong></a>). Also, this <mark>not only works for getting data from the remote server</mark>, it also works for <mark>sending data to the server, by doing a POST Request.</mark> In practice, there are many ways to do AJAX in JavaScript, but we will concentrate on the <code>Fetch</code> Web API which will allow us to make AJAX calls in a simple way. <br><br>
+            
+            Since we are talking about servers, we also have to talk about <strong>API</strong>s, which stands for <strong>A</strong>pplication <strong>P</strong>rogramming <strong>I</strong>nterface. <mark>At an extremely high level, API is a piece of software that can be used by another piece of software in order to allow applications to talk to each other.</mark> And that's not just valid for Web Development, but for Programming in general. In reference to Web Development, AJAX & Servers, API is not the server itself, but a part of the Server (Eg: An application that receives requests and sends back responses).
+            <br><br>
+            
+            There are <mark>two types</mark> of APIs that we can use in JavaScript
+            <ol class="text-left lead">
+                <li>Your own API for data coming from your own server.</li>
+                <li>
+                    Third Party APIs:
+                    <ul>
+                        <li>Google Maps,</li>
+                        <li>Embed YouTube Videos,</li>
+                        <li>Weather Data,</li>
+                        <li>Movies Data,</li>
+                        <li>Send Email or SMS,</li>
+                        <li>etc.</li>
+                    </ul>
+                </li>
+            </ol>
+        </p>
+
+        <p class="text-left lead">
+            Let's imagine for a second that we are building a travelling app, and we have database with different destinations and tourse that we are offering. Therefore, on our server, we could build our own API that can receive request from our front-end app and send back the results. So that would be our own API hosted on our own server. But now we also need some current weather information for each destination, and that data is not available in our database, so for that, we will use a 3<sup>rd</sup> Party API to get that weather data of the destination. And there are a lot of 3<sup>rd</sup> Party API's and some of them are mentioned above.
+        </p>
+
+    </div>
+</body>
+</html>
