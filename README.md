@@ -113,5 +113,6 @@ Syntax -
    4. From Callback Hell to <code>Promise</code>s: [promise.html](https://github.com/Ch-sriram/JavaScript/blob/master/Asynchronous-JS/promise.html) | promise.pdf - [view](https://github.com/Ch-sriram/JavaScript/blob/master/Asynchronous-JS/assets/promise.pdf) or [download](https://github.com/Ch-sriram/JavaScript/raw/master/Asynchronous-JS/assets/promise.pdf)
    5. From <code>Promise</code>s to <code>async</code>/<code>await</code> in ES8/ES2017: [async_await.html](https://github.com/Ch-sriram/JavaScript/blob/master/Asynchronous-JS/async_await.html)
    6. AJAX & API - What do they mean? : [ajax_api.html](https://github.com/Ch-sriram/JavaScript/blob/master/Asynchronous-JS/ajax_api.html) | ajax_api.pdf - [view](https://github.com/Ch-sriram/JavaScript/blob/master/Asynchronous-JS/assets/ajax_api.pdf) or [download](https://github.com/Ch-sriram/JavaScript/raw/master/Asynchronous-JS/assets/ajax_api.pdf)
-   7. Making AJAX Calls Using <code>fetch()</code> and,
+   7. Making AJAX Calls Using <code>fetch()</code> and
       1. <code>Promise</code>s: [fetch_promise.html](https://github.com/Ch-sriram/JavaScript/blob/master/Asynchronous-JS/fetch_promise.html) | [fetch_promise.js](https://github.com/Ch-sriram/JavaScript/blob/master/Asynchronous-JS/scripts/fetch_promise.js)
+      2. <code>async</code>/<code>await</code>: [fetch_async_await.html](https://github.com/Ch-sriram/JavaScript/blob/master/Asynchronous-JS/fetch_async_await.html) | [fetch_async_await.js](https://github.com/Ch-sriram/JavaScript/blob/master/Asynchronous-JS/scripts/fetch_async_await.js)
