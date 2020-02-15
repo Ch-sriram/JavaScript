@@ -116,3 +116,6 @@ Syntax -
    7. Making AJAX Calls Using <code>fetch()</code> and
       1. <code>Promise</code>s: [fetch_promise.html](https://github.com/Ch-sriram/JavaScript/blob/master/Asynchronous-JS/fetch_promise.html) | [fetch_promise.js](https://github.com/Ch-sriram/JavaScript/blob/master/Asynchronous-JS/scripts/fetch_promise.js)
       2. <code>async</code>/<code>await</code>: [fetch_async_await.html](https://github.com/Ch-sriram/JavaScript/blob/master/Asynchronous-JS/fetch_async_await.html) | [fetch_async_await.js](https://github.com/Ch-sriram/JavaScript/blob/master/Asynchronous-JS/scripts/fetch_async_await.js)
+
+7. #### Modern JavaScript Using ES6, NPM, Babel & Webpack
+   1. Introduction: [intro.html](https://github.com/Ch-sriram/JavaScript/blob/master/Modern-JS-ES6-NPM-Babel-Webpack/intro.html)
