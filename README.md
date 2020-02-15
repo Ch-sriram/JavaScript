@@ -119,3 +119,4 @@ Syntax -
 
 7. #### Modern JavaScript Using ES6, NPM, Babel & Webpack
    1. Introduction: [intro.html](https://github.com/Ch-sriram/JavaScript/blob/master/Modern-JS-ES6-NPM-Babel-Webpack/intro.html)
+   2. An Overview of Modern JavaScript: [overview.html](overview.html) | overview.pdf - [view](https://github.com/Ch-sriram/JavaScript/blob/master/Modern-JS-ES6-NPM-Babel-Webpack/assets/overview.pdf) or [download](https://github.com/Ch-sriram/JavaScript/raw/master/Modern-JS-ES6-NPM-Babel-Webpack/assets/overview.pdf)

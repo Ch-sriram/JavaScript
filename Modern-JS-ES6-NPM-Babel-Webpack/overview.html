@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <!-- Boostrap 4 -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    <title>Modern JS: Overview</title>
+</head>
+<body>
+    <div class="container text-center">
+        <h1 class="display-4">Modern JS: Overview</h1>
+        <p>
+            Open <a href="https://github.com/Ch-sriram/JavaScript/blob/master/Modern-JS-ES6-NPM-Babel-Webpack/overview.html">overview.html</a> for the markup | Images are taken from: <a href="https://www.udemy.com/the-complete-javascript-course/">JS Course by Jonas Schmedtmann</a>
+        </p>
+
+        <img src="./assets/overview.png" alt="overview" class="img-thumbnail mb-3">
+
+        <p class="lead text-left">
+            Up until now, we have used JavaScript in the old school way. But now, we will learn how to use JavaScript
+            in a modern (ES6) way. <br>
+            Modern JS is not more about the language itself. It's about the ecosystem/environment we write our JS
+            code in. We still write the exact same JS, but we use it together with a set of tools that make it easier
+            and better to work with. The foundation of all these tools is <mark>Node JS</mark> and the <mark>NPM (Node Package Manager) Ecosystem</mark> where we can find all kinds of third party open source tools,
+            libraries & frameworks (ex: stuff like REACT & ANGULAR, Lodash & jQuery, etc) needed for modern web 
+            development. We also have development tools for task automation, automatic browser reloading or to
+            compile JavaScript down to ES5. <br><br>
+            In order to use/install these tools, we need some kind of tool to install and manage them, and that's 
+            where the NPM comes into the picture. <code>npm</code> is a simple command line interface that allows to 
+            manage web development tools easily. Also, <code>npm</code> also allows us to write scripts to use our
+            development tools automatically. <br><br>
+            
+            Another tool that we use in Modern JS is called <mark>Babel</mark>. In order to convert cutting edge JS 
+            code like ES6, ES7, or ES8 (which together are simply called "ESNext") down to ES5, so if all browsers 
+            are capable of parsing our code, for that, we use Babel. In a couple of years this might not be 
+            necessary, but for now, this is an important step in the process of modern web development. <br><br>
+            
+            Next, we will use ES6 modules, in order to make our code modular and easier to maintain, by separating 
+            different parts of our app/project into different files. ES6 makes this separation of parts in the app
+            into different files implementing something known as modules. The problem with these modules is that 
+            right now the browsers do not support this functionality yet. So, we have to bundle these modules
+            together into a single file, using something called a module bundler. The most popular module bundler out
+            there is <mark>Webpack</mark>. Webpack can actually do much more than just bundling modules. Some of the
+            features of Webpack are Code Splitting, Loading many types of assets like sass or images, decreasing our
+            JavaScript bundle size using an algorithm called "tree shaking" and many more. <br><br>
+
+            <mark>Babel</mark> and <mark>Webpack</mark> are NPM Packages. The easiest way to run these packages is by
+            using something known as "NPM Scripts", which allows us to run all these tools automatically and easily 
+            in our command line interface. <br><br>
+
+            The image above is a quick illustration of the explanation given till now.
+        </p>
+    </div>
+</body>
+</html>
