@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <!-- Bootstrap 4 -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    <title>Modern JS: Installing Node.js and NPM</title>
+</head>
+<body>
+    <div class="container text-center">
+        <h1 class="display-4">Modern JS: Installing Node.js and NPM</h1>
+        <p>
+            Open <a href="https://github.com/Ch-sriram/JavaScript/blob/master/Modern-JS-ES6-NPM-Babel-Webpack/nodejs.html">nodejs.html</a> for the markup | Images are taken from: <a href="https://www.udemy.com/the-complete-javascript-course/">JS Course by Jonas Schmedtmann</a>
+        </p>
+        <p class="lead text-left">
+            Download and Install <mark>Node.js</mark> from <a href="https://www.nodejs.org/en">here</a> (download 
+            the one with "Recommended For Most Users"). After that, check if Node.js has been installed in the system
+            properly by typing in the commands in terminal or the command prompt, as shown in the screenshot below.
+        </p>
+        <img src="./assets/images/ss-1.png" alt="ss-1" class="img-thumbnail mb-3"/>
+        <p class="lead text-left">
+            The output of those two commands shown above, should be the version numbers of Node.js and NPM as shown
+            above. If that's not the case, then there was some problem while installation of Node.js and therefore,
+            we might've to re-install Node.js. <br><br>
+            
+            After that, we now create a <code>package.json</code> file for our project using the command line. Note: 
+            We have to be in the respective project folder to create the <code>package.json</code> file. We simply
+            type in: <code>npm init</code> command in the command prompt (or terminal) and the terminal will ask
+            about the <mark>project name</mark>, <mark>description</mark>, <mark>entry point</mark>, etc as shown
+            below in the screenshot. Fill them up as shown in the screenshot below.
+        </p>
+        <img src="./assets/images/ss-2.png" alt="ss-2" class="img-thumbnail mb-3"/>
+        <p class="lead text-left">
+            We can clearly see that <code>package.json</code> file has been created. We can also see the content of 
+            <code>package.json</code> file. We can see that the file reflects the data that we gave as input when
+            creating the <code>package.json</code> file. We will get to know more about <code>package.json</code>
+            file in-detail, a little bit later. <br><br>
+
+            We will now install <strong>Webpack</strong> using NPM. To install Webpack, we use the following command:
+            <code>npm install webpack --save-dev</code> in the terminal as shown below (we might see some warning(s)
+            , but that's not to fret about. If there are errors, then we need to run the command as administrator/
+            superuser).
+        </p>
+        <img src="./assets/images/ss-3.png" alt="ss-3" class="img-thumbnail"/>
+        <img src="./assets/images/ss-4.png" alt="ss-4" class="img-thumbnail mb-3"/>
+        <p class="lead text-left">
+            In the command, <code>npm install webpack --save-dev</code>, "<code>--save-dev</code>" means that we
+            save Webpack as <strong>Development Dependency</strong>. We can see that in our <code>package.json</code>
+            file shown below, that <code>"webpack"</code> is saved in the <code>package.json</code> file inside the
+            <code>"devDependencies"</code> field with its version number.
+        </p>
+        <img src="./assets/images/ss-5.png" alt="ss-5" class="img-thumbnail mb-3"/>
+        <p class="lead text-left">
+            There are two type of Node.js packages. The first one's are libraries & frameworks, stuff like that, and
+            the others are <strong>development tools</strong>. Libraries like React or jQuery they all are really
+            dependencies, because we use the code from React, jQuery, etc, in our product/app. But something like 
+            Webpack is really just a development tool, and therefore, it's saved inside the <code>package.json</code>
+            in the <code>"devDependencies"</code> field. Now, imagine if we wanted to use something like jQuery
+            (which is an actual dependency from which we import actual code and use the code in our project), then
+            we install it using the following command: <code>npm install jquery --save</code>. Note that in this 
+            command, we just used <code>"--save"</code> instead of <code>"--save-dev"</code>, because jQuery is a 
+            library dependency, and not a development dependency. We can see see the command in action below.
+        </p>
+        <img src="./assets/images/ss-6.png" alt="ss-6" class="img-thumbnail mb-3"/>
+        <p class="lead text-left">
+            Now we can see the contents of <code>package.json</code> below and see that <code>"jquery"</code> is
+            inside the <code>"dependencies"</code> field as shown below, because jQuery is a library and not a tool.
+        </p>
+        <img src="./assets/images/ss-7.png" alt="ss-7" class="img-thumbnail mb-3"/>
+        <p class="lead text-left">
+            Now, the <code>package.json</code> file has all the information regarding the dependencies, development
+            dependencies, etc, in our project. Now that's very important, because if we want to move this project to
+            another computer or work with another person on the same project, then everyone's on the same page by 
+            simply looking into the <code>package.json</code> file. Everyone will get to know the dependencies being
+            used in the project just by having a glance in the <code>package.json</code> file. It is also important
+            to create a <code>package.json</code> file because it allows us to install all of our dependencies
+            automatically even if we don't have the <strong>node_modules</strong> directory in our project. The 
+            node_modules folder is where all our packages (dependencies or development dependencies) reside i.e., it
+            will have all the dependencies for the dependencies that we installed in our project. For instance,
+            Webpack and jQuery themselves have so many dependencies, so the node_modules folder also contains the 
+            dependencies of the dependencies we installed for our project. <br><br>
+            Now, if we want to share our project to someone else, <strong>we need not share the node_modules</strong>
+            folder. Because all the required details are there inside the <code>package.json</code> file. So anyone
+            who's having the project files (without the node_modules folder) along with the 
+            <code>package.json</code> file, he/she can simply run <code>npm install</code> command, and all the 
+            required devDependencies and dependencies will be installed in the project folder in the node_modules 
+            folder. We will illustrate that in the screenshots below. We will delete the node_modules folder first, 
+            and then just type in <code>npm install</code> in the directory where our project files are (along with
+            <code>package.json</code> file), and we will see that the node_modules folder will be created in our 
+            project's directory automatically, where all the dependencies requuired for the project, will reside.
+        </p>
+        <img src="./assets/images/ss-8.png" alt="ss-8" class="img-thumbnail mb-3"/>
+        <img src="./assets/images/ss-9.png" alt="ss-9" class="img-thumbnail mb-3"/>
+        <p class="lead text-left">
+            One last thing is that we can also uninstall the packages. In our project we don't really have a need for
+            jQuery, so we go ahead and uninstall it as shown in the screenshot below, using the following command:
+            <code>npm uninstall jquery --save</code>
+        </p>
+        <img src="./assets/images/ss-10.png" alt="ss-10" class="img-thumbnail mb-3"/>
+        <p class="lead text-left">
+            We can see that the <code>package.json</code> reflects that "jquery" has been uninstalled, as it is not
+            present inside the "dependencies" field of the <code>package.json</code> file as shown below.
+        </p>
+        <img src="./assets/images/ss-11.png" alt="ss-11" class="img-thumbnail mb-3"/>
+        <p class="lead text-left">
+            A final thing to know is, the packages that we installed till now (i.e., Webpack and jQuery using the 
+            <code>--save-dev</code> and <code>--save</code> respectively) are locally installed. It means that they
+            are installed only for this particular project. But we can also install packages globally, so that those
+            packages will be accessible everywhere in our computer. Right now, the "webpack" devDependency only works
+            inside the project, but if we want to install it globally and access it everywhere, we could also do that
+            . <br><br>
+            We will now see how we can install packages globally. We will install the <strong>Live Server</strong> 
+            package globally using the following command: <code>npm install live-server --global</code> (instead of 
+            <code>--global</code> we could've als used <code>-g</code>). Live Server allows us to create a simple and
+            local web server to serve some static websites.
+        </p>
+        <img src="./assets/images/ss-12.png" alt="ss-12" class="img-thumbnail mb-3"/>
+        <img src="./assets/images/ss-13.png" alt="ss-13" class="img-thumbnail mb-3"/>
+        <p class="lead text-left">
+            Now we can run the command <code>live-server</code> from anywhere in the system, and in the respective
+            folder, a live local webserver is created on the loopback address (127.0.0.1) on port 8080 as shown 
+            below.
+        </p>
+        <img src="./assets/images/ss-14.png" alt="ss-14" class="img-thumbnail mb-3"/>
+    </div>
+</body>
+</html>
