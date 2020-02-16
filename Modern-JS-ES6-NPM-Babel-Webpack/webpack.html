@@ -1,0 +1,183 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <!-- Bootstrap 4 -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous"/>
+    <title>Modern JS: Webpack Basics</title>
+</head>
+<body>
+    <div class="container text-center">
+        <h1 class="display-4">Modern JS: Webpack Basics</h1>
+        <p>
+            Open <a href="https://github.com/Ch-sriram/JavaScript/blob/master/Modern-JS-ES6-NPM-Babel-Webpack/webpack.html">webpack.html</a> for the markup/code | Images are taken from: <a href="https://www.udemy.com/the-complete-javascript-course/">JS Course by Jonas Schmedtmann</a>
+        </p>
+
+        <p class="lead text-left">
+            <strong>Webpack</strong> is the most commonly used asset bundler. Webpack doesn't only bundle JS files
+            into bundles, but it bundles all kinds of assets like JS files, CSS, Images, etc, into a single file 
+            as shown below.
+        </p>
+        <img src="./assets/images/webpack-1.png" alt="webpack-1" class="img-thumbnail mb-3" />
+
+        <p class="lead text-left">
+            We will use Webpack v4.0 and above in which something known as <strong>zero configuration</strong>, where
+            we don't even nee to write a configuration file. If we want to use zero configuration, we just need to 
+            have a <strong>source</strong> folder (aka <code>src</code>) in the <strong>root</strong> of the project 
+            and in there, a single <code>index.js</code> file. The webpack will automatically create a
+            <strong>distribution</strong> folder (aka <code>dist</code>) and put the bundled file in there. But that
+            is just for really small projects/apps. For bigger apps, we definitely have to write the 
+            <strong>configuration</strong> file ourselves. Now, in order to do that, we have to add a configuration 
+            file in our app/project root named as <code>webpack.config.js</code> as shown below.
+        </p>
+        <img src="./assets/images/webpack-2.png" alt="webpack-2" class="img-thumbnail mb-3" />
+
+        <p class="lead text-left">
+            In the <code>webpack.config.js</code> file, we have only one object in which we can specify our settings
+            or configuration. We basically want to export this configuration object Node.js syntax. For that, we 
+            assign the object to <code>module.exports</code>. Now, <code>module.exports</code> is simply there to 
+            export the configuration object, so that webpack can take this object and do its magic.
+        </p>
+        <img src="./assets/images/webpack-3.png" alt="webpack-3" class="img-thumbnail mb-3" />
+
+        <p class="lead text-left">
+            To create a configuration, we need to know the 4 core concepts of webpack -
+            The <strong>entry point</strong>, <strong>output</strong>, <strong>loaders</strong> and <strong>plugins</strong>. 
+            We will do a very simple configuration here to show how we usually configure. Starting with the entry 
+            point, it is a property in the <code>modules.export</code> object where, the webpack starts the bundling
+            of files in our app/project. Basically, <code>entry</code> property needs to be mentioned with the file 
+            where all the dependencies can be looked upon, so that webpack can bundle it together. In the
+            <code>entry</code> property, we can specify one or more entry files, but for now, we will keep it simple,
+            and just give one entry file which is <code>index.js</code> as shown below. Next, we need to define the 
+            <code>output</code> property in the <code>modules.export</code> which will tell webpack, where to save 
+            the final bundled file. <code>output</code> property, is an object where we put a path in the
+            <code>path</code> property, which is an absolute path to the directory where we want our final bundled 
+            file to be in. And finally, we give the name of the file (conventionally named as <code>bundle.js</code>)
+            in the <code>filename</code> property. Now, to get the absolute path, we use a built-in node package, 
+            which we have to include in the <code>webpack.config.js</code> as 
+            <code>const path = require('path');</code>. Now, in the <code>path</code> property inside the 
+            <code>output</code> object, we will use the package we imported as 
+            <code>path.resolve(__dirname, &lt;param2>)</code>, where <code>__dirname</code>
+            is the <strong>absolute path</strong> and &lt;param2> is the path to inside the absolute path as shown
+            below. Now, we can go ahead and continue now, but to make things a little better, because in webpack v4 
+            and above, we now have something called the <strong>production</strong> and the
+            <strong>development</strong> mode. The development mode simply builds our bundle without minifying our
+            code in order for our bundling to be as fast as possible. Whereas the production mode will automatically
+            enable all kinds of optimization(s), like minifying and tree shaking in order to reduce the final bundle
+            size. Our very first configuration file is as below (we will look into loaders and plugins later).
+        </p>
+        <img src="./assets/images/webpack-4.png" alt="webpack-4" class="img-thumbnail mb-3" />
+
+        <p class="lead text-left">
+            Now, to test how webpack bundles our files, we need to create a a new JavaScript file, say 
+            <code>test.js</code>. Now, we know that in the webpack configuration file, we have mentioned the entry
+            point to be <code>index.js</code> and therefore, if we want to include a new module inside the entry
+            point in order to test if the other module gets included and if they're bundled together or not. So just
+            for testing purposes, let's add a new file in the <strong>src</strong> folder named <code>test.js</code>
+            as shown below.
+        </p>
+        <img src="./assets/images/webpack-5.png" alt="webpack-5" class="img-thumbnail mb-3" />
+
+        <p class="lead text-left">
+            And in <code>test.js</code> we log something to the console, just for testing purposes. And then, we can
+            also export something from <code>test.js</code>. To export something, we use the <code>export</code>
+            keyword, followed by a <code>default</code> export or a <code>named</code> export. And so, we can write 
+            the code as shown below (we will know more about <code>default</code> and <code>named</code> exports
+            later). 
+        </p>
+        <img src="./assets/images/webpack-6.png" alt="webpack-6" class="img-thumbnail mb-3" />
+
+        <p class="lead text-left">
+            Now, in the entry point (which is the <code>index.js</code> file), we can go ahead and import the 
+            value that we exported in <code>test.js</code> by also naming it. The way we import the value, is given
+            below.
+        </p>
+        <img src="./assets/images/webpack-7.png" alt="webpack-7" class="img-thumbnail mb-3" />
+
+        <p class="lead text-left">
+            Now, the pieces of code that we wrote in <code>test.js</code> and <code>index.js</code> where we
+            exported and imported values respectively, won't run in the browser if we do not use webpack or some 
+            kind of a bundler and that is exactly why we are using webpack. <br><br>
+
+            We now have to update our <code>package.json</code> and add an <strong>npm script</strong>. We use npm
+            scripts because that's the only well known and efficient way to launch our locally installed dev 
+            dependencies. We can see the <code>package.json</code> file below.
+        </p>
+        <img src="./assets/images/webpack-8.png" alt="webpack-8" class="img-thumbnail mb-3" />
+
+        <p class="lead text-left">
+            Now, in order for us to bundle everything in our project into <code>bundle.js</code>, we need to install
+            one more thing, which is <strong>Webpack Command Line Interface</strong>. We install Webpack CLI using 
+            NPM (as our development dependencies) in the terminal using the command shown below.
+        </p>
+        <img src="./assets/images/webpack-9.png" alt="webpack-9" class="img-thumbnail mb-3" />
+
+        <p class="lead text-left">
+            We can look into our <code>package.json</code> file for the reflected changes, specifically, we need to 
+            look into <code>"devDependencies"</code> field where we can see that <code>"webpack-cli"</code> is added
+            along with its version, as shown below.
+        </p>
+        <img src="./assets/images/webpack-10.png" alt="webpack-10" class="img-thumbnail mb-3" />
+
+        <p class="lead text-left">
+            Now, to bundle the modules together, we simply go to the terminal and type in
+            <code>npm run &lt;script_name></code> where our &lt;script_name> in this case is "dev", as shown below.
+        </p>
+        <img src="./assets/images/webpack-11.png" alt="webpack-11" class="img-thumbnail mb-3" />
+
+        <p class="lead text-left">
+            We can see that <code>bundle.js</code> has been created inside the <code>dist/js/</code> as shown below.
+        </p>
+        <img src="./assets/images/webpack-12.png" alt="webpack-12" class="img-thumbnail mb-3" />
+
+        <p class="lead text-left">
+            Finally, we make a dummy html file, say <code>index.html</code> inside <code>/dist/</code> as shown below.
+        </p>
+        <img src="./assets/images/webpack-13.png" alt="webpack-13" class="img-thumbnail mb-3" />
+
+        <p class="lead text-left">
+            And then import <code>bundle.js</code> in <code>index.js</code> as shown below.
+        </p>
+        <img src="./assets/images/webpack-14.png" alt="webpack-14" class="img-thumbnail mb-3" />
+
+        <p class="lead text-left">
+            We open <code>/dist/index.html</code> and then check the developer console for the output, and we should
+            see the output shown below.
+        </p>
+        <img src="./assets/images/webpack-15.png" alt="webpack-15" class="img-thumbnail mb-3" />
+
+        <p class="lead text-left">
+            Now, we bundled our code on the basis that the <code>mode</code> in the <code>webpack.config.js</code>
+            file was <code>"development"</code>. If we change the <code>mode</code> to <code>"production"</code>, 
+            the bundled file generated from webpack will be extremely small, as it will be minified and completely
+            optimized. But, if we want to produce production level bundled file a lot of times, we can just 
+            manually go into the <code>webpack.config.js</code> file and change the <code>mode</code> field every 
+            time. But that would be counter-productive. So, we generally would write <strong>npm scripts</strong> for
+            such things. Inside the <code>package.json</code> file, we will write an npm script inside the 
+            <code>"scripts"</code> object, where we write a script to be run for <code>"dev"</code> and we write
+            another script for <code>"build"</code> as shown below (Note that <code>"build"</code> script should be
+            run when we want to bundle the project for production).
+        </p>
+        <img src="./assets/images/webpack-16.png" alt="webpack-16" class="img-thumbnail mb-3" />
+
+        <p class="lead text-left">
+            And we will test whether the scripts are working properly or not, by typing in the commands shown below.
+        </p>
+        <img src="./assets/images/webpack-17.png" alt="webpack-17" class="img-thumbnail" />
+        <img src="./assets/images/webpack-11.png" alt="webpack-11" class="img-thumbnail mb-3" />
+
+        <p class="lead text-left">
+            We can clearly see that the <code>build.js</code> generated after running the command: 
+            <code>npm run dev</code> had a size of 4.64 KB, whereas <code>bundle.js</code> generated from the
+            command: <code>npm run build</code> had a size of 1.01 KB, which is very less compared to 4.64 KB, as 
+            the it is a minified and optimized bundle. <br><br>
+
+            Now running these <strong>npm scripts</strong> over and over again whenever we want to see the results
+            of the code that we wrote can be a hassle. Therefore, we can make our lives easier by installing the 
+            <strong>Webpack Dev Server</strong>, which will automate a lot of tasks related to npm scripts. We will
+            see that later.
+        </p>
+    </div>
+</body>
+</html>
