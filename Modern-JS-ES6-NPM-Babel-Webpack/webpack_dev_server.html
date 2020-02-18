@@ -1,0 +1,260 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <!-- Bootstrap 4 -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
+        integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous" />
+    <title>Modern JS: Webpack Dev Server Configuration</title>
+</head>
+
+<body>
+    <div class="container text-center">
+        <h1 class="display-4">Modern JS: Webpack Dev Server Configuration</h1>
+        <p>
+            Open <a href="https://github.com/Ch-sriram/JavaScript/blob/master/Modern-JS-ES6-NPM-Babel-Webpack/webpack_dev_server.html">webpack_dev_server.html</a> for the markup/code | Images are taken from: <a href="https://www.udemy.com/the-complete-javascript-course/">JS Course by Jonas Schmedtmann</a>
+        </p>
+
+        
+
+        <p class="lead text-left">
+            In order to make our lives a bit easier when writing JavaScript code, we are going to add the 
+            <strong>Webpack Dev Server</strong> to our setup. Because of adding Webpack Dev Server, we will have 
+            automatic page reload when we save our code. Therefore, besides all the amazing functionalities included
+            in Webpack, it also provides us with a <strong>Development Server</strong> which will automatically
+            bundle all our JavaScript files and then reload the app in the browser whenever we change a file. This
+            will save a lot of time when writing our JavaScript app. And so, we install the Webpack Dev Server using
+            NPM (as it is an NPM Package) as shown below (command is: <code>npm install webpack-dev-server --save-dev</code>).
+        </p>
+        <img src="./assets/images/wds-1.png" alt="wds-1" class="img-thumbnail mb-3" />
+        
+        <p class="lead text-left">
+            Now we check the <code>package.json</code> file to see whether <strong>Webpack Dev Server</strong> is 
+            mentioned inside <code>"devDependencies"</code> object. <code>package.json</code> is shown below.
+        </p>
+        <img src="./assets/images/wds-2.png" alt="wds-2" class="img-thumbnail mb-3" />
+
+        <p class="lead text-left">
+            Now, in order to configure our dev server, we will add another field to <code>webpack.config.js</code> 
+            file (which is our configuration file). The field that we add in the <code>module.exports</code> object 
+            is <code>devServer</code>. The <code>devServer</code> field is an object, in which we first add the field
+            <code>contentBase</code> where we specify the folder from where Webpack can serve the files. In this
+            case, that's the <code>dist</code> folder in our app. Therefore, we set <code>contentBase</code> as, 
+            <code>contentBase: './dist'</code>. We put <code>./dist</code> as our <code>contentBase</code> because
+            all of our code inside the <code>./dist</code> folder is the code that will be shipped to the client and
+            therefore, all of the final production code is inside the <code>./dist</code> folder. <code>./src</code>
+            folder is only there for development purposes, not for distribution/deployment purposes. Therefore, all
+            our source code for the app goes in <code>./src</code> folder, which then gets compiled and bundled into
+            the <code>./dist</code> folder as <code>bundle.js</code>, and so, what we really want to serve to the
+            client/end-user is the resource (code, html) inside the <code>./dist</code> folder.
+            After we make the changes, the configuration file, i.e., <code>webpack.config.js</code> file should look 
+            as shown below.
+        </p>
+        <img src="./assets/images/wds-3.png" alt="wds-3" class="img-thumbnail mb-3" />
+
+        <p class="lead text-left">
+            To make the Webpack Dev Server work, we add an <strong>npm script</strong> to <code>package.json</code>.
+            Inside <code>package.json</code>, in the <code>"scripts"</code> field, we add a new field which is the 
+            standard name for dev servers and it is called <code>"start"</code>. Therefore, the script 
+            <code>"start"</code> is a script that will always keep running in the background and updates the browser
+            as soon as we change our code. When we run the <code>"start"</code> script, what we want <code>npm</code>
+            to do is to run the webpack dev server in development mode and then open the app in the browser 
+            automatically. 
+            So for that, we give our script as: "start": "webpack-dev-server --mode development --open" as shown 
+            below.
+        </p>
+        <img src="./assets/images/wds-4.png" alt="wds-4" class="img-thumbnail mb-3" />
+
+        <p class="lead text-left">
+            We will run the <strong>npm script</strong> with the command - <code>npm run start</code> as shown below.
+        </p>
+        <img src="./assets/images/wds-5.png" alt="wds-5" class="img-thumbnail mb-3" />
+
+        <p class="lead text-left">
+            And the <strong>npm script</strong> opens the browser with <code>./dist/index.html</code> and we get the
+            output in the console as shown below.
+        </p>
+        <img src="./assets/images/wds-6.png" alt="wds-6" class="img-thumbnail mb-3" />
+
+        <p class="lead text-left">
+            The only difference when opening <code>./dist/index.html</code> normally, opening it like this is, now 
+            <code>./dist/index.html</code> is running on a local webserver (as we can see the address above which 
+            says: <code>localhost:8080</code>) where it is simulating a real HTTP server while when we open it
+            normally, it is just opening as a file (using the <code>file://...</code> protocol). <br><br>
+
+            Now, we can see changes in the app as and when we change the code in the app. We will be able to see the
+            output being reflected instantly in webpack dev server (which is <code>localhost:8080</code> in our
+            browser). So now, if we change the code in the <code>./src/js/test.js</code> and 
+            <code>./src/js/index.js</code> files, we will see those changes being reflected 
+            @<code>localhost:8080</code>. The changes we made in the files is shown below.
+        </p>
+        <img src="./assets/images/wds-7.png" alt="wds-7" class="img-thumbnail mb-3" />
+        
+        <p class="lead text-left">
+            Now, the output we should see in the console should be: <br>
+            &emsp;&emsp;&emsp;<code>Imported Module</code> <br>
+            &emsp;&emsp;&emsp;<code>We just imported 12345 from another module called test</code> <br>
+            But the output we get is shown below.
+        </p>
+        <img src="./assets/images/wds-8.png" alt="wds-8" class="img-thumbnail mb-3" />
+
+        <p class="lead text-left">
+            The output we get is the same as the previous output and that's because, when we run the development 
+            server, webpack will bundle our modules together but it will actually not write it to a file on disk, 
+            instead webpack will automatically inject it into the html file (in our case, it is 
+            <code>./dist/index.html</code>). Therefore, we can go ahead and delete the 
+            <code>./dist/js/bundle.js</code> file, because whenever we run ><code>npm run start</code>, it is still
+            reading JavaScript from <code>./dist/js/bundle.js</code> file, which we do not want and not from the one
+            we are generating on the fly through the webpack dev server and that's also because there's a little 
+            problem in the webpack configuration file also. In our <code>webpack.config.js</code> file, in the 
+            <code>module.exports</code> object, the concerned field, which <code>ouput</code> field, has a property
+            called <code>path</code>, which resolved as the current absolute path along with <code>'dist/js'</code>.
+            And because of <code>'dist/js'</code>, every time we run ><code>npm run start</code>, the webpack dev 
+            server will try to inject the dynamically made <code>bundle.js</code> file into an html file which it is
+            trying to find inside the <code>.../dist/js</code> folder. But the required html file (which is 
+            <code>.../dist/index.html</code>) is present in the parent folder, which is <code>dist</code>. 
+            Therefore, we change and resolve the path to current absolute path along with it, we concatenate 
+            <code>'dist'</code>. Then, for <code>/dist/index.html</code> to find the Bundled JavaScript file, we 
+            change the <code>filename</code> property from <code>'bundle.js'</code> to <code>'js/bundle.js'</code>. 
+            After those changes, all we have managed to do is, we have changed the output folder to the entire 
+            <code>dist</code> folder. The changes made in <code>webpack.config.js</code> file is shown below. 
+        </p>
+        <img src="./assets/images/wds-9.png" alt="wds-9" class="img-thumbnail mb-3" />
+
+        <p class="lead text-left">
+            Now we again run the <strong>npm script</strong> -- <code>start</code> using the command:
+            ><code>npm run start</code>, and we see the output in the browser @<code>localhost:8080</code> as shown
+            below.
+        </p>
+        <img src="./assets/images/wds-10.png" alt="wds-10" class="img-thumbnail mb-3" />
+
+        <p class="lead text-left">
+            Now we change the code inside <code>./src/js/test.js</code> or <code>./src/js/index.js</code>, we will 
+            see the changes being reflected instantly in the browser @<code>localhost:8080</code> as shown below.
+        </p>
+        <img src="./assets/images/wds-11.png" alt="wds-11" class="img-thumbnail mb-3" />
+        <img src="./assets/images/wds-12.png" alt="wds-12" class="img-thumbnail mb-3" />
+
+        <p class="lead text-left">
+            Note that we didn't re-run the ><code>npm run start</code> command or anything, everything happened 
+            dynamically. Now, we can actually delete the distribution code, which is <code>bundle.js</code> located
+            at <code>./dist/js</code> and still the code will execute in the server because <strong>we are running in development mode</strong> and therefore, the <code>bundle.js</code> generated is directly being 
+            injected into <code>./dist/index.html</code> file rather than being written on the disk. <br>
+            We can see below that there's no <code>bundle.js</code> file inside <code>./dist/js</code> folder.
+        </p>
+        <img src="./assets/images/wds-13.png" alt="wds-13" class="img-thumbnail mb-3" />
+
+        <p class="lead text-left">
+            And now we again make changes to <code>./src/js/test.js</code> file and we can see the changes being
+            registered in the browser @<code>localhost:8080</code> as shown below.
+        </p>
+        <img src="./assets/images/wds-14.png" alt="wds-14" class="img-thumbnail mb-3" />
+        <img src="./assets/images/wds-15.png" alt="wds-15" class="img-thumbnail mb-3" />
+
+        <p class="lead text-left">
+            And so, the <code>bundle.js</code> file from <code>./dist/js</code> is actually gone, but our webpack
+            dev server running @<code>localhost:8080</code> in the browser, is still actually registering the changes
+            we make inside the app. That's great! <br><br>
+
+            One final thing we would do (apart from making the webpack dev server work for us) is to copy the 
+            <code>index.html</code> file from <code>./src</code> folder, into our distribution folder, i.e.,
+            <code>./dist</code>. Now, in <code>index.html</code> from <code>./src</code>, we can go ahead and delete
+            the <code>&lt;script src="bundle.js">&lt;/script></code> tag, or just comment it. Now, what we want to 
+            do is that, we want to copy the markup of <code>./src/index.html</code> into 
+            <code>./dist/index.html</code> and inject the <code>&lt;script src="bundle.js">&lt;script></code> tag 
+            into it automatically. This can be done using webpack very easily. Now, in order to do that, we use 
+            something called <strong>plugins</strong>. <br><br>
+
+            Remember the <strong>four core concepts</strong> of webpack? <strong>entry points</strong>, 
+            <strong>output</strong>, <strong>loaders</strong> and <strong>plugins</strong>. We will now talk about
+            <strong>plugins</strong>. <strong>Plugins</strong> allow us to do complex processing of our input files,
+            and in this case our input file is <code>./src/index.html</code>. Therefore we will use a plugin called
+            <strong>html webpack plugin</strong> and in order to use it, we have to install it using 
+            <code>npm</code>. Command to install it: <code>npm install html-webpack-plugin --save-dev</code>. It is 
+            also shown below (along with changes that have been automatically made in <code>package.json</code>).
+        </p>
+        <img src="./assets/images/wds-16.png" alt="wds-16" class="img-thumbnail mb-3" />
+        <img src="./assets/images/wds-17.png" alt="wds-17" class="img-thumbnail mb-3" />
+
+        <p class="lead text-left">
+            Now we have to make changes in the webpack configuration, i.e., in <code>webpack.config.js</code> file.
+            We have to <code>require()</code> the file, i.e., <code>import</code> the file and save it into a 
+            variable inside the <code>webpack.config.json</code> file. The convention for the name of the variable
+            used for importing the file(s) for <code>html-webpack-plugin</code> is <code>HtmlWebpackPlugin</code>.
+            <br><br>
+            Now, inside the <code>module.exports</code> object, we can specify a new property called 
+            <code>plugins</code>, which receives an array of all the plugins that we are using. And the first plugin
+            (and the only one in our case) is the <code>html-webpack-plugin</code>. Therefore, we make an instance
+            of HtmlWebpackPlugin and to its constructor, we send in an object (In Modern JS, we generally pass 
+            options/parameters to the constructor as an object) containing two properties which are 
+            <code>filename</code> and <code>template</code> where, <code>filename</code> is the target file onto
+            which we want to copy the content of file mentioned in the <code>template</code> field. <em>Note that we 
+            only mention the name of the target file i.e., <code>'index.html'</code> in the <code>filename</code> 
+            field, because the path is taken care by webpack by looking at the <code>path</code> field mentioned 
+            inside the <code>output</code> object of <code>module.exports</code> object of the 
+            <code>webpack.config.js</code> file. And also, the <code>template</code> field needs to have the source
+            file mentioned along with the relative path i.e., <code>'./src/index.html'</code></em>. <br>
+            The modified webpack configuration file is shown below.
+        </p>
+        <img src="./assets/images/wds-18.png" alt="wds-18" class="img-thumbnail mb-3" />
+
+        <p class="lead text-left">
+            We will start the webpack dev server again now using the <code>npm</code> command: 
+            <code>npm run start</code> as shown below, and it will open <code>./dist/index.html</code> (if 
+            <code>index.html</code> is not available at <code>./dist</code>, webpack will automatically create
+            <code>index.html</code> inside <code>./dict</code>. As a matter of fact, we can delete 
+            <code>index.html</code> from <code>./dist</code> and check whether webpack automatically creates
+            <code>index.html</code> for us inside <code>./dist</code> folder) in the browser 
+            @<code>localhost:8080</code>, with the code copied from <code>./src/index.html</code> as shown below.
+        </p>
+        <img src="./assets/images/wds-19.png" alt="wds-19" class="img-thumbnail mb-3" />
+        <img src="./assets/images/wds-20.png" alt="wds-20" class="img-thumbnail mb-3" />
+
+        <p class="lead text-left">
+            And when we check the console, it is still logged output from <code>./src/js/index.js</code> as shown 
+            below.
+        </p>
+        <img src="./assets/images/wds-21.png" alt="wds-21" class="img-thumbnail mb-3" />
+
+        <p class="lead text-left">
+            We can delete the existing <code>./dist/index.html</code> file and the server wouldn't crash, because
+            we are running the app in the webserver in <strong>development mode</strong>. We can see below that
+            <code>./dist/index.html</code> is deleted, but the webserver @<code>localhost:8080</code> didn't crash,
+            as shown below.
+        </p>
+        <img src="./assets/images/wds-22.png" alt="wds-22" class="img-thumbnail mb-3" />
+        <img src="./assets/images/wds-20.png" alt="wds-20" class="img-thumbnail mb-3" />
+
+        <p class="lead text-left">
+            And also, we can see from the image above that <code>bundle.js</code> is still not created inside 
+            <code>./dist/js</code> folder. The app is still running well because the app is running still in 
+            <strong>development mode</strong>. To actually write the <code>index.html</code> and 
+            <code>bundle.js</code> into the <code>./dist</code> and <code>./dist/js</code> folders respectively, we
+            simply run either of the <strong>npm script</strong> we created earlier which were <code>build</code> and
+            <code>dev</code> by simply running the command: <code>npm run build</code> or <code>npm run dev</code>,
+            where <code>build</code> script generates the minified and optimized <code>bundle.js</code> whereas 
+            <code>dev</code> script generates un-optimized <code>bundle.js</code>, inside <code>./dist/js</code> 
+            folder. Both scripts generate <code>index.html</code> inside the <code>./dist</code> folder.
+            The generated files along with the working of the command (dev version) is shown below.
+        </p>
+        <img src="./assets/images/wds-23.png" alt="wds-23" class="img-thumbnail mb-3" />
+        <img src="./assets/images/wds-24.png" alt="wds-24" class="img-thumbnail mb-3" />
+
+        <p class="lead text-left">
+            We can also see that inside <code>./dist/index.html</code>,
+            <code>&lt;script src="js/bundle.js">&lt;/script></code> is automatically copied from the webpack 
+            configuration file where we gave the <code>filename</code> to be <code>'js/bundle.js'</code> as shown
+            below.
+        </p>
+        <img src="./assets/images/wds-25.png" alt="wds-25" class="img-thumbnail mb-3" />
+
+        <p class="lead text-left">
+            The only thing that's missing now is <strong>Babel</strong> which converts ESNext JavaScript Code to 
+            ES5 JavaScript Code for compatibility across all the web browsers out there.
+        </p>
+    </div>
+</body>
+
+</html>
