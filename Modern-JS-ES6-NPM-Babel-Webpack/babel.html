@@ -1,0 +1,181 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <!-- Bootstrap 4 -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
+        integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous" />
+    <title>Modern JS: Babel Configuration</title>
+</head>
+
+<body>
+    <div class="container text-center">
+        <h1 class="display-4">Modern JS: Babel Configuration</h1>
+        <p>
+            Open <a href="https://github.com/Ch-sriram/JavaScript/blob/master/Modern-JS-ES6-NPM-Babel-Webpack/babel.html">babel.html</a> for the markup/code | Images are taken from: <a href="https://www.udemy.com/the-complete-javascript-course/">JS Course by Jonas Schmedtmann</a>
+        </p>
+
+        <p class="lead text-left">
+            When we open <a href="https://www.babeljs.io">Babel JS' Official Homepage</a>, it says:
+            <strong>Babel is a JavaScript Compiler</strong>.
+        </p>
+        <img src="./assets/images/babel-1.png" alt="babel-1" class="img-thumbnail mb-3" />
+
+        <p class="lead text-left">
+            We can always dive into the <a href="https://babeljs.io/docs/en/">Documentation of Babel</a> to setup
+            Babel. In order for our project to include Babel, we need to download a couple of packages. 
+            The packages that we need to install for Babel to work are: <code>@babel/core</code>, 
+            <code>@babel/preset-env</code> (which will convert all the modern JS code back to ES5 code),
+            <code>babel-loader</code> (needed by Webpack in order to load Babel files). We install them using the 
+            <code>npm</code> command line where we save them as devDependencies in our project as shown below. <br> 
+            (Command: <code>npm install @babel/core @babel/preset-env babel-loader --save-dev</code>. Note that we can install multiple packages using a single <code>npm install ...</code> command)
+        </p>
+        <img src="./assets/images/babel-2.png" alt="babel-2" class="img-thumbnail mb-3" />
+
+        <p class="lead text-left">
+            We can check our <code>package.json</code> file to check what's new inside <code>"devDependencies"</code>
+            field.
+        </p>
+        <img src="./assets/images/babel-3.png" alt="babel-3" class="img-thumbnail mb-3" />
+
+        <p class="lead text-left">
+            Coming back to Webpack, we know that <strong>Webpack has four core concepts</strong> which are 
+            <strong>entry points</strong>, <strong>output</strong>, <strong>plugins</strong> & 
+            <strong>loaders</strong>. <strong>Loaders</strong> in Webpack allow us to import/load all kinds of 
+            different files, and more importantly, to also process them. Like converting Sass to CSS code, or 
+            converting ES6 to ES5 code, (which is exactly what we want from setting up Babel) and for that we need
+            the Babel Loader because Babel is the tool that converts ES6+ code to ES5 for backward compatibility
+            reasons. The syntax to include Babel into our project along with Webpack is a bit weird. <br><br>
+
+            What we do is, in the Webpack Configuration file (which is <code>webpack.config.js</code>), inside the
+            <code>module.exports</code> object, we define a new property named <code>module</code>, which is an
+            object, in which we specify the <code>rules</code> property. <code>rules</code> property receives an 
+            array of all of the loaders that we want to use in our project. For each of the loader that the 
+            <code>rules</code> property takes in its array, it is to be passed as an object. Inside the respective
+            loader object, we need a property called <code>test</code> which takes in a 
+            <strong>regular expression</strong> (aka <strong>regex</strong>). In our particular case, for the regex 
+            we will test all the files that end with '.js', because we want to convert all our code written in 
+            the JavaScript files (which is ES6+) to be converted into ES5 code, and to do that, Babel actually needs
+            to find the JavaScript files that it can convert. And so, we give the regex <code>/\.js$/</code> in our
+            <code>test</code> property. Now, we do want to convert all JavaScript files back to ES5, but we only want
+            to do that with our project's code, not the from the <code>./node_modules</code> directory. Therefore,
+            we should exclude all the JavaScript files that are inside the <code>./node_modules</code> directory.
+            Therefore, we also have a property for that in our loader object which is known as <code>exclude</code>.
+            The <code>exclude</code> property again takes in a regex, where the loader (in our case babel-loader)
+            will see the directories/files that are to be excluded from being loaded onto babel-core for conversion.
+            For that, we give the <code>/node_modules/</code> regex to the <code>exclude</code> property. Now,
+            finally, we have to mention which loader should these rules be applied to? And so, for that we define one
+            more property called <code>use</code>, which takes in an object inside which we define another property
+            called <code>loader</code>. The <code>loader</code> property is to be defined as 
+            <code>'babel-loader'</code> because we want all these rules to be applied through the 
+            <strong>babel-loader</strong>. All the changes made to the <code>webpack.config.js</code> file is shown
+            below.
+        </p>
+        <img src="./assets/images/babel-4.png" alt="babel-4" class="img-thumbnail mb-3" />
+
+        <p class="lead text-left">
+            Now we need a <strong>Babel Configuration File</strong> which is to be made inside our project named as
+            <code>.babelrc</code>, and so, it will be made inside our project directory as shown below.
+        </p>
+        <img src="./assets/images/babel-5.png" alt="babel-5" class="img-thumbnail mb-3" />
+
+        <p class="lead text-left">
+            <code>.babelrc</code> file inside <code>./</code> (which is our project directory) is not a JavaScript 
+            file (unlike <code>webpack.config.js</code>), but it is a dot file, in which we have an object. In the 
+            object, (using JSON format), we pass the <code>"presets"</code> property and the <code>"presets"</code>
+            property takes in a 2D array, inside which each 1D array contains details about the environment for which
+            Babel needs to generate the code for. Now, <strong>presets</strong> in general are a collection of code 
+            transform plugins, which are like pieces of code that actually apply the actual transformation or 
+            conversion to our code, from ES6+ to ES6. And the <strong>preset</strong> that we select here is the 
+            <code>"@babel/env"</code> preset, (which stands for <strong>environment</strong>) and we actually 
+            installed the <code>babel-preset-env</code> as package and it got included in our 
+            <code>package.json</code> inside <code>"devDependencies"</code> field. And therefore, in the Babel 
+            Config file (which is <code>.babelrc</code>) we define what are the parameters of 
+            <code>babel-preset-env</code>. <br><br>
+
+            After that we specify the environment (i.e., Browsers) that we want to target. Inside the 1D array of
+            the <code>"presets"</code> field, we send in <code>"@babel/env"</code> and then we pass in an object. 
+            Inside the object, we send in another field called <code>"targets"</code> which is again an object. The 
+            <code>"targets"</code> object defines the <strong>browsers</strong> to which we want to cater our code 
+            to. Therefore, inside the <code>"targets"</code> property, we pass in an object inside which, we pass in
+            the <code>"browsers"</code> field, which is an array that takes in the browsers that we want to target
+            or cater our code to (i.e., we are specifying how much backward compatibility we want). Inside the 
+            <code>"browsers"</code> array field, we pass in information about all the browsers i.e., 
+            <code>"last 5 version"</code> or <code>"last 10 versions"</code>, meaning, we want Babel to convert the
+            ES6+ code in such a way that it is backward compatible with previous 5 or 10 versions of the all the 
+            browsers. We can also specify settings for a specific browser saying: <code>"ie >= 8"</code>. We can add
+            more browser restrictions and we can find more about it in Babel's Documentation. The changes made inside
+            <code>.babelrc</code> file are shown below.
+        </p>
+        <img src="./assets/images/babel-6.png" alt="babel-6" class="img-thumbnail mb-3" />
+
+        <p class="lead text-left">
+            Right now, all the versions of ES6+ in our codebase will convert to ES5 JavaScript code. Now, there are 
+            some things that we cannot really convert back to ES5 and those are things that are new to ES6+ code, and
+            which were not present in any way, in ES5. And to convert the language features of ES6+ to ES5 where that
+            feature is not present at all in ES5, we need to use something known as <strong>polyfills</strong>. 
+            Because some features of ES6+ like <code>Promise</code>s or methods like <code>Array.from()</code>, or
+            basically stuff that was not present in ES5, have to be <strong>polyfilled</strong> or in other words,
+            we add the implementation(s) of these ES6+ features as ES5 code in our codebase, because if they were not
+            a feature of ES5, then we cannot convert them back in any form, and therefore there's only one way to get
+            uniform ES5 code, and that's to implement these ES6+ features in ES5 code, using polyfills. To use a 
+            <strong>polyfill</strong> we need to install it via <code>npm</code> as shown below. <br>
+            (Command: <code>npm install @babel/polyfill --save</code>. Note that we used <code>--save</code> here,
+            which means that <strong>polyfill</strong> is not a development dependency, it is a code dependency. 
+            That means that we will actually import the code from the <code>@babel/polyfill</code> package into our
+            project codebase)
+        </p>
+        <img src="./assets/images/babel-7.png" alt="babel-7" class="img-thumbnail mb-3" />
+
+        <p class="lead text-left">
+            We can check <code>package.json</code> in the <code>"dependencies"</code> field that 
+            <code>'@babel/polyfill'</code> in installed as shown below.
+        </p>
+        <img src="./assets/images/babel-8.png" alt="babel-8" class="img-thumbnail mb-3" />
+
+        <p class="lead text-left">
+            Now all we have to do is that we have to add the <code>babel-polyfill</code> to our Webpack Configuration
+            File (i.e., to <code>webpack.config.json</code> file). We add <code>babel-polyfill</code> as an 
+            <strong>entry point</strong>. Therefore, we change our <code>entry</code> property inside the 
+            <code>module.exports</code> object of the <code>webpack.config.js</code> file into an array that takes in
+            two elements, one is <code>'@babel/polyfill'</code> and the other is <code>'./src/js/index.js'</code>. 
+            The changes made to the <code>webpack.config.json</code> file is shown below.
+        </p>
+        <img src="./assets/images/babel-9.png" alt="babel-9" class="img-thumbnail mb-3" />
+
+        <p class="lead text-left">
+            Webpack will automatically figure out where the code for <code>@babel/polyfill</code> is located inside
+            <code>./node_modules</code> directory and include it in our project and therefore, our final project
+            which is in <code>bundle.js</code> will also include code from <code>@babel/polyfill</code> package.
+            <br><br>
+
+            Now to test out the functionalities of Babel, we just edit some code inside 
+            <code>./src/js/index.js</code>. Inside <code>index.js</code> we just introduce some ES6+ code and then
+            later, we will generate the bundle using <code>npm run dev</code> and then check whether the ES6+ code 
+            that we wrote, has been changed back to ES5 in <code>./dist/js/bundle.js</code>. 
+            Therefore, we first make some changes to the code inside <code>./src/js/index.html</code> as shown below.
+        </p>
+        <img src="./assets/images/babel-10.png" alt="babel-10" class="img-thumbnail mb-3" />
+
+        <p class="lead text-left">
+            And now we run the command: <code>npm run dev</code> to generate <code>./dist/js/bundle.js</code>
+        </p>
+        <img src="./assets/images/babel-11.png" alt="babel-11" class="img-thumbnail mb-3" />
+        
+        <p class="lead text-left">
+            Now, we check the <code>bundle.js</code> inside <strong>./dist/js/</strong>, where we can check that the
+            code we wrote in <code>index.js</code> from <strong>./src/js/</strong> is converted to ES5 code, because
+            we used <strong>Babel</strong>. The converted code inside the <code>bundle.js</code> file is shown below.
+            <br>
+            (Although the code we see is all messy, we can evidently see that all the code in there, is ES5 code)
+        </p>
+        <img src="./assets/images/babel-12.png" alt="babel-12" class="img-thumbnail mb-3" />
+
+        <p class="lead text-left"></p>
+        <p class="lead text-left"></p>
+    </div>
+</body>
+
+</html>

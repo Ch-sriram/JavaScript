@@ -1,0 +1,26 @@
+<p><strong><em>[PLEASE&nbsp;READ&nbsp;BEFORE&nbsp;YOU&nbsp;MOVE&nbsp;ON!]</em></strong></p><p>Modern tools like Webpack and Babel change all the time, which is great for the development community, but difficult for course creators.</p><p>So please understand that I&nbsp;cannot re-record these videos each time a new change is introduced to one of the tools. Instead, <strong>I&nbsp;will keep this lecture updated with instructions to make your tooling setup work as it should.</strong></p><p>There are two ways of approaching this: you either just want tools to work like in the videos, or you want to use the latest versions of the tools. Choose the one that works best 😉</p><p><br></p><p><strong>1. If you just want it to work, follow this (<em>RECOMMENDED</em>) 👇</strong></p><p>Tools don't add <em>that</em> much functionality in new versions, so you're just fine using this method.</p><p>You will have to install the same package versions that I install in my videos. So instead of the npm install commands I use in the videos, use the following (we use <code>@</code> to specify the version number)</p><ul><li><p><strong>For webpack:</strong></p></li></ul><pre class="prettyprint linenums">npm install --save-dev webpack@4 webpack-cli@2 webpack-dev-server@3</pre><ul><li><p><strong>For babel:</strong></p></li></ul><pre class="prettyprint linenums">npm install --save-dev babel-core@6 babel-preset-env@1 babel-loader@7
+npm install --save babel-polyfill@6</pre><p><br></p><p><strong>2. If you want the latest versions, follow this 👇</strong></p><p>This method requires a little more work, as babel has recently changed how the configuration works.</p><ul><li><p>For webpack, just follow the videos.</p></li></ul><ul><li><p>For babel, <strong>instead</strong> of installing <code>babel-core</code>, <code>babel-preset-env</code> and <code>babel-polyfill</code> in the babel lecture, please install <code>@babel/core</code>, <code>@babel/preset-env</code> and <code>@babel/polyfill</code> like this:</p></li></ul><pre class="prettyprint linenums">npm install --save-dev @babel/core @babel/preset-env babel-loader
+npm install --save @babel/polyfill</pre><p>You will also need to change the <code>entry</code> in <code>webpack.config.js</code> (a file we create during the video) from this:</p><pre class="prettyprint linenums">entry: ['babel-polyfill', './src/js/index.js'],</pre><p>to this:</p><pre class="prettyprint linenums">entry: ['@babel/polyfill', './src/js/index.js'],</pre><p>and the the code in <code>.babelrc</code> (also created during the video) from this:</p><pre class="prettyprint linenums">{
+    "presets": [
+        ["env", {
+            "targets": {
+                "browsers": [
+                    "last 5 versions",
+                    "ie &gt;= 8"
+                ]
+            }
+        }]
+    ]
+}
+</pre><p>to this:</p><pre class="prettyprint linenums">{
+    "presets": [
+        ["@babel/env", {
+            "targets": {
+                "browsers": [
+                    "last 5 versions",
+                    "ie &gt;= 8"
+                ]
+            }
+        }]
+    ]
+}</pre><p><br></p>
