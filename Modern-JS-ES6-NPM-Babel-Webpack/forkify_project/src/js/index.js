@@ -1,87 +1,84 @@
 /********************************************************************************************************************
  * What we'll learn:
- * 1. How to use ES6 Modules.
- * 2. Default and named exports and imports.
+ * ----------------
+ * 1. How to make Real World API Calls.
+ * 2. What API Keys are why we need them?
  * 
- * First of all, in ./src/js/ directory, we create two new directories named "models" and "views".
- * We will put all the code related to Model (Data) in MVC, in ./src/js/models/ and all the code related to 
- * View (front-end manager) in MVC, in ./src/js/views/ 
+ * The API that we were supposed to use was known as "food2fork", but now, that API has shut down its services, and
+ * therefore, we will use the 'forkify' API, which is hosted @https://forkify-api.herokuapp.com/
  * 
- * We create two new files - "Search.js" and "searchView.js" in "./src/js/models" and "./src/js/views" directories
- * respectively. By convention, all the files defined in Model part of MVC architecture are named with an uppercase 
- * letter as the start of the filename, hence "Search.js", and all the files defined in View part of the MVC 
- * architecture are named using Camel casing, hence "searchView.js".
+ * Now, if we were using the food2fork's API, then in there, there was a Recipe API which allowed us to do two things
+ * 1. Search for a Recipe.
+ * 2. Get Data about a specific Recipe.
  * 
- * Default Exports:
- * ---------------
- * We only use default exports in ES6, when we only have one thing to export in the project. To do a default export
- * we simply write the following code:
- *    export default "I am an exported string.";
+ * For the searching part, we had to make a search request using the API URL: https://food2fork.com/api/search,
+ * but now, we will use the following API URL: https://forkify-api.heroku-app.com/api/search
  * 
- * The above piece of code can be written in "Search.js" @"./src/js/models" and we can import it in "index.js" 
- * i.e., this file, as follows:
- *    import str from './models/Search';  // Note that we don't need the .js extension to be mentioned when importing
- * Instead of str, we can use any name there, such as "string", "x", "ajdbcjhbc", etc.
+ * To get the data, we used the other API endpoint which was: https://food2fork.com/api/get, but now, we will use
+ * another API endpoint which is the following: https://forkify-api.heroku-app.com/api/get
  * 
+ * Using the food2fork API was free for the 500 request, but after that, the API didn't respond. But using forkify
+ * API, we can have a 100 requests per hour.
  * 
- * Named Exports:
- * -------------
- * Now, if we want to export multiple things from a module, then we use something known as Named Export.
- * From "searchView.js" @"./src/js/views/", if we want to export the add() function to this file, then we do it as:
- *    export const add = (a, b) => a + b;
- * Instead of the name add, we can use any name. But when we import that function in the index.js file, we have
- * to use the same name as it was when it was exported, and therefore, it is imported as follows:
- *    import { add } from './views/searchView';
+ * Now, to make any API call, we had to create our own account in food2fork's website, because to make an AJAX
+ * request to the API endpoint, we needed to have an API Key. An API Key is like a password that's given to each
+ * user which is a unique ID that each user can use in order to make requests, due to which, the API can track the 
+ * number of requests the user makes per day. The API Key is basically a long string of alphanumerics which was to
+ * be included in the request link along with the search query or the get data query. But now, using forkify-api, 
+ * we need not use any API Keys to search or get the data.
  * 
- * Now, we can export multiple things using named exports, as we told in the beginning. Therefore, in searchView.js
- * we will write code to export multiple things (here, things can be a value, function, etc).
- *    export const add = (a, b) => a + b;
- *    export const mul = (a, b) => a * b;
- *    export const rem = (a, b) => (a > b) ? a % b : rem(b, a);
- *    export const val = 42;
+ * Now, we will make an API call to fetch the data from the forkify API.
  * 
- * Now we can export these named exports in our index.js file as follows:
- *    import { add } from './views/searchView';
- *    import { mul } from './views/searchView';
- *    import { rem } from './views/searchView';
- *    import { val } from './views/searchView';
+ * NOTE ABOUT fetch():
+ * ------------------
+ * Previously, we used the fetch() API to make AJAX Requests and it is fine to work with in the latest browsers.
+ * But the fetch() API doesn't really work with all the browsers yet. A very old browser, might not recognize
+ * the fetch() API call. Instead, what we are going to do is to use an extremely popular HTTPRequest Library called
+ * AXIOS. To use axios(), we need to install it and get it from NPM, using 'npm install axios --save' (note that
+ * we save axios as a code dependency, and not as a dev dependency, because we use its implementation in our code).
+ * And then we import the axios package as: import axios from 'axios'; wherever we want to use axios. Conventionally,
+ * the package is always imported as "axios". Now, we don't need to provide the path because webpack will just
+ * recognize the path when bundling the modules together when it sees the 'axios'. Now, axios() call works exactly
+ * the same way as fetch() does, but axios() doesn't return a string in JSON format, it automatically returns a 
+ * JSON object, whereas using fetch(), we had to convert the JSON formatted string that we got into a JSON object.
+ * Therefore, that extra step of converting the string returned from the fetch() to a JSON object, is removed here.
+ * One more thing about axios() is that, it better at error handling compared to the fetch() API.
  * 
- * Or, we can import all of them in a single line as follows:
- *    import { add, mul, rem, val } from './views/searchView';
- * 
- * Remember that we have to use the exact same names to import the exported files as they were mentioned in the
- * module where we exported. Now, if we want to change the name, then we can do so by importing as follows:
- *     import { add as a, mul as m, rem as r, val as v } from './views/searchView';
- * 
- * If we want to import everything, then we do the following:
- *     import * as searchView from './views/searchView';
- * 
- * for the full code, see below
+ * We will see how we use axios() below
  */
 
-// This is how we import default exports.
-import str from './models/Search';  // Note that we don't need the .js extension to be mentioned when importing
-console.log(`The string that we imported from Search.js is: ${str}\n\n`);
+import axios from 'axios';
 
-// We import named exports as follows:
-import { add, mul, rem, val } from './views/searchView';
-console.log(`2 + 3 = ${add(2, 3)}`);
-console.log(`2 * 3 = ${mul(2, 3)}`);
-console.log(`3 % 2 = ${rem(3, 2)}`);
-console.log(`The value that we imported from searchView.js is: ${val}\n\n`);
+async function getResult(query) {
+    // Previously, we had to have a key and only then, we could query the food2fork API. An AJAX Request would be
+    // as follows: (we'd need the CORS proxy to use the API, such as: https://cors-anywhere.herokuapp.com/)
+    // const proxy = 'https://cors-anywhere.herokuapp.com/';
+    // const key = '1984bi1219823ibd83412';
+// The foll. line of code will work, if we call the getResult() function with a search query say getResult('pizza');
+    // const result = await axios(`${proxy}https://food2fork.com/api/search?key=${key}&q=${query}`);
+    // console.log(result); 
 
+    try {
+        // Now, we don't need any key for the search, we simply use the forkify() API as follows:
+        const key = '20200221195421';
+        const result = await axios(`https://forkify-api.herokuapp.com/api/search?q=${query}`);
+        //console.log(result);    // from the result we get, we only want the data field inside which the recipe 
+                                  // array contains the recipes
+        const recipes = result.data.recipes;
+        console.log(recipes);
+        // In every element of the recipes array, we have an object in which there are details about
+        // the publisher, title, source_url, recipe_id, image_url, social_rank, publisher_url, etc, out of which
+        // we'll require the "recipe_id" field to get the data about that recipe when we want to use the 
+        // get data service using the https://forkify-api.heroku-app.com/api/get. We have to append the
+        // recipe_id as follows: https://forkify-api.heroku-app.com/api/get?rId=47746, to get the data for the pizza
+        // recipe.
+    } catch (error) {
+        console.log(error);
+        alert(error);
+    }
+}
 
-// If we want to import the things from another module but we want to name them as we please, we use 'as' syntax:
-import { add as a, mul as m, rem as r, val as v } from './views/searchView';
-console.log(`2 + 3 = ${a(2, 3)}`);
-console.log(`2 * 3 = ${m(2, 3)}`);
-console.log(`3 % 2 = ${r(3, 2)}`);
-console.log(`The value that we imported from searchView.js is: ${v}\n\n`);
-
-
-// When we want to import everything from a module into a single object, we do the following:
-import * as searchView from './views/searchView';
-console.log(`2 + 3 = ${searchView.add(2, 3)}`);
-console.log(`2 * 3 = ${searchView.mul(2, 3)}`);
-console.log(`3 % 2 = ${searchView.rem(3, 2)}`);
-console.log(`The value that we imported from searchView.js is: ${searchView.val}`);
+getResult('pizza');
+getResult('pasta');
+getResult('curry');
+getResult('paneer');  // error generated for this request because it is not a search phrase supported in forkify-api
