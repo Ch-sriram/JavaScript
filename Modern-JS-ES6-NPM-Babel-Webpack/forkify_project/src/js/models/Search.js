@@ -12,7 +12,7 @@ export default class Search {
             
             //We want to get the recipe from the AJAX Request, but we want it to be stored inside this Search instance
             this.recipes = result.data.recipes;
-            console.log(this.recipes);
+            //console.log(this.recipes);
         } catch (error) {
             console.log(error);
             alert(error);
