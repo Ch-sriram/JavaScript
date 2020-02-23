@@ -1,27 +1,38 @@
 /********************************************************************************************************************
- * We want the to render the loading spinner when we are trying to fetch all the recipes about say 'pizza' and 
- * putting that in our view as a list inside the <ul> with the class .results__list. Now, the loading spinner is not
- * only used to be shown in the front-end before rendering the results onto the .results__list, but also, it is to be
- * used for also to render the recipe onto the front-end when one of the recipes from the .results__list is clicked
- * on. And so, for the purpose of re-usability, we write the function that renders the loading spinner inside a
- * common module for the views and it is inside ./src/js/views/base.js module.
- * We use that function in here at controlSearch() async function where it is used for step 3, which is the 
- * preparation of the UI for results. For that, we have to import the renderLoader() method from the 
- * ./src/js/views/base.js module
+ * Here, we will learn how to implement pagination where, instead of displaying all the results in a single page,
+ * we simply display 10-20 results per page, depending on the need, and then put the rest of the results
+ * on the subsequent pages.
+ * 
+ * To implement pagination, in ./src/js/views/searchView.js module, we modify the implementation of 
+ * the renderResults() method. Along with the recipes that we pass into the renderResults() method, we will
+ * pass in the page number - 'page' and the number of recipes we want to show per page, let's say we want 10 recipes - 'resPerPage'
+ * per page. 
+ * 
+ * Then, we have to render the Next Page and Previous Page buttons onto the .results__pages class in 
+ * index.html. After that, we have to attach the event handler to these buttons to handle the clicks to 
+ * the buttons, so that they actually change the page that we want, and get the previous/next 10 recipes in 
+ * .results__list class' list.
+ * 
+ * We can see the changes made to renderResults() method inside ./src/js/views/searchView.js module.
+ * 
+ * 
+ * Inside the controller i.e., this file, we will handle the button clicks for the next and prev pages by event 
+ * delegation. We can see the code below where we attach the event handler to .results__page class which is 
+ * imported using elements.searchResPages
  * 
  * What we'll learn:
  * ----------------
- * 1. Advanced DOM manipulation techniques.
- * 2. How to use ES6 template string to render entire HTML components.
- * 3. How to create a loading spinner.
+ * 1. How to use the closest() method for easier event handling.
+ * 2. How and why to use data-* attributes in HTML5.
+ * 
+ * 
  */
 
 import Search from './models/Search';
 import * as searchView from './views/searchView';   // we import everything from the ./src/js/views/searchView module
 
-// we import the the elements in ./src/js/views/base module to get DOM elements. renderLoader() to import the 
-// Spinning Loader and to render it to the UI. clearLoader() to clear the spinning loader from front-end.
-import { elements, renderLoader, clearLoader } from './views/base';    
+
+import { elements, renderLoader, clearLoader, elementStrings } from './views/base';    
 
 /**
  * Global State of the app:
@@ -54,7 +65,6 @@ const controlSearch = async () => {
         await state.search.getResult();
 
         // 5. Render results on the UI  //console.log(state.search.recipes);
-        // After we get the results, before rendering them to the front-end, we render the spinning loader invisible
         clearLoader();
         searchView.renderResults(state.search.recipes);
     }
@@ -68,4 +78,22 @@ elements.searchForm.addEventListener('submit', event => {
 });
 
 
-// The next thing we are going to do is to shorten the titles of the results in the .results__list
+// event to handle pagination in .results__page class' element.
+elements.searchResPages.addEventListener('click', event => {
+    //console.log(event.target);
+    // event.target is not the actual button element that we want, but it will be whatever the user 
+    // click onto that's inside the button, i.e., it can be the button element, or the Page number span,
+    // or it can be also be the left or right icon, depending on what the click on. Therefore, for that
+    // we use the closest() method which works on all the DOM elements. Look into Element.closest() MDN Docs to know 
+    // more about closest() method. We will use the closest() method to get the closest ancestor element that 
+    // we want to get from the triggered event.
+    const btn = event.target.closest(`.${elementStrings.pageButton}`);
+    //console.log(btn);
+    if (btn) {
+        const goToPage = parseInt(btn.dataset.goto, 10);    // convert to base10 int
+        // clearing the buttons code is included inside the clearResults() method
+        searchView.clearResults();  
+        searchView.renderResults(state.search.recipes, goToPage);   // default is page 1
+        console.log(goToPage);
+    }
+});

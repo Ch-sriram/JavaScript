@@ -5,14 +5,16 @@ export const elements = {
     searchForm: document.querySelector('.search'),
     searchInput: document.querySelector('.search__field'),
     searchResList: document.querySelector('.results__list'),
-    searchRes: document.querySelector('.results') 
+    searchRes: document.querySelector('.results'),
+    searchResPages: document.querySelector('.results__pages')
 };
 
 
 // inside the elementStrings object, we will have all the dynamically created DOM elements that are created and 
 // then removed after a while. One such example is the spinning loader.
-const elementStrings = {
-    loader: "loader"
+export const elementStrings = {
+    loader: "loader",
+    pageButton: "btn-inline"
 };
 
 // function to render the loading spinner from the ./dist/css/style.css.
