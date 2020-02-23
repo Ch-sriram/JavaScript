@@ -1,7 +1,13 @@
 /********************************************************************************************************************
- * We want the titles in the .results__list list to occupy only a single line for each of the recipe. We write a 
- * function for this inside ./src/js/views/searchView.js named limitRecipeTitle(), which we call inside the 
- * renderRecipe() function inside the searchView.js module itself.
+ * We want the to render the loading spinner when we are trying to fetch all the recipes about say 'pizza' and 
+ * putting that in our view as a list inside the <ul> with the class .results__list. Now, the loading spinner is not
+ * only used to be shown in the front-end before rendering the results onto the .results__list, but also, it is to be
+ * used for also to render the recipe onto the front-end when one of the recipes from the .results__list is clicked
+ * on. And so, for the purpose of re-usability, we write the function that renders the loading spinner inside a
+ * common module for the views and it is inside ./src/js/views/base.js module.
+ * We use that function in here at controlSearch() async function where it is used for step 3, which is the 
+ * preparation of the UI for results. For that, we have to import the renderLoader() method from the 
+ * ./src/js/views/base.js module
  * 
  * What we'll learn:
  * ----------------
@@ -12,7 +18,10 @@
 
 import Search from './models/Search';
 import * as searchView from './views/searchView';   // we import everything from the ./src/js/views/searchView module
-import { elements } from './views/base';    // we import the the elements in ./src/js/views/base module to get DOM elements
+
+// we import the the elements in ./src/js/views/base module to get DOM elements. renderLoader() to import the 
+// Spinning Loader and to render it to the UI. clearLoader() to clear the spinning loader from front-end.
+import { elements, renderLoader, clearLoader } from './views/base';    
 
 /**
  * Global State of the app:
@@ -37,12 +46,16 @@ const controlSearch = async () => {
         // After we get the result, we have to clear the input form
         searchView.clearInput();
         searchView.clearResults();
+        
+        // We send in the .results class' element from the elements imported from base module
+        renderLoader(elements.searchRes);  
 
         // 4. Search for results
         await state.search.getResult();
 
-        // 5. Render results on the UI 
-        //console.log(state.search.recipes);
+        // 5. Render results on the UI  //console.log(state.search.recipes);
+        // After we get the results, before rendering them to the front-end, we render the spinning loader invisible
+        clearLoader();
         searchView.renderResults(state.search.recipes);
     }
 }
