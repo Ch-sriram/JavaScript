@@ -1,4 +1,8 @@
 /********************************************************************************************************************
+ * We want the titles in the .results__list list to occupy only a single line for each of the recipe. We write a 
+ * function for this inside ./src/js/views/searchView.js named limitRecipeTitle(), which we call inside the 
+ * renderRecipe() function inside the searchView.js module itself.
+ * 
  * What we'll learn:
  * ----------------
  * 1. Advanced DOM manipulation techniques.

@@ -5,19 +5,39 @@
 // base.js inside the ./src/js/views/ directory. Look into the ./src/js/views/base.js file to know more details.
 import { elements } from './base';
 
+
 // function to read the input from the input form with the class .search__field
 export const getInput = () => elements.searchInput.value;   // returns the search query
+
 
 // function to clear the input of the search query after we searched for the query.
 export const clearInput = () => {
     elements.searchInput.value = '';
 };
 
+
 // function to clear the .results__list so that when we search the next time, we will be able to load the list items
 // into the .results__list freshly.
 export const clearResults = () => {
     elements.searchResList.innerHTML = '';
 };
+
+
+// function to limit the recipe name in the .results__list class
+const limitRecipeTitle = (title, limit = 17) => {   // 17 is the sweet spot for limiting the no. of letters
+    let newTitle = [];
+    if (title.length > limit) {
+        title.split(' ').reduce((acc, curr) => {
+            if (acc + curr.length <= limit)
+                newTitle.push(curr);
+            return acc + curr.length;
+        }, 0);
+        const __title__ = newTitle;
+        return `${__title__.join(' ')} ...`;
+    }
+    return title;
+}; 
+
 
 // function to render a single recipe onto the app's front-end
 const renderRecipe = recipe => {
@@ -27,6 +47,8 @@ const renderRecipe = recipe => {
     // we also want the image URL related to the image of the recipe that we are rendering. 
     // We also want the recipe ID of the recipe we are rendering, so that we can later on get the data related to
     // that recipe, when the user click that recipe, to the UI.
+    // We render the title using the limitRecipeTitle() function defined above, only for viewing the title, not for
+    // the alt attribute.
     const markup = `
         <li>
             <a class="results__link" href="#${recipe.recipe_id}">
@@ -34,7 +56,7 @@ const renderRecipe = recipe => {
                     <img src="${recipe.image_url}" alt="${recipe.title}">
                 </figure>
                 <div class="results__data">
-                    <h4 class="results__name">${recipe.title}</h4>
+                    <h4 class="results__name">${limitRecipeTitle(recipe.title)}</h4>
                     <p class="results__author">${recipe.publisher}</p>
                 </div>
             </a>
@@ -46,9 +68,12 @@ const renderRecipe = recipe => {
     elements.searchResList.insertAdjacentHTML('beforeend', markup);
 };
 
+
 // function to render results onto the left side of the page from the recipes array
 export const renderResults = recipes => {
     // for each of the recipe inside the recipes[], we render each recipe object using renderRecipe object.
     console.log(recipes);
     recipes.forEach(renderRecipe);  
 };
+
+// next, we will implement a small spinner while we are fetching the search results (data) from the forkify-api.
