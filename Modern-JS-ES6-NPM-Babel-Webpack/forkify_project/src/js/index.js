@@ -1,34 +1,21 @@
 /********************************************************************************************************************
- * Here, we will learn how to implement pagination where, instead of displaying all the results in a single page,
- * we simply display 10-20 results per page, depending on the need, and then put the rest of the results
- * on the subsequent pages.
+ * We've fully implemented the MVC for Searching. Now, we will implement MVC for getting the individual recipes.
+ * For that, we will create the Recipe Model (Data) at ./src/js/models/Recipe.js which will contain the class
+ * related to the Recipe Data Model. The Recipe class inside the Recipe Module will contain the AJAX Request for
+ * the Recipe Data that's clicked by the user from the .results__list class' element's ID. Therefore, we can
+ * find that every Recipe object will take in ID as a parameter into its constructor. Check the Recipe Module.
+ * We import the Recipe Model (Data) here and create get details about the recipe using the Recipe class.
  * 
- * To implement pagination, in ./src/js/views/searchView.js module, we modify the implementation of 
- * the renderResults() method. Along with the recipes that we pass into the renderResults() method, we will
- * pass in the page number - 'page' and the number of recipes we want to show per page, let's say we want 10 recipes - 'resPerPage'
- * per page. 
- * 
- * Then, we have to render the Next Page and Previous Page buttons onto the .results__pages class in 
- * index.html. After that, we have to attach the event handler to these buttons to handle the clicks to 
- * the buttons, so that they actually change the page that we want, and get the previous/next 10 recipes in 
- * .results__list class' list.
- * 
- * We can see the changes made to renderResults() method inside ./src/js/views/searchView.js module.
- * 
- * 
- * Inside the controller i.e., this file, we will handle the button clicks for the next and prev pages by event 
- * delegation. We can see the code below where we attach the event handler to .results__page class which is 
- * imported using elements.searchResPages
- * 
- * What we'll learn:
- * ----------------
- * 1. How to use the closest() method for easier event handling.
- * 2. How and why to use data-* attributes in HTML5.
- * 
+ * Very Important Information
+ * --------------------------
+ * In general, we never store/hard-code information like API Keys, Passwords, Usernames, etc, inside
+ * the JS Modules present at client-side. Therefore, we always make an AJAX Request for sensitive data
+ * such as mentioned above, and get them from some other server (which is generally our own server/domain).
  * 
  */
 
 import Search from './models/Search';
+import Recipe from './models/Recipe';
 import * as searchView from './views/searchView';   // we import everything from the ./src/js/views/searchView module
 
 
@@ -43,6 +30,7 @@ import { elements, renderLoader, clearLoader, elementStrings } from './views/bas
  */
 const state = {};
 
+// SEARCH CONTROLLER
 const controlSearch = async () => {
     // 1. Get the search query from the view
     // const query = 'pizza';  // for now, this is just a placeholder string.
@@ -97,3 +85,11 @@ elements.searchResPages.addEventListener('click', event => {
         console.log(goToPage);
     }
 });
+
+
+
+// RECIPE CONTROLLER
+// Testing Code:
+const r = new Recipe(47746);
+r.getRecipe();
+console.log(r);

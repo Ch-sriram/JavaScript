@@ -16,6 +16,7 @@ export default class Search {
         } catch (error) {
             console.log(error);
             alert(error);
+            alert("Please check the search queries that can be searched for, from: https://forkify-api.herokuapp.com/phrases.html");
         }
     }
 }
