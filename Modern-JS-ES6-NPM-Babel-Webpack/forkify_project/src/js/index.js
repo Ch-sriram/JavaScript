@@ -1,16 +1,14 @@
 /********************************************************************************************************************
- * We've fully implemented the MVC for Searching. Now, we will implement MVC for getting the individual recipes.
- * For that, we will create the Recipe Model (Data) at ./src/js/models/Recipe.js which will contain the class
- * related to the Recipe Data Model. The Recipe class inside the Recipe Module will contain the AJAX Request for
- * the Recipe Data that's clicked by the user from the .results__list class' element's ID. Therefore, we can
- * find that every Recipe object will take in ID as a parameter into its constructor. Check the Recipe Module.
- * We import the Recipe Model (Data) here and create get details about the recipe using the Recipe class.
+ * What we'll learn:
+ * ----------------
+ * 1. How to read data from the page URL.
+ * 2. How to respond to the 'hashchange' event.
+ * 3. How to add the same event listener to multiple events.
  * 
- * Very Important Information
- * --------------------------
- * In general, we never store/hard-code information like API Keys, Passwords, Usernames, etc, inside
- * the JS Modules present at client-side. Therefore, we always make an AJAX Request for sensitive data
- * such as mentioned above, and get them from some other server (which is generally our own server/domain).
+ * Whenever we click on one of the recipes that is shown in .results_list class' element, we get the ID of the recipe
+ * in the URL as: 'localhost:8080/?#46956'. Now the URL has a hash-link (after the '?') which has the ID
+ * of the respective recipe we clicked. Therefore, we can take advantage of that using the 'hashchange' event
+ * in the DOM, using an event listener for that event. The code is implemented below.
  * 
  */
 
@@ -46,15 +44,21 @@ const controlSearch = async () => {
         searchView.clearInput();
         searchView.clearResults();
         
-        // We send in the .results class' element from the elements imported from base module
-        renderLoader(elements.searchRes);  
-
-        // 4. Search for results
-        await state.search.getResult();
-
-        // 5. Render results on the UI  //console.log(state.search.recipes);
-        clearLoader();
-        searchView.renderResults(state.search.recipes);
+        try {
+            // We send in the .results class' element from the elements imported from base module
+            renderLoader(elements.searchRes);  
+    
+            // 4. Search for results
+            await state.search.getResult();
+    
+            // 5. Render results on the UI  //console.log(state.search.recipes);
+            clearLoader();
+            searchView.renderResults(state.search.recipes);
+        } catch (error) {
+            alert("Something went wrong with the search... \n Dev Note: Check the console for the error");
+            console.log(error);
+            clearLoader();
+        }
     }
 }
 
@@ -89,7 +93,49 @@ elements.searchResPages.addEventListener('click', event => {
 
 
 // RECIPE CONTROLLER
-// Testing Code:
-const r = new Recipe(47746);
-r.getRecipe();
-console.log(r);
+
+// Test Code:
+// const r = new Recipe(47746);
+// r.getRecipe();
+// console.log(r);
+
+const controlRecipe = async () => {
+    // Get the hash-link
+    const id = window.location.hash.replace('#', '');   //console.log(id);
+
+    // Check if we have an id, only then, we would go ahead and execute the following code
+    if (id) {
+        // Prepare the UI for changes
+
+        // Create new recipe object
+        state.recipe = new Recipe(id);
+
+        try {
+            // Get the recipe data
+            await state.recipe.getRecipe();
+    
+            // Calculate servings of the recipe and time required to make the recipe.
+            state.recipe.calcServings();
+            state.recipe.calcTime();
+    
+            // Render Recipe
+            console.log(state.recipe);
+
+        } catch (error) {
+            alert("Something went wrong with processing the recipe... \nDev Note: Check the developer console for the error");
+            console.log(error);
+        }
+    }
+};
+
+// // we have to render the recipes when there's hashchange event
+// window.addEventListener('hashchange', controlRecipe);
+
+// // we also have to render the recipes when the page reloads, to save the state of the recipe
+// window.addEventListener('load', controlRecipe);
+
+// Instead of adding the same event handler - controlRecipe() for two events on window, we can simply 
+// do it in a single line using the forEach() method as shown below.
+['hashchange', 'load'].forEach(event => window.addEventListener(event, controlRecipe));
+
+// Next, we will process the ingredients that we receive we have in the Recipe Model, at ./src/js/models/Recipe.js
