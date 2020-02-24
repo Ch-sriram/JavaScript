@@ -123,7 +123,9 @@ export default class Recipe {
                     // strings that are numeric in nature. Therefore, whenever we have such a situation, we can 
                     // simply call the eval() method on the string (which is an arithmetic expression), so that it
                     // can evaluate the arithmetic expression passed to it.
-                    count = eval(arrCount.slice().join('+'));
+
+                    // console.log(arrCount);
+                    count = eval(arrCount.slice(0, 2).join('+'));
 
                     // if arrCount is ['4', '1/2'], then the line above will convert into '4+1/2' and then that's
                     // passed onto the eval() method which will then evaluate the expression as JS Code, and actually
@@ -159,3 +161,6 @@ export default class Recipe {
         this.ingredients = newIngredients;
     }
 };
+
+// In the .recipe class, we have the ingredients given as 4.5 cup, 1.75 tsp salt, etc. We don't want to show it like 
+// that, we want to show it as 4 1/2 cup, 1 3/4 tsp salt, etc. Therefore, we see that next.

@@ -1,22 +1,14 @@
 /********************************************************************************************************************
  * What we'll learn:
  * ----------------
- * 1. Use array methods like map(), slice(), findIndex() and includes().
- * 2. How and why to use the eval() method.
- * 
- * This time, we want to read through the list of  ingredients and at the same time, separate the quantity
- * (count), unit and the description of each ingredient such that we can increase/decrease the quantities
- * of the ingredients depending on the number of servings the user wants. 
- * 
- * This is done by implementing the parseIngredients() method at ./src/js/models/Recipe.js module.
- * Look into the Recipe model module to know more about the parseIngredients() method.
+ * 1. Using loop to generate HTML markup.
  * 
  */
 
 import Search from './models/Search';
 import Recipe from './models/Recipe';
-import * as searchView from './views/searchView';   // we import everything from the ./src/js/views/searchView module
-
+import * as searchView from './views/searchView';
+import * as recipeView from './views/recipeView';
 
 import { elements, renderLoader, clearLoader, elementStrings } from './views/base';    
 
@@ -107,11 +99,12 @@ const controlRecipe = async () => {
     // Check if we have an id, only then, we would go ahead and execute the following code
     if (id) {
         // Prepare the UI for changes
-
+        recipeView.clearRecipe();
+        renderLoader(elements.recipe);
+        
         // Create new recipe object
         state.recipe = new Recipe(id);
         // window.r = state.recipe;    // TEST CODE
-        
 
         try {
             // Get the recipe data and parse ingredients
@@ -122,10 +115,12 @@ const controlRecipe = async () => {
             state.recipe.calcServings();
             state.recipe.calcTime();
     
-            // Render Recipe
-            console.log(state.recipe);
+            // Render Recipe -- console.log(state.recipe);
+            clearLoader();
+            recipeView.renderRecipe(state.recipe);
 
         } catch (error) {
+            clearLoader();
             alert("Something went wrong with processing the recipe... \nDev Note: Check the developer console for the error");
             console.log(error);
         }
