@@ -1,14 +1,15 @@
 /********************************************************************************************************************
  * What we'll learn:
  * ----------------
- * 1. How to read data from the page URL.
- * 2. How to respond to the 'hashchange' event.
- * 3. How to add the same event listener to multiple events.
+ * 1. Use array methods like map(), slice(), findIndex() and includes().
+ * 2. How and why to use the eval() method.
  * 
- * Whenever we click on one of the recipes that is shown in .results_list class' element, we get the ID of the recipe
- * in the URL as: 'localhost:8080/?#46956'. Now the URL has a hash-link (after the '?') which has the ID
- * of the respective recipe we clicked. Therefore, we can take advantage of that using the 'hashchange' event
- * in the DOM, using an event listener for that event. The code is implemented below.
+ * This time, we want to read through the list of  ingredients and at the same time, separate the quantity
+ * (count), unit and the description of each ingredient such that we can increase/decrease the quantities
+ * of the ingredients depending on the number of servings the user wants. 
+ * 
+ * This is done by implementing the parseIngredients() method at ./src/js/models/Recipe.js module.
+ * Look into the Recipe model module to know more about the parseIngredients() method.
  * 
  */
 
@@ -109,11 +110,14 @@ const controlRecipe = async () => {
 
         // Create new recipe object
         state.recipe = new Recipe(id);
+        // window.r = state.recipe;    // TEST CODE
+        
 
         try {
-            // Get the recipe data
+            // Get the recipe data and parse ingredients
             await state.recipe.getRecipe();
-    
+            state.recipe.parseIngredients();
+
             // Calculate servings of the recipe and time required to make the recipe.
             state.recipe.calcServings();
             state.recipe.calcTime();
@@ -137,5 +141,3 @@ const controlRecipe = async () => {
 // Instead of adding the same event handler - controlRecipe() for two events on window, we can simply 
 // do it in a single line using the forEach() method as shown below.
 ['hashchange', 'load'].forEach(event => window.addEventListener(event, controlRecipe));
-
-// Next, we will process the ingredients that we receive we have in the Recipe Model, at ./src/js/models/Recipe.js

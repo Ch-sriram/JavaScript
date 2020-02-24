@@ -59,4 +59,103 @@ export default class Recipe {
         // by just saying that every dish will serve 4 people no matter what.
         this.servings = 4;
     }
+
+    parseIngredients() {
+        // We create 2 Maps where one map stores the units that can occur in plural form,
+        // for eg: teaspoons, tablespoons, etc and then store their values into short-form
+        // units, which are tsp, tbsp, etc, respectively. And another map for units that
+        // can occur in singular form i.e., teaspoon, tablespoon, etc. We will convert all of 
+        // the singular units also into an their respective short-forms as show n above.
+        const abbrUnits = ['tbsp', 'tsp', 'cup', 'oz', 'pound'];
+
+        const pluralUnits = new Map();
+        pluralUnits.set('tablespoons', abbrUnits[0]);
+        pluralUnits.set('teaspoons', abbrUnits[1]);
+        pluralUnits.set('cups', 'cup');
+        pluralUnits.set('ounces', abbrUnits[3]);
+        pluralUnits.set('pounds', abbrUnits[4]);
+
+        const singularUnits = new Map();
+        singularUnits.set('tablespoon', abbrUnits[0]);
+        singularUnits.set('teaspoon', abbrUnits[1]);
+        singularUnits.set('ounce', abbrUnits[3]);
+
+        const newIngredients = this.ingredients.map(el => {
+            // 1. Uniform units
+            let ingredient = el.toLowerCase();
+            for (let [key, value] of pluralUnits.entries()) {
+                if (ingredient.includes(key))
+                    ingredient = ingredient.replace(key, value);
+            }
+
+            for (let [key, value] of singularUnits.entries()) {
+                if (ingredient.includes(key))
+                    ingredient = ingredient.replace(key, value);
+            }
+
+            // 2. Remove Parentheses --- Regex taken from: 
+            // https://stackoverflow.com/questions/4292468/javascript-regex-remove-text-between-parentheses
+            ingredient = ingredient.replace(/\([^)]*\)/g, '');
+
+            // 3. Parse ingredients into count, unit and ingredient
+            // The hardest part of parsing the ingredients is to separate out the count and units.
+            // That's because in the list of ingredients, some have the count in-front
+            // and some don't. Therefore, we have to be clever about the way we decouple the quantity
+            // and the unit of the ingredient. A good way is to use the index of the unit
+            // and then decouple the quantity from the unit.
+            const arrIng = ingredient.split(' ');
+            const unitIndex = arrIng.findIndex(el => abbrUnits.includes(el));
+
+            let objIng;
+            if (unitIndex > -1) {
+                // There is a unit -- the difficult one to implement.
+
+                // first we pick the quantity(s) before the units
+                // Ex. if arrIng is ['4, '1/2', 'cup', ...] => arrCount is ['4', 1/2']
+                // Ex. if arrIng is ['4', 'cup', ...] => arrCount is ['4']
+                const arrCount = arrIng.slice(0, unitIndex);
+
+                let count;
+                if (arrCount.length === 1)
+                    count = eval(arrIng[0].replace('-', '+'));  // For the strings which are like: '1-1/2 cup'
+                else {
+                    // Now, we have the elements of arrCount as strings, but we are also sure that they are
+                    // strings that are numeric in nature. Therefore, whenever we have such a situation, we can 
+                    // simply call the eval() method on the string (which is an arithmetic expression), so that it
+                    // can evaluate the arithmetic expression passed to it.
+                    count = eval(arrCount.slice().join('+'));
+
+                    // if arrCount is ['4', '1/2'], then the line above will convert into '4+1/2' and then that's
+                    // passed onto the eval() method which will then evaluate the expression as JS Code, and actually
+                    // the string as an arithmetic expression and return 4.5
+                }
+
+                objIng = {
+                    count,
+                    unit: arrIng[unitIndex],
+                    ingredient: arrIng.slice(unitIndex + 1).join(' ')
+                };
+                    
+            } else if (parseInt(arrIng[0], 10)) {
+                // There is NO unit, but 1st element is a number
+                objIng = {
+                    count: parseInt(arrIng[0], 10),
+                    unit: '',
+                    ingredient: arrIng.slice(1).join(' ')
+                };
+            } else if (unitIndex === -1) {
+                // There is NO unit and NO number in 1st position
+                objIng = {
+                    count: 1,
+                    unit: '',
+                    ingredient  // In ES6, to mention 'ingredient: ingredient', we need not assign it, we simply 
+                                // mention it. Therefore, 'ingredient: ingredient' can be written as 'ingredient'
+                };
+            } 
+
+            return objIng;
+        });
+
+        this.ingredients = newIngredients;
+    }
 };
