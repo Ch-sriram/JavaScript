@@ -25,7 +25,10 @@ const formatCount = count => {
             // we will create a fraction only for 0.5 and append it to 2. For that, we would
             // take the difference between the count and the int and pass it to the Fraction's constructor.
             const fr = new Fraction(count - int);
-            return `${int} ${fr.numerator}/${fr.denominator}`;
+            const numerator = parseInt(fr.numerator.toString().slice(0, 1));
+            const denominator = fr.denominator.toString();
+            const sliceTill = (denominator.length > 1) ? 2 : 1;
+            return `${int} ${numerator}/${parseInt(denominator.slice(0, sliceTill))}`;
         }
     }
     return 1;
