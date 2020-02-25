@@ -154,18 +154,18 @@ elements.recipe.addEventListener('click', event => {
     // This time we cannot use the closest() method because this time we have two buttons that can be clicked.
     // Therefore, the best way to handle the even this time is to use the matches() method as shown below.
     // if the target matches .btn-decrease class or any class under .btn-decrease, then, we want to 
-    // decrease the number of servings
+    // decrease the number of servings. Ex: event.target.matches(`.btn-decrease, .btn-decrease *`)
+    // where, '.btn-decrease *' means all the children elements of the .btn-decrease class.
 
     // Decrease Servings Button is clicked
-    if (event.target.matches(`.${elementStrings.servingsDecreaseButton}, .${elementStrings.servingsDecreaseButton} *`) && state.recipe.servings > 1) {
+    if (event.target.matches(`.${elementStrings.servingsDecreaseButton}, .${elementStrings.servingsDecreaseButton} *`)
+        && state.recipe.servings > 1)
         state.recipe.updateServings('dec');
-        recipeView.updateServingsAndIngredients(state.recipe);
-    }
     
     // Increase Servings Button is clicked
-    else if (event.target.matches(`.${elementStrings.servingsIncreaseButton}, .${elementStrings.servingsIncreaseButton} *`)) {
+    else if (event.target.matches(`.${elementStrings.servingsIncreaseButton}, .${elementStrings.servingsIncreaseButton} *`))
         state.recipe.updateServings('inc');
-        recipeView.updateServingsAndIngredients(state.recipe);
-    }
+
+    recipeView.updateServingsAndIngredients(state.recipe);
     //console.log(state.recipe);  // TESTING
 });
