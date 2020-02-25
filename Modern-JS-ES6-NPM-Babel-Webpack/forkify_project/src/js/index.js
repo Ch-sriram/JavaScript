@@ -1,22 +1,28 @@
 /********************************************************************************************************************
  * What we'll learn:
  * ----------------
- * 1. Another way of implementing event delegation using matches() method.
+ * 1. How and why to create unique IDs using an external package called 'uniqid'.
+ * 2. Difference between Array.slice() and Array.splice() methods.
+ * 3. More use cases for Array.findIndex() and Array.find() methods.
  * 
- * We will implement the functionality to change the ingredient quantities depending on the number of servings.
- * Therefore, we give the functionality of increasing/decreasing the number of servings for every recipe.
- * This functionality is given in the Recipe Model Module where we define a method called updateServings().
- * Again, we will be handling the button clicks in this file as index.js is the controller. We have to apply
- * event delegation for the .recipe class' element and catch the event at the element that has the .recipe class
- * applied to it. Right at the bottom of this file, we can see that the .recipe class' button click event is handled.
- * Consequently, we will update the UI using the updateServingsAndIngredients() method written in recipeView module.
+ * We make a new model which is the List Model which handles the data for the Shopping List. Check out the List 
+ * Module at ./src/js/models/List.js. One thing to note is that we generate unique ID's for each item inside the List
+ * Module using a 3rd party API known as 'uniqid' which we install using npm by the command: 'npm i uniqid --save' in
+ * the project directory. And then we can import it inside the List Model Module. Note that we can import the package
+ * because it is not a dev dependency but it is a code dependency. Therefore, we can go ahead and import the code
+ * related to 'uniqid' package.
+ * 
  */
-
+// Import Data Models
 import Search from './models/Search';
 import Recipe from './models/Recipe';
+import List from './models/List';
+
+// Import Front-End Views
 import * as searchView from './views/searchView';
 import * as recipeView from './views/recipeView';
 
+// Import Common Code Base
 import { elements, renderLoader, clearLoader, elementStrings } from './views/base';    
 
 /**
@@ -169,3 +175,9 @@ elements.recipe.addEventListener('click', event => {
     recipeView.updateServingsAndIngredients(state.recipe);
     //console.log(state.recipe);  // TESTING
 });
+
+
+// SHOPPING LIST CONTROLLER
+
+// TEST CODE
+window.l = new List();
