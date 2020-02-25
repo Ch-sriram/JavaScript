@@ -66,7 +66,7 @@ export default class Recipe {
         // units, which are tsp, tbsp, etc, respectively. And another map for units that
         // can occur in singular form i.e., teaspoon, tablespoon, etc. We will convert all of 
         // the singular units also into an their respective short-forms as show n above.
-        const abbrUnits = ['tbsp', 'tsp', 'cup', 'oz', 'pound'];
+        const abbrUnits = ['tbsp', 'tsp', 'cup', 'oz', 'pound', 'kg', 'g'];
 
         const pluralUnits = new Map();
         pluralUnits.set('tablespoons', abbrUnits[0]);
