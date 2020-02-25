@@ -1,17 +1,15 @@
 /********************************************************************************************************************
  * What we'll learn:
  * ----------------
- * 1. Using external third-party API called fractional.
+ * 1. Another way of implementing event delegation using matches() method.
  * 
- * We want to convert the recipe quantity (i.e., count) from decimal values (i.e., 4.5, 2.25, etc) into fractional
- * values (i.e., 4 1/2, 2 1/4, etc). In order to do that, we use a 3rd party API called fractional.
- * We install it using npm and save it as a code dependency because we will import the API in our code.
- * Now, we implement the formatCount() method inside the recipeView module, where we will use the fractional API.
- * Another important aspect is to keep the selected recipe from the .results__list highlighted.
- * For that, we will implement another function in searchView module which will be called here, onto which the ID of
- * the selected item is passed onto to the method. The method is called highlightSelected(). It is called inside
- * the controlRecipe() method in this file.
- * 
+ * We will implement the functionality to change the ingredient quantities depending on the number of servings.
+ * Therefore, we give the functionality of increasing/decreasing the number of servings for every recipe.
+ * This functionality is given in the Recipe Model Module where we define a method called updateServings().
+ * Again, we will be handling the button clicks in this file as index.js is the controller. We have to apply
+ * event delegation for the .recipe class' element and catch the event at the element that has the .recipe class
+ * applied to it. Right at the bottom of this file, we can see that the .recipe class' button click event is handled.
+ * Consequently, we will update the UI using the updateServingsAndIngredients() method written in recipeView module.
  */
 
 import Search from './models/Search';
@@ -149,3 +147,25 @@ const controlRecipe = async () => {
 // Instead of adding the same event handler - controlRecipe() for two events on window, we can simply 
 // do it in a single line using the forEach() method as shown below.
 ['hashchange', 'load'].forEach(event => window.addEventListener(event, controlRecipe));
+
+
+// Handling recipe button clicks
+elements.recipe.addEventListener('click', event => {
+    // This time we cannot use the closest() method because this time we have two buttons that can be clicked.
+    // Therefore, the best way to handle the even this time is to use the matches() method as shown below.
+    // if the target matches .btn-decrease class or any class under .btn-decrease, then, we want to 
+    // decrease the number of servings
+
+    // Decrease Servings Button is clicked
+    if (event.target.matches(`.${elementStrings.servingsDecreaseButton}, .${elementStrings.servingsDecreaseButton} *`) && state.recipe.servings > 1) {
+        state.recipe.updateServings('dec');
+        recipeView.updateServingsAndIngredients(state.recipe);
+    }
+    
+    // Increase Servings Button is clicked
+    else if (event.target.matches(`.${elementStrings.servingsIncreaseButton}, .${elementStrings.servingsIncreaseButton} *`)) {
+        state.recipe.updateServings('inc');
+        recipeView.updateServingsAndIngredients(state.recipe);
+    }
+    //console.log(state.recipe);  // TESTING
+});

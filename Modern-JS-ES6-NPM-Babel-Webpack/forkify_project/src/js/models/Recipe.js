@@ -160,6 +160,18 @@ export default class Recipe {
 
         this.ingredients = newIngredients;
     }
+
+    updateServings(type) {
+        // Update the servings
+        const newServings = type === 'dec' ? this.servings - 1 : this.servings + 1;
+
+        // Update the ingredients' quantities (i.e., ingredient.count)
+        this.ingredients.forEach(ing => {
+            ing.count *= (newServings / this.servings);
+        });
+
+        this.servings = newServings;
+    }
 };
 
 // In the .recipe class, we have the ingredients given as 4.5 cup, 1.75 tsp salt, etc. We don't want to show it like 

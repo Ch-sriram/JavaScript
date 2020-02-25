@@ -7,7 +7,7 @@ export const elements = {
     searchResList: document.querySelector('.results__list'),
     searchRes: document.querySelector('.results'),
     searchResPages: document.querySelector('.results__pages'),
-    recipe: document.querySelector('.recipe')
+    recipe: document.querySelector('.recipe'),
 };
 
 
@@ -15,7 +15,11 @@ export const elements = {
 // then removed after a while. One such example is the spinning loader.
 export const elementStrings = {
     loader: "loader",
-    pageButton: "btn-inline"
+    pageButton: "btn-inline",
+    servingsIncreaseButton: "btn-increase",
+    servingsDecreaseButton: "btn-decrease",
+    ingredientQuantity: "recipe__count",
+    servings: "recipe__info-data--people"
 };
 
 // function to render the loading spinner from the ./dist/css/style.css.
