@@ -24,6 +24,19 @@ export const clearResults = () => {
 };
 
 
+export const highlightSelected = id => {
+    // Before highlighting the selected recipe from the .results__list class, we have to remove the 
+    // .results__link--active class from all the recipes in the .results__list class' elements.
+    const recipeArr = Array.from(document.querySelectorAll(`.results__link--active`));
+    recipeArr.forEach(el => {
+        el.classList.remove('results__link--active');
+    });
+
+    // highlight the selected recipe from .results__list class
+    document.querySelector(`a[href="#${id}"]`).classList.add('results__link--active');
+};
+
+
 // function to limit the recipe name in the .results__list class
 const limitRecipeTitle = (title, limit = 17) => {   // 17 is the sweet spot for limiting the no. of letters
     let newTitle = [];

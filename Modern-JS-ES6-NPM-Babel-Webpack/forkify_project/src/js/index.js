@@ -1,7 +1,16 @@
 /********************************************************************************************************************
  * What we'll learn:
  * ----------------
- * 1. Using loop to generate HTML markup.
+ * 1. Using external third-party API called fractional.
+ * 
+ * We want to convert the recipe quantity (i.e., count) from decimal values (i.e., 4.5, 2.25, etc) into fractional
+ * values (i.e., 4 1/2, 2 1/4, etc). In order to do that, we use a 3rd party API called fractional.
+ * We install it using npm and save it as a code dependency because we will import the API in our code.
+ * Now, we implement the formatCount() method inside the recipeView module, where we will use the fractional API.
+ * Another important aspect is to keep the selected recipe from the .results__list highlighted.
+ * For that, we will implement another function in searchView module which will be called here, onto which the ID of
+ * the selected item is passed onto to the method. The method is called highlightSelected(). It is called inside
+ * the controlRecipe() method in this file.
  * 
  */
 
@@ -102,6 +111,10 @@ const controlRecipe = async () => {
         recipeView.clearRecipe();
         renderLoader(elements.recipe);
         
+        // Highlight the selected recipe
+        if (state.search)
+            searchView.highlightSelected(id);
+
         // Create new recipe object
         state.recipe = new Recipe(id);
         // window.r = state.recipe;    // TEST CODE

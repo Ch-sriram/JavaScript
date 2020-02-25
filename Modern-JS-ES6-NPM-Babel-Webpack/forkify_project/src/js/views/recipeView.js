@@ -1,7 +1,34 @@
 import { elements } from './base';
+import { Fraction } from 'fractional';
 
 export const clearRecipe = () => {
     elements.recipe.innerHTML = '';
+};
+
+// look into documentation of fraction.js @https://github.com/ekg/fraction.js/
+const formatCount = count => {
+    if (count) {
+        // count = 2.5 --> 2 1/2
+        // count = 0.5 --> 1/2
+        const [int, dec] = count.toString().split('.').map(el => parseInt(el, 10));
+
+        // count = 2 --> 2  // there's no dec
+        if (!dec) return count;
+
+        // count = 0.5 --> 1/2
+        if (int === 0) {
+            const fr = new Fraction(count);
+            return `${fr.numerator}/${fr.denominator}`;
+        } else {
+            // count = 2.5 --> 2 1/2
+            // if we create a fraction for 2.5, we will get 5/2, which we don't want. Therefore,
+            // we will create a fraction only for 0.5 and append it to 2. For that, we would
+            // take the difference between the count and the int and pass it to the Fraction's constructor.
+            const fr = new Fraction(count - int);
+            return `${int} ${fr.numerator}/${fr.denominator}`;
+        }
+    }
+    return 1;
 };
 
 const createIngredient = ingredient => `
@@ -9,7 +36,7 @@ const createIngredient = ingredient => `
         <svg class="recipe__icon">
             <use href="img/icons.svg#icon-check"></use>
         </svg>
-        <div class="recipe__count">${ingredient.count}</div>
+        <div class="recipe__count">${formatCount(ingredient.count)}</div>
         <div class="recipe__ingredient">
             <span class="recipe__unit">${ingredient.unit}</span>
             ${ingredient.ingredient}
