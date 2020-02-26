@@ -22,7 +22,7 @@ export default class List {
     /** Map Version */
         const id = uniqid();    
         this.items.set(id, { count, unit, ingredient });
-        return this.items.get(id);
+        return { id, value: this.items.get(id) };
     }
 
     deleteItem(id) {

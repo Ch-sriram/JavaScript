@@ -1,16 +1,5 @@
 /********************************************************************************************************************
- * What we'll learn:
- * ----------------
- * 1. How and why to create unique IDs using an external package called 'uniqid'.
- * 2. Difference between Array.slice() and Array.splice() methods.
- * 3. More use cases for Array.findIndex() and Array.find() methods.
- * 
- * We make a new model which is the List Model which handles the data for the Shopping List. Check out the List 
- * Module at ./src/js/models/List.js. One thing to note is that we generate unique ID's for each item inside the List
- * Module using a 3rd party API known as 'uniqid' which we install using npm by the command: 'npm i uniqid --save' in
- * the project directory. And then we can import it inside the List Model Module. Note that we can import the package
- * because it is not a dev dependency but it is a code dependency. Therefore, we can go ahead and import the code
- * related to 'uniqid' package.
+ * Implementation of the listView Module at ./src/js/views/listView.js.
  * 
  */
 // Import Data Models
