@@ -1,13 +1,16 @@
 /********************************************************************************************************************
- * Whenever we like/heart a recipe in the .recipe class, we add it to the list of liked recipe shown as a 
- * heart in the top right corner of the webapp. Therefore, for that, we build a Likes Model inside the
- * ./src/js/models/Likes.js module where the data model of Likes class is almost similar to the one we made for 
- * the List class in ./src/js/models/Likes.js module. Checkout the Likes Module for more information.
+ * We make the controller for the likes in here. The event for liking an item happens inside the
+ * .recipe class.
+ * Therefore, we handle the event again at the .recipe class, where we only catch the event that pertains to the
+ * 'click' event occurring on the like button, which is the button with .recipe__love class under the 
+ * .recipe class generated dynamically, and this is the reason we use event delegation.
  */
+
 // Import Data Models
 import Search from './models/Search';
 import Recipe from './models/Recipe';
 import List from './models/List';
+import Likes from './models/Likes';
 
 // Import Front-End Views
 import * as searchView from './views/searchView';
@@ -15,7 +18,7 @@ import * as recipeView from './views/recipeView';
 import * as listView from './views/listView';
 
 // Import Common Code Base
-import { elements, renderLoader, clearLoader, elementStrings } from './views/base';    
+import { elements, renderLoader, clearLoader, elementStrings } from './views/base';
 
 /**
  * Global State of the app:
@@ -190,6 +193,40 @@ elements.shopping.addEventListener('click', event => {
 });
 
 
+// LIKE CONTROLLER
+const controlLike = () => {
+    if (!state.likes) state.likes = new Likes();
+    const currentID = state.recipe.id;
+
+    // If a recipe is liked, then we have to include it in state.likes map, otherwise we don't.
+    // For that, we use the isLikedItem() method from Likes Model Module
+
+    // If the current recipe is not liked, then:
+    if (!state.likes.isLikedItem(currentID)) {
+        // Add the like to the state
+        const newLike = state.likes.addLikedItem(currentID, state.recipe.title, state.recipe.author, state.recipe.img);
+
+        // Toggle the love button
+
+
+        // Add like to the UI, i.e., add the liked recipe to the liked list
+
+        console.log(state.likes);   // TESTING
+
+    } else {    // when the current recipe is liked
+        // Remove like from the state
+        state.likes.deleteLikedItem(currentID);
+        
+        // Toggle the love button
+
+        // Remove like from the UI, i.e. from the liked list
+        
+        
+        console.log(state.likes);   // TESTING
+    }
+};
+
+
 // Handling recipe button clicks
 elements.recipe.addEventListener('click', event => {
     // This time we cannot use the closest() method because this time we have two buttons that can be clicked.
@@ -212,7 +249,13 @@ elements.recipe.addEventListener('click', event => {
     }
 
     else if (event.target.matches(`.${elementStrings.addToShoppingList}, .${elementStrings.addToShoppingList} *`)) {
+        // Add ingredients to the Shopping List
         controlList();
+    }
+
+    else if (event.target.matches(`.${elementStrings.loveButton}, .${elementStrings.loveButton} *`)) {
+        // We want to call the controlLike() which is the Likes Controller
+        controlLike();
     }
         
     //console.log(state.recipe);  // TESTING

@@ -24,7 +24,8 @@ export const elementStrings = {
     addToShoppingList: "recipe__btn--add",
     shoppingItem: "shopping__item",
     shoppingDelete: "shopping__delete",
-    shoppingCount: "shopping__count-value"
+    shoppingCount: "shopping__count-value",
+    loveButton: "recipe__love"
 };
 
 // function to render the loading spinner from the ./dist/css/style.css.
