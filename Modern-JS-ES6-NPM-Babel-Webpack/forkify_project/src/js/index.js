@@ -1,6 +1,11 @@
 /********************************************************************************************************************
- * Implementation of the listView Module at ./src/js/views/listView.js.
+ * We will now implement the controller for the shopping list in this controller module named as controlList() below.
  * 
+ * controlList() is only called when the "Add to Shopping List" Button is clicked in the .recipe class.
+ * 
+ * Therefore, we handle that using event delegation in .recipe class' element again.
+ * 
+ * We also handle click event when the user wants to update/remove the item from the shopping list.
  */
 // Import Data Models
 import Search from './models/Search';
@@ -10,6 +15,7 @@ import List from './models/List';
 // Import Front-End Views
 import * as searchView from './views/searchView';
 import * as recipeView from './views/recipeView';
+import * as listView from './views/listView';
 
 // Import Common Code Base
 import { elements, renderLoader, clearLoader, elementStrings } from './views/base';    
@@ -22,6 +28,7 @@ import { elements, renderLoader, clearLoader, elementStrings } from './views/bas
  * - Liked Recipes  -- Stored persistently. We'll know about JS local storage (i.e., persistent data) later.
  */
 const state = {};
+window.state = state;   // TESTING
 
 // SEARCH CONTROLLER
 const controlSearch = async () => {
@@ -144,6 +151,48 @@ const controlRecipe = async () => {
 ['hashchange', 'load'].forEach(event => window.addEventListener(event, controlRecipe));
 
 
+// SHOPPING LIST CONTROLLER
+
+// TEST CODE
+// window.l = new List();
+
+const controlList = () => {
+    // Create a new shopping list, IF there is none yet
+    if (!state.list)
+        state.list = new List();
+    
+    // Add each ingredient to the list and the UI
+    state.recipe.ingredients.forEach(el => {
+        const item = state.list.addItem(el.count, el.unit, el.ingredient);
+        listView.renderItem(item);
+    });
+};
+
+
+// Handling update/delete list item events
+elements.shopping.addEventListener('click', event => {
+    // get the ID of the item we want to delete/update
+    const id = event.target.closest(`.${elementStrings.shoppingItem}`).dataset.itemid;
+
+    // handle the delete event
+    if (event.target.matches(`.${elementStrings.shoppingDelete}, .${elementStrings.shoppingDelete} *`)) {
+        // Delete from state
+        state.list.deleteItem(id);
+
+        // Remove the item from the UI
+        listView.deleteItem(id);
+    }
+
+    // handle the updation of the items in the shopping list
+    else if (event.target.matches(`.${elementStrings.shoppingCount}`)) {
+        // Read the data from the UI and update it in our state
+        const val = parseFloat(event.target.value, 10);
+        if (val >= 0)
+            state.list.updateCount(id, val);
+    }
+});
+
+
 // Handling recipe button clicks
 elements.recipe.addEventListener('click', event => {
     // This time we cannot use the closest() method because this time we have two buttons that can be clicked.
@@ -154,19 +203,22 @@ elements.recipe.addEventListener('click', event => {
 
     // Decrease Servings Button is clicked
     if (event.target.matches(`.${elementStrings.servingsDecreaseButton}, .${elementStrings.servingsDecreaseButton} *`)
-        && state.recipe.servings > 1)
+        && state.recipe.servings > 1) {
         state.recipe.updateServings('dec');
+        recipeView.updateServingsAndIngredients(state.recipe);
+    }
     
     // Increase Servings Button is clicked
-    else if (event.target.matches(`.${elementStrings.servingsIncreaseButton}, .${elementStrings.servingsIncreaseButton} *`))
+    else if (event.target.matches(`.${elementStrings.servingsIncreaseButton}, .${elementStrings.servingsIncreaseButton} *`)) {
         state.recipe.updateServings('inc');
+        recipeView.updateServingsAndIngredients(state.recipe);
+    }
 
-    recipeView.updateServingsAndIngredients(state.recipe);
+    else if (event.target.matches(`.${elementStrings.addToShoppingList}, .${elementStrings.addToShoppingList} *`)) {
+        controlList();
+    }
+        
     //console.log(state.recipe);  // TESTING
 });
 
 
-// SHOPPING LIST CONTROLLER
-
-// TEST CODE
-window.l = new List();

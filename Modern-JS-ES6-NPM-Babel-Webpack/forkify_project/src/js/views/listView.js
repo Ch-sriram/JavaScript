@@ -3,6 +3,7 @@ import { elements } from './base';
 
 export const renderItem = item => {
     // Get the markup below .shopping__list class in ./index.html
+
 /** Array Version */
     // const markup = `
     //     <li class="shopping__item" data-itemid=${item.id}>
@@ -23,7 +24,7 @@ export const renderItem = item => {
     const markup = `
         <li class="shopping__item" data-itemid=${item.id}>
             <div class="shopping__count">
-                <input type="number" value="${item.value.count}" step="${item.value.count}" class="shopping__count-value">
+                <input type="number" value="${item.value.count}" step="${item.value.count}" min="0" class="shopping__count-value">
                 <p>${item.value.unit}</p>
             </div>
             <p class="shopping__description">${item.value.ingredient}</p>
@@ -46,6 +47,6 @@ export const deleteItem = id => {
 
 /** Map Version */
     const item = document.querySelector(`[data-itemid="${id}"]`);
-    item.parentElement.removeChild(item);
+    if (item) item.parentElement.removeChild(item);
 };
 

@@ -20,7 +20,11 @@ export const elementStrings = {
     servingsIncreaseButton: "btn-increase",
     servingsDecreaseButton: "btn-decrease",
     ingredientQuantity: "recipe__count",
-    servings: "recipe__info-data--people"
+    servings: "recipe__info-data--people",
+    addToShoppingList: "recipe__btn--add",
+    shoppingItem: "shopping__item",
+    shoppingDelete: "shopping__delete",
+    shoppingCount: "shopping__count-value"
 };
 
 // function to render the loading spinner from the ./dist/css/style.css.
