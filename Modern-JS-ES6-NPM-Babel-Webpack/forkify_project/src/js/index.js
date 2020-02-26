@@ -1,11 +1,8 @@
 /********************************************************************************************************************
- * We will now implement the controller for the shopping list in this controller module named as controlList() below.
- * 
- * controlList() is only called when the "Add to Shopping List" Button is clicked in the .recipe class.
- * 
- * Therefore, we handle that using event delegation in .recipe class' element again.
- * 
- * We also handle click event when the user wants to update/remove the item from the shopping list.
+ * Whenever we like/heart a recipe in the .recipe class, we add it to the list of liked recipe shown as a 
+ * heart in the top right corner of the webapp. Therefore, for that, we build a Likes Model inside the
+ * ./src/js/models/Likes.js module where the data model of Likes class is almost similar to the one we made for 
+ * the List class in ./src/js/models/Likes.js module. Checkout the Likes Module for more information.
  */
 // Import Data Models
 import Search from './models/Search';
