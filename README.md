@@ -166,4 +166,4 @@ Syntax -
           4. Common Code Base: [./src/js/views/base.js](https://github.com/Ch-sriram/JavaScript/blob/master/Modern-JS-ES6-NPM-Babel-Webpack/forkify_project/src/js/views/base.js)
           5. Config: [package.json](https://github.com/Ch-sriram/JavaScript/blob/master/Modern-JS-ES6-NPM-Babel-Webpack/forkify_project/package.json) | [webpack.config.js](https://github.com/Ch-sriram/JavaScript/blob/master/Modern-JS-ES6-NPM-Babel-Webpack/forkify_project/webpack.config.js) | [.babelrc](https://github.com/Ch-sriram/JavaScript/blob/master/Modern-JS-ES6-NPM-Babel-Webpack/forkify_project/.babelrc)
           6. Final Bundled JS: [./dist/js/bundle.js](https://github.com/Ch-sriram/JavaScript/blob/master/Modern-JS-ES6-NPM-Babel-Webpack/forkify_project/dist/js/bundle.js)
-          
+      20. #### Forkify App: [Use here, @Repl](https://forkify.chsriram.repl.co/) | [Use here, @Netlify](https://forkify-ram.netlify.com/)
