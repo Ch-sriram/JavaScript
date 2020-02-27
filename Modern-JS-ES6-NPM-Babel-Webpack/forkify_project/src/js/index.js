@@ -1,40 +1,3 @@
-/********************************************************************************************************************
- * What we'll learn:
- * ----------------
- * 1. How to use the localStorage() API.
- * 2. How to set, get and delete items from local storage.
- * 
- * We will persist the likes data so that the liked recipes are kept even after the page reloads.
- * 
- * The Web Storage API allows us to keep the key-value pairs in the browser. This data will be persistent
- * even after the page reloads.
- * 
- * We use the localStorage() method available inside the window object as follows:
- * localStorage.setItem(<key>, <value>); where <key> and <value> always have to be a string.
- * ex: localStorage.setItem('id', '233f3e');
- * 
- * To get the item that we stored in the localStorage, we simple use localStorage.getItem(<key>);
- * where <key> is again a string type and getItem() returns the <value> associated to that <key>.
- * ex: localStorage.getItem('id');  // '233f3e'
- * 
- * More examples:
- * localStorage.setItem('recipe', 'Cheese Pizza');
- * localStorage;    // will return us window.Storage object which will store the key-value pairs.
- * 
- * to remove a key-value pair from localStorage, we simply call: localStorage.removeItem(<key>);
- * ex: localStorage.removeItem('recipe');   // removes 'Cheese Pizza' and the key associated to it, which is 
- * 'recipe' from the window.Storage object.
- * 
- * To get the number of key-value pairs stored inside the window.Storage object, we call localStorage.length;
- * property.
- * 
- * To implement the likes data persistency, we use the localStorage() API inside the Likes Model at ./src/js/modes/Likes.js
- * 
- * We implement two methods, persistData() and readStorage(). The persistData() method is called every time a recipe 
- * is added/deleted from the likes model. And readStorage() is only called when we load the webapp in
- * the browser. Therefore, we call the readStorage on the 'load' event in the window.
- */
-
 // Import Data Models
 import Search from './models/Search';
 import Recipe from './models/Recipe';
@@ -58,7 +21,7 @@ import { elements, renderLoader, clearLoader, elementStrings } from './views/bas
  * - Liked Recipes  -- Stored persistently. We'll know about JS local storage (i.e., persistent data) later.
  */
 const state = {};
-window.state = state;   // TESTING
+// window.state = state;   // TESTING
 
 // SEARCH CONTROLLER
 const controlSearch = async () => {
@@ -339,5 +302,3 @@ elements.recipe.addEventListener('click', event => {
         
     //console.log(state.recipe);  // TESTING
 });
-
-

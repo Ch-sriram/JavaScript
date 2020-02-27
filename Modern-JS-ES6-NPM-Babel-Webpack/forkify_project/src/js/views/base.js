@@ -1,6 +1,4 @@
-// we will have all the DOM elements in here, and if the user needs any DOM elements, they've to get it by importing
-// the this module
-
+// DOM Elements that are static
 export const elements = {
     searchForm: document.querySelector('.search'),
     searchInput: document.querySelector('.search__field'),
@@ -15,7 +13,9 @@ export const elements = {
 
 
 // inside the elementStrings object, we will have all the dynamically created DOM elements that are created and 
-// then removed after a while. One such example is the spinning loader.
+// then removed after a while. One such example is the Loading Spinner. For that purpose, we just use their 
+// class names when needed from the elementStrings object. If in case we try to get the DOM element here, it will
+// be a 'null' because at the time of querying for the element, it is/was not available in the webapp.
 export const elementStrings = {
     loader: "loader",
     pageButton: "btn-inline",
