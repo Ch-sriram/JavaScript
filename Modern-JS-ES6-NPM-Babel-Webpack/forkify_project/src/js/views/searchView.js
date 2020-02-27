@@ -33,12 +33,12 @@ export const highlightSelected = id => {
     });
 
     // highlight the selected recipe from .results__list class
-    document.querySelector(`a[href="#${id}"]`).classList.add('results__link--active');
+    document.querySelector(`.results__link[href="#${id}"]`).classList.add('results__link--active');
 };
 
 
 // function to limit the recipe name in the .results__list class
-const limitRecipeTitle = (title, limit = 17) => {   // 17 is the sweet spot for limiting the no. of letters
+export const limitRecipeTitle = (title, limit = 17) => {   // 17 is the sweet spot for limiting the no. of letters
     let newTitle = [];
     if (title.length > limit) {
         title.split(' ').reduce((acc, curr) => {

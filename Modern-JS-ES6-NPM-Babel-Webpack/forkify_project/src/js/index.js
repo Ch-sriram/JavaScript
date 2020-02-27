@@ -1,9 +1,22 @@
 /********************************************************************************************************************
- * We make the controller for the likes in here. The event for liking an item happens inside the
- * .recipe class.
- * Therefore, we handle the event again at the .recipe class, where we only catch the event that pertains to the
- * 'click' event occurring on the like button, which is the button with .recipe__love class under the 
- * .recipe class generated dynamically, and this is the reason we use event delegation.
+ * Now we will handle the UI for the likes. Whenever the user clicks on the love button for a recipe, 
+ * the love button has to be shown as it is a clicked love button. For that, we add logic inside the recipeView 
+ * Module found at ./src/js/views/recipeView.js.
+ * 
+ * Also, the love button should be persistent, it means that even if we reload the page, the recipe should be liked
+ * and that love button should show that the recipe was liked. We also implement that functionality
+ * by changing the recipeView module where we modify the renderRecipe() method. Note that the recipe won't be rendered 
+ * when we reload and that's because state.likes object is not available at the time of the call of renderRecipe() 
+ * inside the controlRecipe() controller. For that reason, we simply use a global state.likes object for testing 
+ * purposes. We can see that global state.likes object on top of the actual Likes Controller which is controlLikes() 
+ * controller method.
+ * 
+ * Also, we don't want to show the heart icon at the top right of the webapp if there are no recipes that are liked
+ * by the user yet. Therefore, we will implement the functionality to hide the heart icon at the top right in the 
+ * likesView Module.
+ * 
+ * As the final step, we will render the likes into the heart icon's list when we hover over it.
+ * Implementation of the method related to rendering the likes can be found in the likesView Module.
  */
 
 // Import Data Models
@@ -16,6 +29,7 @@ import Likes from './models/Likes';
 import * as searchView from './views/searchView';
 import * as recipeView from './views/recipeView';
 import * as listView from './views/listView';
+import * as likesView from './views/likesView';
 
 // Import Common Code Base
 import { elements, renderLoader, clearLoader, elementStrings } from './views/base';
@@ -130,7 +144,10 @@ const controlRecipe = async () => {
     
             // Render Recipe -- console.log(state.recipe);
             clearLoader();
-            recipeView.renderRecipe(state.recipe);
+            recipeView.renderRecipe(
+                state.recipe,
+                state.likes.isLikedItem(id)
+            );
 
         } catch (error) {
             clearLoader();
@@ -193,9 +210,13 @@ elements.shopping.addEventListener('click', event => {
 });
 
 
-// LIKE CONTROLLER
+
+// LIKES CONTROLLER
+state.likes = new Likes();  // TESTING
+likesView.toggleLikeMenu(state.likes.getNumberOfLikedItems());  // TESTING
+
 const controlLike = () => {
-    if (!state.likes) state.likes = new Likes();
+    // if (!state.likes) state.likes = new Likes();
     const currentID = state.recipe.id;
 
     // If a recipe is liked, then we have to include it in state.likes map, otherwise we don't.
@@ -207,23 +228,27 @@ const controlLike = () => {
         const newLike = state.likes.addLikedItem(currentID, state.recipe.title, state.recipe.author, state.recipe.img);
 
         // Toggle the love button
-
+        likesView.toggleLikeBtn(true);
 
         // Add like to the UI, i.e., add the liked recipe to the liked list
-
-        console.log(state.likes);   // TESTING
+        likesView.renderLike(newLike);
+        // console.log(state.likes);   // TESTING
 
     } else {    // when the current recipe is liked
         // Remove like from the state
         state.likes.deleteLikedItem(currentID);
         
         // Toggle the love button
+        likesView.toggleLikeBtn(false);
 
         // Remove like from the UI, i.e. from the liked list
-        
-        
-        console.log(state.likes);   // TESTING
+        likesView.deleteLike(currentID);
+        // console.log(state.likes);   // TESTING
     }
+
+    likesView.toggleLikeMenu(
+        state.likes.getNumberOfLikedItems()
+    );
 };
 
 
