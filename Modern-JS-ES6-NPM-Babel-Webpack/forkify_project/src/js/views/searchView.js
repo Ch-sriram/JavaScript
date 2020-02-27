@@ -27,13 +27,16 @@ export const clearResults = () => {
 export const highlightSelected = id => {
     // Before highlighting the selected recipe from the .results__list class, we have to remove the 
     // .results__link--active class from all the recipes in the .results__list class' elements.
-    const recipeArr = Array.from(document.querySelectorAll(`.results__link--active`));
+    const recipeArr = Array.from(document.querySelectorAll(`.results__link`));
     recipeArr.forEach(el => {
         el.classList.remove('results__link--active');
     });
 
     // highlight the selected recipe from .results__list class
-    document.querySelector(`.results__link[href="#${id}"]`).classList.add('results__link--active');
+    const element = document.querySelector(`.results__link[href*="#${id}"]`);
+    if (element) {
+        element.classList.add('results__link--active');
+    }
 };
 
 

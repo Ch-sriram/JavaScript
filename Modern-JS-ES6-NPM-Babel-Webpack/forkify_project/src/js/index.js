@@ -1,22 +1,38 @@
 /********************************************************************************************************************
- * Now we will handle the UI for the likes. Whenever the user clicks on the love button for a recipe, 
- * the love button has to be shown as it is a clicked love button. For that, we add logic inside the recipeView 
- * Module found at ./src/js/views/recipeView.js.
+ * What we'll learn:
+ * ----------------
+ * 1. How to use the localStorage() API.
+ * 2. How to set, get and delete items from local storage.
  * 
- * Also, the love button should be persistent, it means that even if we reload the page, the recipe should be liked
- * and that love button should show that the recipe was liked. We also implement that functionality
- * by changing the recipeView module where we modify the renderRecipe() method. Note that the recipe won't be rendered 
- * when we reload and that's because state.likes object is not available at the time of the call of renderRecipe() 
- * inside the controlRecipe() controller. For that reason, we simply use a global state.likes object for testing 
- * purposes. We can see that global state.likes object on top of the actual Likes Controller which is controlLikes() 
- * controller method.
+ * We will persist the likes data so that the liked recipes are kept even after the page reloads.
  * 
- * Also, we don't want to show the heart icon at the top right of the webapp if there are no recipes that are liked
- * by the user yet. Therefore, we will implement the functionality to hide the heart icon at the top right in the 
- * likesView Module.
+ * The Web Storage API allows us to keep the key-value pairs in the browser. This data will be persistent
+ * even after the page reloads.
  * 
- * As the final step, we will render the likes into the heart icon's list when we hover over it.
- * Implementation of the method related to rendering the likes can be found in the likesView Module.
+ * We use the localStorage() method available inside the window object as follows:
+ * localStorage.setItem(<key>, <value>); where <key> and <value> always have to be a string.
+ * ex: localStorage.setItem('id', '233f3e');
+ * 
+ * To get the item that we stored in the localStorage, we simple use localStorage.getItem(<key>);
+ * where <key> is again a string type and getItem() returns the <value> associated to that <key>.
+ * ex: localStorage.getItem('id');  // '233f3e'
+ * 
+ * More examples:
+ * localStorage.setItem('recipe', 'Cheese Pizza');
+ * localStorage;    // will return us window.Storage object which will store the key-value pairs.
+ * 
+ * to remove a key-value pair from localStorage, we simply call: localStorage.removeItem(<key>);
+ * ex: localStorage.removeItem('recipe');   // removes 'Cheese Pizza' and the key associated to it, which is 
+ * 'recipe' from the window.Storage object.
+ * 
+ * To get the number of key-value pairs stored inside the window.Storage object, we call localStorage.length;
+ * property.
+ * 
+ * To implement the likes data persistency, we use the localStorage() API inside the Likes Model at ./src/js/modes/Likes.js
+ * 
+ * We implement two methods, persistData() and readStorage(). The persistData() method is called every time a recipe 
+ * is added/deleted from the likes model. And readStorage() is only called when we load the webapp in
+ * the browser. Therefore, we call the readStorage on the 'load' event in the window.
  */
 
 // Import Data Models
@@ -49,7 +65,7 @@ const controlSearch = async () => {
     // 1. Get the search query from the view
     // const query = 'pizza';  // for now, this is just a placeholder string.
     const query = searchView.getInput();    // we get the search query from the searchView module that we imported
-    console.log(query); // testing purposes
+    // console.log(query); // testing purposes
 
     if (query) {
         // 2. If there's a query, then add it to the state as a search object.
@@ -178,6 +194,9 @@ const controlList = () => {
     if (!state.list)
         state.list = new List();
     
+    // Add the delete all items button
+    listView.renderDeleteBtn();
+
     // Add each ingredient to the list and the UI
     state.recipe.ingredients.forEach(el => {
         const item = state.list.addItem(el.count, el.unit, el.ingredient);
@@ -210,13 +229,21 @@ elements.shopping.addEventListener('click', event => {
 });
 
 
+// Handle deleting all the items in the shopping list
+document.querySelector('#delete-all-btn').addEventListener('click', event => {
+    listView.deleteAllItems();
+    listView.removeDeleteBtn();
+    state.list.deleteAllItems();
+});
 
 // LIKES CONTROLLER
-state.likes = new Likes();  // TESTING
-likesView.toggleLikeMenu(state.likes.getNumberOfLikedItems());  // TESTING
+
+// This same testing code goes inside the 'load' event handler for window object.
+// state.likes = new Likes();  // TESTING
+// likesView.toggleLikeMenu(state.likes.getNumberOfLikedItems());  // TESTING
 
 const controlLike = () => {
-    // if (!state.likes) state.likes = new Likes();
+    if (!state.likes) state.likes = new Likes();
     const currentID = state.recipe.id;
 
     // If a recipe is liked, then we have to include it in state.likes map, otherwise we don't.
@@ -250,6 +277,33 @@ const controlLike = () => {
         state.likes.getNumberOfLikedItems()
     );
 };
+
+
+// Handling liked recipes on page load/reload
+window.addEventListener('load', () => {
+    state.likes = new Likes();
+
+    // Restore likes
+    state.likes.readStorage();
+
+    // Toggle like menu button
+    likesView.toggleLikeMenu(state.likes.getNumberOfLikedItems());
+
+    // Render the existing likes
+    state.likes.likes.forEach((val, id) => {
+        // Each key-value pair inside the Map is converted into an object
+        const like = {
+            id,
+            value: {
+                title: val.title,
+                author: val.author,
+                img: val.img
+            }
+        };
+
+        likesView.renderLike(like);
+    });
+});
 
 
 // Handling recipe button clicks

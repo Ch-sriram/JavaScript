@@ -50,3 +50,22 @@ export const deleteItem = id => {
     if (item) item.parentElement.removeChild(item);
 };
 
+export const renderDeleteBtn = () => {
+    const element = document.querySelector('#delete-all-btn');
+    console.log(element.hasChildNodes());
+    console.log(element);
+    if (!element.hasChildNodes()) {
+        const markup = `<button class="btn" id="delete-all-btn_">Delete All Items</button>`;
+        element.insertAdjacentHTML('afterbegin', markup);
+    }
+};
+
+
+export const removeDeleteBtn = () => {
+    document.querySelector('#delete-all-btn').innerHTML = '';
+};
+
+
+export const deleteAllItems = () => {
+    document.querySelector('.shopping__list').innerHTML = '';
+};

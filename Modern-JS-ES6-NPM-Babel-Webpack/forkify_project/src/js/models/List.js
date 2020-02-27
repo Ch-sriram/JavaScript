@@ -58,6 +58,8 @@ export default class List {
         this.items.get(id).count = newCount;
     }
 
-
+    deleteAllItems() {
+        this.items.clear();
+    }
 
 }

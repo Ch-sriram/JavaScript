@@ -490,3 +490,12 @@ body {
   .shopping__item:hover .shopping__delete {
     opacity: 1;
     visibility: visible; }
+
+#delete-all-btn {
+  text-align: center;
+}
+
+#delete-all-btn_ {
+  margin-left: auto;
+  margin-right: auto;
+}
