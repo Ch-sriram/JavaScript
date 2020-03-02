@@ -1,6 +1,7 @@
 # JavaScript
 
-Learning the JavaScript Language from the Internet
+Learning the JavaScript Language from the Internet. [![HitCount](http://hits.dwyl.com/Ch-sriram/JavaScript.svg)](http://hits.dwyl.com/Ch-sriram/JavaScript)
+
 
 Resources:
 
