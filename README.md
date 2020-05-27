@@ -1,27 +1,24 @@
-# JavaScript
+# JavaScript - Proof of Concept
 
-Learning the JavaScript Language from the Internet. [![HitCount](http://hits.dwyl.com/Ch-sriram/JavaScript.svg)](http://hits.dwyl.com/Ch-sriram/JavaScript)
-
+Implementation & Explanation of Beginner to Advanced JavaScript Concepts [ES5 & ES6]. [![HitCount](http://hits.dwyl.com/Ch-sriram/JavaScript.svg)](http://hits.dwyl.com/Ch-sriram/JavaScript)
 
 Resources:
 
-<ol>
-   <li>
-      <a href="https://www.udemy.com/the-complete-javascript-course/">JS Course</a>  &  <a href="https://github.com/jonasschmedtmann/complete-javascript-course">Github Repo for JS</a> by <a href="https://twitter.com/jonasschmedtman">Jonas Schmedtmann</a>
-   </li>
-   <li>
-      <a href="https://github.com/getify/You-Dont-Know-JS">You Don't Know JS</a> by <a href="https://github.com/getify">Kyle Simpson (getify)</a>
-   </li>
-   <li>
-      <a href="https://developer.mozilla.org/en-US/docs/Learn/JavaScript">JS Docs by MDN</a>
-   </li>
-</ol>
+1. [JS Course](https://www.udemy.com/the-complete-javascript-course/) & [GitHub Repo for JS](https://github.com/jonasschmedtmann/complete-javascript-course) by [Jonas Schmedtmann](https://twitter.com/jonasschmedtman)
+2. [You Don't Know JS](https://github.com/getify/You-Dont-Know-JS) by [Kyle Simpson (getify)](https://github.com/getify)
+3. [JS Docs by MDN](https://developer.mozilla.org/en-US/docs/Learn/JavaScript)
 
-<em>More resources will be added depending on the usefulness of the resource.</em>
+*More resources will be added depending on the usefulness of the resource.*
 
-<hr/>
+## Child Repositories (Project Deployments)
 
-### Index
+These are the projects that are implemented using JavaScript as a proof of concept.
+
+- Pig - dice game: **[Live here](https://pig-dice-game.chsriram.repl.co/)** | **[GitHub Repo](https://github.com/Ch-sriram/Pig-Dice-Game)**
+- Budgety - budget app: **[Live here](https://budgety-ram.netlify.app/)** | **[GitHub Repo](https://github.com/Ch-sriram/Budgety)**
+- Forkify - online recipe search: **[Live here](https://forkify-ram.netlify.app/)** | **[GitHub Repo](https://github.com/Ch-sriram/forkify)**
+
+## Development Workflow 
 
 Syntax -
 <em>&lt;topic name>: &lt;html file> | &lt;JavaScript file></em>
